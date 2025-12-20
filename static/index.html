@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniAssist Pro - AI Student Support</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .chat-container { height: calc(100vh - 200px); }
+        .message-enter { animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .typing-indicator span {
+            animation: typing 1.4s infinite;
+            display: inline-block;
+        }
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- Login Screen -->
+    <div id="loginScreen" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-600 to-blue-800">
+        <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
+            <div class="text-center mb-8">
+                <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-graduation-cap text-3xl text-white"></i>
+                </div>
+                <h1 class="text-2xl font-bold text-gray-800">UniAssist Pro</h1>
+                <p class="text-gray-500">AI-Powered Student Support</p>
+            </div>
+            
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input type="email" id="email" value="sarah.johnson@techedu.edu"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <input type="password" id="password" value="demo123"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <button type="submit" 
+                    class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Sign In
+                </button>
+            </form>
+            
+            <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                <p class="text-sm text-blue-800 font-medium">Demo Credentials:</p>
+                <div class="mt-2 space-y-1">
+                    <p class="text-sm text-blue-600">👨‍🎓 Student: sarah.johnson@techedu.edu / demo123</p>
+                    <p class="text-sm text-blue-600">👔 Staff: advisor.smith@techedu.edu / staff123</p>
+                    <p class="text-sm text-blue-600">👑 Admin: admin@techedu.edu / admin123</p>
+                </div>
+            </div>
+            
+            <div id="loginError" class="hidden mt-4 p-3 bg-red-100 text-red-700 rounded-lg text-sm"></div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="mainApp" class="hidden">
+        <!-- Header -->
+        <header class="bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg">
+            <div class="max-w-6xl mx-auto px-4 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-robot text-xl"></i>
+                        </div>
+                        <div>
+                            <h1 class="font-bold text-lg">UniAssist Pro</h1>
+                            <p class="text-xs text-blue-100">AI Student Support • Online 24/7</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button onclick="showTab('chat')" id="chatTab" class="tab-btn px-4 py-2 rounded-lg bg-white/20">
+                            <i class="fas fa-comments mr-2"></i>Chat
+                        </button>
+                        <button onclick="showTab('support')" id="supportTab" class="tab-btn px-4 py-2 rounded-lg hover:bg-white/10 hidden">
+                            <i class="fas fa-headset mr-2"></i>Support
+                        </button>
+                        <button onclick="showTab('analytics')" id="analyticsTab" class="tab-btn px-4 py-2 rounded-lg hover:bg-white/10">
+                            <i class="fas fa-chart-bar mr-2"></i>Analytics
+                        </button>
+                        <button onclick="showTab('admin')" id="adminTab" class="tab-btn px-4 py-2 rounded-lg hover:bg-white/10 hidden">
+                            <i class="fas fa-cog mr-2"></i>Admin
+                        </button>
+                        <button onclick="showTab('profile')" id="profileTab" class="tab-btn px-4 py-2 rounded-lg hover:bg-white/10">
+                            <i class="fas fa-user mr-2"></i>Profile
+                        </button>
+                        <div id="userBadge" class="px-3 py-1 rounded-full bg-white/20 text-sm hidden">
+                            <span id="userRole">Student</span>
+                        </div>
+                        <button onclick="logout()" class="px-4 py-2 rounded-lg hover:bg-white/10">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Chat View -->
+        <div id="chatView" class="max-w-4xl mx-auto p-4">
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                <!-- Chat Messages -->
+                <div id="chatMessages" class="chat-container overflow-y-auto p-4 space-y-4">
+                    <!-- Welcome message will be added by JS -->
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="px-4 py-2 border-t bg-gray-50">
+                    <div class="flex justify-between items-center mb-2">
+                        <p class="text-xs text-gray-500">Quick questions:</p>
+                        <button id="myTicketsBtn" onclick="showMyTickets()" class="text-xs text-blue-600 hover:text-blue-800 font-medium">
+                            <i class="fas fa-ticket-alt mr-1"></i><span id="ticketsBtnText">📋 My Tickets</span>
+                        </button>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="askQuestion('When is my next financial aid disbursement?')" 
+                            class="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded-full hover:bg-blue-200">
+                            💰 Financial Aid
+                        </button>
+                        <button onclick="askQuestion('What is my current GPA?')" 
+                            class="px-3 py-1 text-sm bg-green-100 text-green-700 rounded-full hover:bg-green-200">
+                            📊 My GPA
+                        </button>
+                        <button onclick="askQuestion('Where is my dorm room located?')" 
+                            class="px-3 py-1 text-sm bg-purple-100 text-purple-700 rounded-full hover:bg-purple-200">
+                            🏠 Housing
+                        </button>
+                        <button onclick="askQuestion('How do I register for next semester?')" 
+                            class="px-3 py-1 text-sm bg-orange-100 text-orange-700 rounded-full hover:bg-orange-200">
+                            📚 Registration
+                        </button>
+                        <button onclick="askQuestion('I have a complaint or issue')" 
+                            class="px-3 py-1 text-sm bg-red-100 text-red-700 rounded-full hover:bg-red-200">
+                            ⚠️ Report Issue
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Input -->
+                <div class="p-4 border-t">
+                    <form id="chatForm" class="flex gap-2">
+                        <input type="text" id="messageInput" placeholder="Ask me anything about your student services..."
+                            class="flex-1 px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <button type="submit" 
+                            class="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics View -->
+        <div id="analyticsView" class="hidden max-w-6xl mx-auto p-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Total Queries</p>
+                            <p id="totalQueries" class="text-3xl font-bold text-gray-800">--</p>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-comments text-blue-600"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Automated Resolution</p>
+                            <p id="automatedRate" class="text-3xl font-bold text-green-600">--</p>
+                        </div>
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-robot text-green-600"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Avg Response Time</p>
+                            <p id="avgResponse" class="text-3xl font-bold text-purple-600">--</p>
+                        </div>
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-clock text-purple-600"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Satisfaction Score</p>
+                            <p id="satisfaction" class="text-3xl font-bold text-orange-600">--</p>
+                        </div>
+                        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-smile text-orange-600"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-bold text-lg mb-4"><i class="fas fa-chart-pie mr-2 text-blue-600"></i>Top Query Categories</h3>
+                    <div id="categoriesChart" class="space-y-3">
+                        <!-- Will be populated by JS -->
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-bold text-lg mb-4"><i class="fas fa-dollar-sign mr-2 text-green-600"></i>ROI Metrics</h3>
+                    <div id="roiMetrics" class="space-y-3">
+                        <!-- Will be populated by JS -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ESB Status -->
+            <div class="mt-4 bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="font-bold text-lg mb-4"><i class="fas fa-network-wired mr-2 text-purple-600"></i>ESB Integration Status</h3>
+                <div id="esbStatus" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3">
+                    <!-- Will be populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile View -->
+        <div id="profileView" class="hidden max-w-4xl mx-auto p-4">
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                <div class="bg-gradient-to-r from-blue-600 to-blue-700 p-6 text-white">
+                    <div class="flex items-center gap-4">
+                        <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-3xl"></i>
+                        </div>
+                        <div>
+                            <h2 id="profileName" class="text-2xl font-bold">Loading...</h2>
+                            <p id="profileProgram" class="text-blue-100">--</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-graduation-cap mr-2 text-blue-600"></i>Academic Info</h3>
+                        <div class="space-y-2">
+                            <p><span class="text-gray-500">Student ID:</span> <span id="profileId" class="font-medium">--</span></p>
+                            <p><span class="text-gray-500">Year:</span> <span id="profileYear" class="font-medium">--</span></p>
+                            <p><span class="text-gray-500">GPA:</span> <span id="profileGpa" class="font-medium">--</span></p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-home mr-2 text-green-600"></i>Housing</h3>
+                        <div class="space-y-2">
+                            <p><span class="text-gray-500">Building:</span> <span id="profileBuilding" class="font-medium">--</span></p>
+                            <p><span class="text-gray-500">Room:</span> <span id="profileRoom" class="font-medium">--</span></p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-dollar-sign mr-2 text-purple-600"></i>Financial Aid</h3>
+                        <div class="space-y-2">
+                            <p><span class="text-gray-500">Status:</span> <span id="profileAidStatus" class="font-medium">--</span></p>
+                            <p><span class="text-gray-500">Amount:</span> <span id="profileAidAmount" class="font-medium">--</span></p>
+                            <p><span class="text-gray-500">Next Disbursement:</span> <span id="profileAidDate" class="font-medium">--</span></p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-book mr-2 text-orange-600"></i>Current Courses</h3>
+                        <div id="profileCourses" class="space-y-2">
+                            <!-- Will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Support Staff Portal (Staff/Admin Only) -->
+        <div id="supportView" class="hidden max-w-6xl mx-auto p-4">
+            <!-- Support Header -->
+            <div class="bg-gradient-to-r from-green-600 to-teal-600 rounded-2xl p-6 text-white mb-6 shadow-lg">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-headset text-3xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold">Support Staff Portal</h2>
+                            <p class="text-green-100">Manage escalated student queries</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm text-green-100">Escalation Threshold</p>
+                        <p class="text-2xl font-bold">&lt; 70% Confidence</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Escalation Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-red-500">
+                    <p class="text-gray-500 text-sm">Open Tickets</p>
+                    <p id="supportOpenCount" class="text-2xl font-bold text-red-600">--</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-yellow-500">
+                    <p class="text-gray-500 text-sm">In Progress</p>
+                    <p id="supportProgressCount" class="text-2xl font-bold text-yellow-600">--</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-blue-500">
+                    <p class="text-gray-500 text-sm">Pending Student</p>
+                    <p id="supportPendingCount" class="text-2xl font-bold text-blue-600">--</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-green-500">
+                    <p class="text-gray-500 text-sm">Resolved</p>
+                    <p id="supportResolvedCount" class="text-2xl font-bold text-green-600">--</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-purple-500">
+                    <p class="text-gray-500 text-sm">Avg Resolution</p>
+                    <p id="supportAvgTime" class="text-2xl font-bold text-purple-600">--</p>
+                </div>
+            </div>
+
+            <!-- Escalation Flow Diagram -->
+            <div class="bg-white rounded-xl shadow-lg p-4 mb-6">
+                <h3 class="font-bold text-lg mb-3"><i class="fas fa-project-diagram mr-2 text-blue-600"></i>Escalation Flow</h3>
+                <div class="flex items-center justify-center gap-2 text-sm overflow-x-auto py-2">
+                    <div class="bg-blue-100 text-blue-700 px-4 py-2 rounded-lg whitespace-nowrap">
+                        <i class="fas fa-user mr-1"></i>Student Query
+                    </div>
+                    <i class="fas fa-arrow-right text-gray-400"></i>
+                    <div class="bg-purple-100 text-purple-700 px-4 py-2 rounded-lg whitespace-nowrap">
+                        <i class="fas fa-robot mr-1"></i>AI Processing
+                    </div>
+                    <i class="fas fa-arrow-right text-gray-400"></i>
+                    <div class="bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg whitespace-nowrap">
+                        <i class="fas fa-question mr-1"></i>Confidence &lt; 70%?
+                    </div>
+                    <i class="fas fa-arrow-right text-gray-400"></i>
+                    <div class="bg-red-100 text-red-700 px-4 py-2 rounded-lg whitespace-nowrap">
+                        <i class="fas fa-ticket-alt mr-1"></i>Create Ticket
+                    </div>
+                    <i class="fas fa-arrow-right text-gray-400"></i>
+                    <div class="bg-green-100 text-green-700 px-4 py-2 rounded-lg whitespace-nowrap">
+                        <i class="fas fa-headset mr-1"></i>Staff Support
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Tickets List -->
+                <div class="lg:col-span-2 bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-4 border-b bg-gray-50 flex justify-between items-center">
+                        <h3 class="font-bold text-lg"><i class="fas fa-ticket-alt mr-2 text-green-600"></i>Support Tickets</h3>
+                        <select id="ticketStatusFilter" onchange="loadTickets()" class="text-sm border rounded-lg px-3 py-1">
+                            <option value="">All Tickets</option>
+                            <option value="open">Open</option>
+                            <option value="in_progress">In Progress</option>
+                            <option value="pending_student">Pending Student</option>
+                            <option value="resolved">Resolved</option>
+                        </select>
+                    </div>
+                    <div class="p-4 max-h-[500px] overflow-y-auto">
+                        <div id="ticketsList" class="space-y-3">
+                            <!-- Will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ticket Detail -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-4 border-b bg-gray-50">
+                        <h3 class="font-bold text-lg"><i class="fas fa-comments mr-2 text-blue-600"></i>Ticket Detail</h3>
+                    </div>
+                    <div id="ticketDetail" class="p-4">
+                        <div class="text-center text-gray-400 py-8">
+                            <i class="fas fa-ticket-alt text-4xl mb-2"></i>
+                            <p>Select a ticket to view details</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Escalation Matters -->
+            <div class="mt-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 border border-blue-100">
+                <h3 class="font-bold text-lg mb-3"><i class="fas fa-info-circle mr-2 text-blue-600"></i>Why AI + Human Support?</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div>
+                        <p class="font-medium text-blue-700">🤖 AI Handles (70%+ Confidence)</p>
+                        <ul class="mt-1 text-gray-600 space-y-1">
+                            <li>• FAQ questions</li>
+                            <li>• Status inquiries</li>
+                            <li>• Simple information lookup</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-medium text-orange-700">⚠️ Escalated (&lt;70% Confidence)</p>
+                        <ul class="mt-1 text-gray-600 space-y-1">
+                            <li>• Complex appeals</li>
+                            <li>• Special circumstances</li>
+                            <li>• Policy exceptions</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-medium text-green-700">✅ Benefits</p>
+                        <ul class="mt-1 text-gray-600 space-y-1">
+                            <li>• 73% queries auto-resolved</li>
+                            <li>• Staff focus on complex issues</li>
+                            <li>• Better student experience</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin View (Staff/Admin Only) -->
+        <div id="adminView" class="hidden max-w-6xl mx-auto p-4">
+            <!-- Admin Header -->
+            <div class="bg-gradient-to-r from-purple-600 to-purple-700 rounded-2xl p-6 text-white mb-6 shadow-lg">
+                <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-3xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold">Administration Panel</h2>
+                        <p class="text-purple-100">System Management & Legacy Integration</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-purple-500">
+                    <p class="text-gray-500 text-sm">Total Users</p>
+                    <p id="adminTotalUsers" class="text-2xl font-bold text-gray-800">--</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-blue-500">
+                    <p class="text-gray-500 text-sm">Students</p>
+                    <p id="adminStudentCount" class="text-2xl font-bold text-blue-600">--</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-green-500">
+                    <p class="text-gray-500 text-sm">Staff</p>
+                    <p id="adminStaffCount" class="text-2xl font-bold text-green-600">--</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-red-500">
+                    <p class="text-gray-500 text-sm">Admins</p>
+                    <p id="adminAdminCount" class="text-2xl font-bold text-red-600">--</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Users Table -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-4 border-b bg-gray-50">
+                        <h3 class="font-bold text-lg"><i class="fas fa-users mr-2 text-purple-600"></i>User Management</h3>
+                    </div>
+                    <div class="p-4 max-h-96 overflow-y-auto">
+                        <table class="w-full">
+                            <thead class="text-left text-sm text-gray-500">
+                                <tr>
+                                    <th class="pb-2">User</th>
+                                    <th class="pb-2">Role</th>
+                                    <th class="pb-2">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminUsersTable" class="text-sm">
+                                <!-- Will be populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- RBAC Matrix -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-4 border-b bg-gray-50">
+                        <h3 class="font-bold text-lg"><i class="fas fa-key mr-2 text-orange-600"></i>Role Permissions Matrix</h3>
+                    </div>
+                    <div class="p-4 max-h-96 overflow-y-auto">
+                        <div id="rbacMatrix" class="space-y-4">
+                            <!-- Will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Legacy Systems Status -->
+            <div class="mt-6 bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="p-4 border-b bg-gray-50">
+                    <h3 class="font-bold text-lg"><i class="fas fa-server mr-2 text-blue-600"></i>Legacy Systems Integration (On-Premise)</h3>
+                    <p class="text-sm text-gray-500 mt-1">Real-time status of enterprise systems connected via ESB</p>
+                </div>
+                <div class="p-4">
+                    <div id="legacySystemsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- Will be populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Architecture Diagram -->
+            <div class="mt-6 bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="p-4 border-b bg-gray-50">
+                    <h3 class="font-bold text-lg"><i class="fas fa-project-diagram mr-2 text-green-600"></i>System Architecture</h3>
+                </div>
+                <div class="p-6">
+                    <pre class="text-xs bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto">
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           CLOUD INFRASTRUCTURE                               │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐        │
+│  │   Frontend  │  │   FastAPI   │  │   AI/ML     │  │  Analytics  │        │
+│  │   (React)   │──│   Gateway   │──│   Service   │──│   (Cloud)   │        │
+│  └─────────────┘  └──────┬──────┘  └─────────────┘  └─────────────┘        │
+│                          │                                                   │
+│                          ▼                                                   │
+│               ┌──────────────────────┐                                      │
+│               │ ENTERPRISE SERVICE   │                                      │
+│               │      BUS (ESB)       │                                      │
+│               │   [MuleSoft/Azure]   │                                      │
+│               └──────────┬───────────┘                                      │
+└──────────────────────────┼──────────────────────────────────────────────────┘
+                           │ Secure VPN / ExpressRoute
+┌──────────────────────────┼──────────────────────────────────────────────────┐
+│                          ▼           ON-PREMISE DATACENTER                   │
+│  ┌───────────┐  ┌───────────┐  ┌───────────┐  ┌───────────┐  ┌───────────┐ │
+│  │ Admissions│  │ Academic  │  │ Financial │  │  Housing  │  │ Directory │ │
+│  │  (Banner) │  │(PeopleSoft│  │(PowerFAIDS│  │ (StarRez) │  │   (AD)    │ │
+│  │           │  │           │  │           │  │           │  │           │ │
+│  │ FERPA ✓   │  │ FERPA ✓   │  │ PCI-DSS ✓ │  │ Privacy ✓ │  │ Security ✓│ │
+│  └───────────┘  └───────────┘  └───────────┘  └───────────┘  └───────────┘ │
+└─────────────────────────────────────────────────────────────────────────────┘
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://127.0.0.1:8000';
+        let token = null;
+        let studentId = 'STU2024001';
+        let currentUser = null;
+
+        // Login
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const formData = new URLSearchParams();
+                formData.append('username', email);
+                formData.append('password', password);
+                
+                const response = await fetch(`${API_URL}/token`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    token = data.access_token;
+                    
+                    // Get user info to determine role
+                    await loadCurrentUser();
+                    
+                    document.getElementById('loginScreen').classList.add('hidden');
+                    document.getElementById('mainApp').classList.remove('hidden');
+                    await initChat();
+                    
+                    // Load appropriate data based on role
+                    if (currentUser.student_id) {
+                        studentId = currentUser.student_id;
+                        loadProfile();
+                    }
+                    
+                    if (currentUser.is_staff || currentUser.is_admin) {
+                        loadAnalytics();
+                    }
+                } else {
+                    document.getElementById('loginError').textContent = 'Invalid credentials. Please try again.';
+                    document.getElementById('loginError').classList.remove('hidden');
+                }
+            } catch (error) {
+                document.getElementById('loginError').textContent = 'Connection error. Is the server running?';
+                document.getElementById('loginError').classList.remove('hidden');
+            }
+        });
+
+        // Load current user info
+        async function loadCurrentUser() {
+            try {
+                const response = await fetch(`${API_URL}/api/me`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (response.ok) {
+                    currentUser = await response.json();
+                    
+                    // Show role badge
+                    document.getElementById('userBadge').classList.remove('hidden');
+                    const roleText = currentUser.role.charAt(0).toUpperCase() + currentUser.role.slice(1);
+                    document.getElementById('userRole').textContent = roleText;
+                    
+                    // Show/hide tabs based on role
+                    if (currentUser.ui_capabilities.can_view_admin_panel) {
+                        document.getElementById('adminTab').classList.remove('hidden');
+                        document.getElementById('supportTab').classList.remove('hidden');
+                    }
+                    
+                    // Hide profile tab for non-students
+                    if (!currentUser.student_id) {
+                        document.getElementById('profileTab').classList.add('hidden');
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading current user:', error);
+            }
+        }
+
+        // Initialize chat with welcome message
+        async function initChat() {
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML = '';
+            addMessage('bot', `Hi! 👋 I'm UniAssist, your AI-powered student support assistant.\n\nI have access to your student profile and can help you with:\n\n• 💰 Financial Aid & Tuition\n• 📚 Course Registration\n• 📊 Academic Records & Grades\n• 🏠 Housing Information\n• 🎓 Admissions Questions\n\nI'll do my best to resolve your queries instantly. If I'm unable to help, I'll connect you with our support staff.\n\nHow can I help you today?`);
+            
+            // Check if student has existing tickets and update button
+            if (currentUser?.student_id) {
+                try {
+                    const response = await fetch(`${API_URL}/api/tickets/my`, {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    if (response.ok) {
+                        const data = await response.json();
+                        const ticketCount = data.tickets?.length || 0;
+                        const btnText = document.getElementById('ticketsBtnText');
+                        if (btnText) {
+                            if (ticketCount > 0) {
+                                btnText.textContent = `📋 My Tickets (${ticketCount})`;
+                                btnText.parentElement.classList.add('bg-blue-100', 'px-2', 'py-1', 'rounded');
+                            } else {
+                                btnText.textContent = '📋 My Tickets';
+                            }
+                        }
+                    }
+                } catch (e) { 
+                    console.error('Error checking tickets:', e);
+                }
+            }
+        }
+
+        // Simple markdown to HTML converter
+        function formatMessage(text) {
+            return text
+                .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')  // Bold
+                .replace(/\*(.+?)\*/g, '<em>$1</em>')              // Italic
+                .replace(/_(.+?)_/g, '<em>$1</em>')                // Italic with underscore
+                .replace(/---/g, '<hr class="my-2 border-gray-300">')  // Horizontal rule
+                .replace(/\n/g, '<br>');                          // Line breaks
+        }
+
+        // Add message to chat
+        function addMessage(type, text, metadata = {}) {
+            const chatMessages = document.getElementById('chatMessages');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `flex gap-3 message-enter ${type === 'user' ? 'flex-row-reverse' : ''}`;
+            
+            const icon = type === 'user' ? 'fa-user' : 'fa-robot';
+            const bgColor = type === 'user' ? 'bg-blue-600' : 'bg-green-600';
+            const msgBg = type === 'user' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-800';
+            
+            let metaHtml = '';
+            if (metadata.category) {
+                const confidencePercent = Math.round((metadata.confidence || 0) * 100);
+                const showEscalate = confidencePercent < 85; // Show escalate option for lower confidence
+                metaHtml = `<div class="text-xs text-gray-400 mt-1">
+                    <span class="bg-gray-200 px-2 py-0.5 rounded">${metadata.category}</span>
+                    ${metadata.confidence ? `<span class="ml-2">${confidencePercent}% confident</span>` : ''}
+                    ${showEscalate ? `<button onclick="raiseTicketFromChat()" class="ml-2 text-blue-600 hover:text-blue-800 underline">
+                        <i class="fas fa-headset"></i> Talk to Support
+                    </button>` : ''}
+                </div>`;
+                
+                // Store last query for potential escalation
+                window.lastQuery = { text: text, category: metadata.category, confidence: metadata.confidence };
+            }
+            
+            const formattedText = formatMessage(text);
+            
+            msgDiv.innerHTML = `
+                <div class="w-8 h-8 ${bgColor} rounded-full flex items-center justify-center flex-shrink-0">
+                    <i class="fas ${icon} text-white text-sm"></i>
+                </div>
+                <div class="max-w-[80%]">
+                    <div class="${msgBg} rounded-2xl px-4 py-3">
+                        <div class="text-sm">${formattedText}</div>
+                    </div>
+                    ${metaHtml}
+                </div>
+            `;
+            
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Raise ticket from chat
+        async function raiseTicketFromChat() {
+            const lastUserMsg = document.querySelectorAll('#chatMessages > div');
+            let userQuery = '';
+            
+            // Find the last user message
+            for (let i = lastUserMsg.length - 1; i >= 0; i--) {
+                if (lastUserMsg[i].classList.contains('flex-row-reverse')) {
+                    // Get text from the message div (handles both p and div.text-sm)
+                    userQuery = lastUserMsg[i].querySelector('.text-sm')?.textContent || 
+                                lastUserMsg[i].querySelector('p')?.textContent || '';
+                    break;
+                }
+            }
+            
+            // If no user message found, use stored lastUserMessage or lastQuery
+            if (!userQuery) {
+                userQuery = window.lastUserMessage || window.lastQuery?.text || '';
+            }
+            
+            if (!userQuery) {
+                addMessage('bot', 'Please ask a question first, then I can connect you with support.');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}/api/tickets/create`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        query: userQuery,
+                        category: window.lastQuery?.category || 'general',
+                        ai_confidence: window.lastQuery?.confidence || 0.5
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    addMessage('bot', `✅ I've created a support ticket for you!\n\n📋 Ticket ID: ${data.ticket.id}\n\nA support staff member will review your query and respond soon. You can view your tickets by clicking "My Tickets" above.\n\nTypical response time: 4-24 hours`, {});
+                    
+                    // Update ticket count in button
+                    const btnText = document.getElementById('ticketsBtnText');
+                    if (btnText) {
+                        const currentText = btnText.textContent;
+                        const match = currentText.match(/\((\d+)\)/);
+                        const count = match ? parseInt(match[1]) + 1 : 1;
+                        btnText.textContent = `📋 My Tickets (${count})`;
+                        btnText.parentElement.classList.add('bg-blue-100', 'px-2', 'py-1', 'rounded');
+                    }
+                } else {
+                    addMessage('bot', 'Sorry, I could not create a ticket. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error creating ticket:', error);
+                addMessage('bot', 'Connection error. Please try again.');
+            }
+        }
+
+        // Show my tickets modal for students
+        async function showMyTickets() {
+            try {
+                const response = await fetch(`${API_URL}/api/tickets/my`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    if (data.tickets && data.tickets.length > 0) {
+                        // Show ticket list first
+                        let ticketsList = data.tickets.map(t => {
+                            const statusEmoji = {
+                                'open': '🔴',
+                                'in_progress': '🟡',
+                                'pending_student': '🔵',
+                                'resolved': '🟢',
+                                'closed': '⚫'
+                            };
+                            return `${statusEmoji[t.status] || '⚪'} **${t.id}** - ${t.status.replace('_', ' ')}\n   ${t.original_query.substring(0, 50)}...`;
+                        }).join('\n\n');
+                        
+                        addMessage('bot', `📋 **Your Support Tickets:**\n\n${ticketsList}\n\n_Status: 🔴 Open | 🟡 In Progress | 🔵 Awaiting Your Reply | 🟢 Resolved_\n\n👇 See conversation threads below:`);
+                        
+                        // Show each ticket with its full conversation thread
+                        for (const ticket of data.tickets) {
+                            let conversationThread = '';
+                            
+                            if (ticket.messages && ticket.messages.length > 0) {
+                                conversationThread = ticket.messages.map(msg => {
+                                    const senderIcon = msg.sender === 'student' ? '👤 You' : 
+                                                      msg.sender === 'staff' ? `👔 ${msg.sender_name || 'Support Staff'}` : 
+                                                      '🤖 System';
+                                    const time = new Date(msg.timestamp).toLocaleString();
+                                    return `**${senderIcon}** _(${time})_\n${msg.message}`;
+                                }).join('\n\n---\n\n');
+                            } else {
+                                conversationThread = '_No messages yet_';
+                            }
+                            
+                            const statusEmoji = {
+                                'open': '🔴 Open',
+                                'in_progress': '🟡 In Progress',
+                                'pending_student': '🔵 Awaiting Your Reply',
+                                'resolved': '🟢 Resolved',
+                                'closed': '⚫ Closed'
+                            };
+                            
+                            addMessage('bot', `🎫 **Ticket: ${ticket.id}**\n📌 Status: ${statusEmoji[ticket.status] || ticket.status}\n📁 Category: ${ticket.category}\n\n**Conversation:**\n\n${conversationThread}${ticket.status === 'pending_student' ? '\n\n⚠️ _Staff is waiting for your reply!_' : ''}`);
+                        }
+                    } else {
+                        addMessage('bot', "You don't have any support tickets yet. If I can't resolve your query, I'll automatically offer to connect you with our support staff.");
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading tickets:', error);
+                addMessage('bot', 'Could not load your tickets. Please try again.');
+            }
+        }
+
+        // Show typing indicator
+        function showTyping() {
+            const chatMessages = document.getElementById('chatMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'typingIndicator';
+            typingDiv.className = 'flex gap-3 message-enter';
+            typingDiv.innerHTML = `
+                <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
+                    <i class="fas fa-robot text-white text-sm"></i>
+                </div>
+                <div class="bg-gray-100 rounded-2xl px-4 py-3">
+                    <div class="typing-indicator text-gray-500">
+                        <span>●</span><span>●</span><span>●</span>
+                    </div>
+                </div>
+            `;
+            chatMessages.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function hideTyping() {
+            const typing = document.getElementById('typingIndicator');
+            if (typing) typing.remove();
+        }
+
+        // Send chat message
+        document.getElementById('chatForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            // Store the user's message for potential ticket creation
+            window.lastUserMessage = message;
+            
+            input.value = '';
+            addMessage('user', message);
+            showTyping();
+            
+            try {
+                const response = await fetch(`${API_URL}/api/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        student_id: studentId,
+                        message: message
+                    })
+                });
+                
+                hideTyping();
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    addMessage('bot', data.text, {
+                        category: data.category,
+                        confidence: data.confidence
+                    });
+                } else {
+                    addMessage('bot', 'Sorry, I encountered an error. Please try again.');
+                }
+            } catch (error) {
+                hideTyping();
+                addMessage('bot', 'Connection error. Please check if the server is running.');
+            }
+        });
+
+        // Quick question
+        function askQuestion(question) {
+            document.getElementById('messageInput').value = question;
+            document.getElementById('chatForm').dispatchEvent(new Event('submit'));
+        }
+
+        // Load profile
+        async function loadProfile() {
+            try {
+                const response = await fetch(`${API_URL}/api/students/${studentId}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('profileName').textContent = data.name;
+                    document.getElementById('profileProgram').textContent = data.program;
+                    document.getElementById('profileId').textContent = data.id;
+                    document.getElementById('profileYear').textContent = `Year ${data.year}`;
+                    document.getElementById('profileGpa').textContent = data.gpa;
+                    document.getElementById('profileBuilding').textContent = data.housing.building;
+                    document.getElementById('profileRoom').textContent = data.housing.room;
+                    document.getElementById('profileAidStatus').textContent = data.financial_aid.status;
+                    document.getElementById('profileAidAmount').textContent = `$${data.financial_aid.amount.toLocaleString()}`;
+                    document.getElementById('profileAidDate').textContent = data.financial_aid.disbursement_date;
+                    
+                    const coursesDiv = document.getElementById('profileCourses');
+                    coursesDiv.innerHTML = data.courses.map(c => 
+                        `<p><span class="font-medium">${c.code}</span> - ${c.name} <span class="text-green-600">(${c.grade})</span></p>`
+                    ).join('');
+                }
+            } catch (error) {
+                console.error('Error loading profile:', error);
+            }
+        }
+
+        // Load analytics
+        async function loadAnalytics() {
+            try {
+                const response = await fetch(`${API_URL}/api/analytics`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('totalQueries').textContent = data.total_queries.toLocaleString();
+                    document.getElementById('automatedRate').textContent = `${data.automated_resolution}%`;
+                    document.getElementById('avgResponse').textContent = `${data.avg_response_time}s`;
+                    document.getElementById('satisfaction').textContent = `${data.satisfaction_score}%`;
+                    
+                    // Categories chart
+                    const categoriesDiv = document.getElementById('categoriesChart');
+                    categoriesDiv.innerHTML = data.top_categories.map(cat => `
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>${cat.name}</span>
+                                <span class="text-gray-500">${cat.count} (${cat.percentage}%)</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-blue-600 h-2 rounded-full" style="width: ${cat.percentage}%"></div>
+                            </div>
+                        </div>
+                    `).join('');
+                    
+                    // ROI metrics
+                    const roiDiv = document.getElementById('roiMetrics');
+                    const roi = data.roi_metrics;
+                    roiDiv.innerHTML = `
+                        <div class="flex justify-between py-2 border-b">
+                            <span class="text-gray-600">Cost per Query (Human)</span>
+                            <span class="font-bold">${roi.cost_per_query_human}</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b">
+                            <span class="text-gray-600">Cost per Query (AI)</span>
+                            <span class="font-bold text-green-600">${roi.cost_per_query_ai}</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b">
+                            <span class="text-gray-600">Workload Reduction</span>
+                            <span class="font-bold">${roi.workload_reduction_percent}%</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b">
+                            <span class="text-gray-600">Monthly Savings</span>
+                            <span class="font-bold text-green-600">${roi.monthly_savings_projected}</span>
+                        </div>
+                        <div class="flex justify-between py-2">
+                            <span class="text-gray-600">Year 1 ROI</span>
+                            <span class="font-bold text-blue-600">${roi.roi_year1_percent}%</span>
+                        </div>
+                    `;
+                }
+                
+                // Load ESB status
+                const esbResponse = await fetch(`${API_URL}/api/esb/status`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (esbResponse.ok) {
+                    const esbData = await esbResponse.json();
+                    const esbDiv = document.getElementById('esbStatus');
+                    esbDiv.innerHTML = esbData.connected_systems.map(sys => `
+                        <div class="p-3 rounded-lg border ${sys.status === 'operational' ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'}">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="w-2 h-2 rounded-full ${sys.status === 'operational' ? 'bg-green-500' : 'bg-red-500'}"></span>
+                                <span class="font-medium text-sm">${sys.name.split(' ')[0]}</span>
+                            </div>
+                            <p class="text-xs text-gray-500">${sys.vendor}</p>
+                            <p class="text-xs text-gray-400">${sys.location}</p>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('Error loading analytics:', error);
+            }
+        }
+
+        // Tab navigation
+        function showTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('bg-white/20'));
+            document.getElementById(`${tab}Tab`).classList.add('bg-white/20');
+            
+            document.getElementById('chatView').classList.add('hidden');
+            document.getElementById('analyticsView').classList.add('hidden');
+            document.getElementById('profileView').classList.add('hidden');
+            document.getElementById('adminView').classList.add('hidden');
+            document.getElementById('supportView').classList.add('hidden');
+            document.getElementById(`${tab}View`).classList.remove('hidden');
+            
+            if (tab === 'analytics') loadAnalytics();
+            if (tab === 'admin') loadAdminPanel();
+            if (tab === 'support') loadSupportPortal();
+        }
+
+        // Load Support Staff Portal
+        async function loadSupportPortal() {
+            await loadTickets();
+        }
+
+        // Load tickets
+        let selectedTicketId = null;
+        
+        async function loadTickets() {
+            try {
+                const statusFilter = document.getElementById('ticketStatusFilter')?.value || '';
+                const url = statusFilter ? `${API_URL}/api/tickets?status=${statusFilter}` : `${API_URL}/api/tickets`;
+                
+                const response = await fetch(url, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Update stats
+                    if (data.stats) {
+                        document.getElementById('supportOpenCount').textContent = data.stats.open || 0;
+                        document.getElementById('supportProgressCount').textContent = data.stats.in_progress || 0;
+                        document.getElementById('supportPendingCount').textContent = data.stats.pending_student || 0;
+                        document.getElementById('supportResolvedCount').textContent = data.stats.resolved || 0;
+                        document.getElementById('supportAvgTime').textContent = data.stats.avg_resolution_time || '--';
+                    }
+                    
+                    // Render tickets list
+                    const ticketsList = document.getElementById('ticketsList');
+                    if (data.tickets && data.tickets.length > 0) {
+                        ticketsList.innerHTML = data.tickets.map(ticket => {
+                            const statusColors = {
+                                'open': 'bg-red-100 text-red-700 border-red-200',
+                                'in_progress': 'bg-yellow-100 text-yellow-700 border-yellow-200',
+                                'pending_student': 'bg-blue-100 text-blue-700 border-blue-200',
+                                'resolved': 'bg-green-100 text-green-700 border-green-200',
+                                'closed': 'bg-gray-100 text-gray-700 border-gray-200'
+                            };
+                            const priorityColors = {
+                                'low': 'text-gray-500',
+                                'medium': 'text-yellow-500',
+                                'high': 'text-orange-500',
+                                'urgent': 'text-red-500'
+                            };
+                            return `
+                                <div onclick="selectTicket('${ticket.id}')" 
+                                     class="p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors ${selectedTicketId === ticket.id ? 'ring-2 ring-blue-500' : ''}">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <span class="font-medium text-sm">${ticket.id}</span>
+                                        <span class="px-2 py-1 rounded-full text-xs ${statusColors[ticket.status]}">${ticket.status.replace('_', ' ')}</span>
+                                    </div>
+                                    <p class="font-medium">${ticket.student_name}</p>
+                                    <p class="text-sm text-gray-500 truncate">${ticket.original_query}</p>
+                                    <div class="flex justify-between items-center mt-2 text-xs text-gray-400">
+                                        <span><i class="fas fa-tag mr-1"></i>${ticket.category}</span>
+                                        <span class="${priorityColors[ticket.priority]}"><i class="fas fa-exclamation-circle mr-1"></i>${ticket.priority}</span>
+                                    </div>
+                                    <div class="text-xs text-gray-400 mt-1">
+                                        <span>Confidence: ${Math.round((ticket.ai_confidence || 0) * 100)}%</span>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('');
+                    } else {
+                        ticketsList.innerHTML = '<p class="text-center text-gray-400 py-8">No tickets found</p>';
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading tickets:', error);
+            }
+        }
+
+        // Select ticket
+        async function selectTicket(ticketId) {
+            selectedTicketId = ticketId;
+            
+            try {
+                const response = await fetch(`${API_URL}/api/tickets/${ticketId}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (response.ok) {
+                    const ticket = await response.json();
+                    renderTicketDetail(ticket);
+                    loadTickets(); // Refresh list to show selection
+                }
+            } catch (error) {
+                console.error('Error loading ticket detail:', error);
+            }
+        }
+
+        // Render ticket detail
+        function renderTicketDetail(ticket) {
+            const detailDiv = document.getElementById('ticketDetail');
+            
+            const statusColors = {
+                'open': 'bg-red-100 text-red-700',
+                'in_progress': 'bg-yellow-100 text-yellow-700',
+                'pending_student': 'bg-blue-100 text-blue-700',
+                'resolved': 'bg-green-100 text-green-700'
+            };
+            
+            detailDiv.innerHTML = `
+                <div class="space-y-4">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="font-bold">${ticket.student_name}</h4>
+                            <p class="text-sm text-gray-500">${ticket.student_email}</p>
+                        </div>
+                        <span class="px-2 py-1 rounded-full text-xs ${statusColors[ticket.status]}">${ticket.status.replace('_', ' ')}</span>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-lg p-3 text-sm">
+                        <p class="font-medium text-gray-700 mb-1">Original Query:</p>
+                        <p class="text-gray-600">${ticket.original_query}</p>
+                        <p class="text-xs text-gray-400 mt-2">AI Confidence: ${Math.round((ticket.ai_confidence || 0) * 100)}%</p>
+                    </div>
+                    
+                    <div class="border-t pt-3">
+                        <p class="font-medium text-sm mb-2">Conversation:</p>
+                        <div class="space-y-2 max-h-48 overflow-y-auto">
+                            ${ticket.messages.map(msg => `
+                                <div class="text-sm ${msg.sender === 'student' ? 'bg-blue-50 ml-4' : msg.sender === 'staff' ? 'bg-green-50 mr-4' : 'bg-gray-100'} rounded-lg p-2">
+                                    <p class="text-xs text-gray-500 mb-1">
+                                        ${msg.sender === 'student' ? '👨‍🎓 Student' : msg.sender === 'staff' ? '👔 ' + (msg.sender_name || 'Staff') : '🤖 System'}
+                                    </p>
+                                    <p>${msg.message}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    ${ticket.status !== 'resolved' && ticket.status !== 'closed' ? `
+                        <div class="border-t pt-3 space-y-2">
+                            ${!ticket.assigned_to ? `
+                                <button onclick="assignTicket('${ticket.id}')" class="w-full bg-blue-600 text-white py-2 rounded-lg text-sm hover:bg-blue-700">
+                                    <i class="fas fa-hand-paper mr-2"></i>Claim This Ticket
+                                </button>
+                            ` : ''}
+                            <div class="flex gap-2">
+                                <input type="text" id="replyInput" placeholder="Type your reply..." 
+                                    class="flex-1 px-3 py-2 border rounded-lg text-sm">
+                                <button onclick="sendReply('${ticket.id}')" class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-700">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                            <button onclick="resolveTicket('${ticket.id}')" class="w-full bg-gray-100 text-gray-700 py-2 rounded-lg text-sm hover:bg-gray-200">
+                                <i class="fas fa-check mr-2"></i>Mark as Resolved
+                            </button>
+                        </div>
+                    ` : `
+                        <div class="bg-green-50 p-3 rounded-lg text-sm">
+                            <p class="font-medium text-green-700"><i class="fas fa-check-circle mr-2"></i>Resolved</p>
+                            ${ticket.resolution_notes ? `<p class="text-gray-600 mt-1">${ticket.resolution_notes}</p>` : ''}
+                        </div>
+                    `}
+                </div>
+            `;
+        }
+
+        // Assign ticket
+        async function assignTicket(ticketId) {
+            try {
+                const response = await fetch(`${API_URL}/api/tickets/${ticketId}/assign`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (response.ok) {
+                    selectTicket(ticketId);
+                    loadTickets();
+                }
+            } catch (error) {
+                console.error('Error assigning ticket:', error);
+            }
+        }
+
+        // Send reply
+        async function sendReply(ticketId) {
+            const input = document.getElementById('replyInput');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            try {
+                const response = await fetch(`${API_URL}/api/tickets/${ticketId}/message`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ text: message })
+                });
+                
+                if (response.ok) {
+                    input.value = '';
+                    selectTicket(ticketId);
+                }
+            } catch (error) {
+                console.error('Error sending reply:', error);
+            }
+        }
+
+        // Resolve ticket
+        async function resolveTicket(ticketId) {
+            const notes = prompt('Enter resolution notes:');
+            if (!notes) return;
+            
+            try {
+                const response = await fetch(`${API_URL}/api/tickets/${ticketId}/resolve`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ notes: notes })
+                });
+                
+                if (response.ok) {
+                    selectTicket(ticketId);
+                    loadTickets();
+                }
+            } catch (error) {
+                console.error('Error resolving ticket:', error);
+            }
+        }
+
+        // Load Admin Panel
+        async function loadAdminPanel() {
+            try {
+                // Load users
+                const usersResponse = await fetch(`${API_URL}/api/admin/users`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (usersResponse.ok) {
+                    const usersData = await usersResponse.json();
+                    
+                    document.getElementById('adminTotalUsers').textContent = usersData.total_users;
+                    document.getElementById('adminStudentCount').textContent = usersData.role_summary.students;
+                    document.getElementById('adminStaffCount').textContent = usersData.role_summary.staff;
+                    document.getElementById('adminAdminCount').textContent = usersData.role_summary.admins;
+                    
+                    // Populate users table
+                    const tableBody = document.getElementById('adminUsersTable');
+                    tableBody.innerHTML = usersData.users.map(user => {
+                        const roleColors = {
+                            'student': 'bg-blue-100 text-blue-700',
+                            'staff': 'bg-green-100 text-green-700',
+                            'admin': 'bg-red-100 text-red-700'
+                        };
+                        return `
+                            <tr class="border-b">
+                                <td class="py-2">
+                                    <div class="font-medium">${user.name}</div>
+                                    <div class="text-xs text-gray-400">${user.username}</div>
+                                </td>
+                                <td class="py-2">
+                                    <span class="px-2 py-1 rounded-full text-xs ${roleColors[user.role]}">${user.role}</span>
+                                </td>
+                                <td class="py-2">
+                                    <span class="w-2 h-2 inline-block rounded-full ${user.is_active ? 'bg-green-500' : 'bg-gray-400'}"></span>
+                                </td>
+                            </tr>
+                        `;
+                    }).join('');
+                }
+
+                // Load RBAC info
+                const rbacResponse = await fetch(`${API_URL}/api/admin/roles`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (rbacResponse.ok) {
+                    const rbacData = await rbacResponse.json();
+                    const rbacDiv = document.getElementById('rbacMatrix');
+                    
+                    rbacDiv.innerHTML = Object.entries(rbacData.role_permissions).map(([role, permissions]) => {
+                        const roleColors = {
+                            'student': 'border-blue-500 bg-blue-50',
+                            'staff': 'border-green-500 bg-green-50',
+                            'admin': 'border-red-500 bg-red-50'
+                        };
+                        return `
+                            <div class="p-3 rounded-lg border-l-4 ${roleColors[role]}">
+                                <div class="font-bold capitalize mb-2">${role}</div>
+                                <div class="flex flex-wrap gap-1">
+                                    ${permissions.map(p => `<span class="text-xs bg-white px-2 py-1 rounded">${p.replace(/_/g, ' ')}</span>`).join('')}
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                }
+
+                // Load Legacy Systems
+                const legacyResponse = await fetch(`${API_URL}/api/admin/legacy-systems`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (legacyResponse.ok) {
+                    const legacyData = await legacyResponse.json();
+                    const legacyDiv = document.getElementById('legacySystemsGrid');
+                    
+                    legacyDiv.innerHTML = legacyData.systems.map(sys => {
+                        const statusColor = sys.status === 'operational' ? 'border-green-500' : 'border-red-500';
+                        const statusBg = sys.status === 'operational' ? 'bg-green-100' : 'bg-red-100';
+                        const statusDot = sys.status === 'operational' ? 'bg-green-500' : 'bg-red-500';
+                        
+                        return `
+                            <div class="p-4 rounded-xl border-2 ${statusColor} ${statusBg}">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-bold">${sys.name}</span>
+                                    <span class="w-3 h-3 rounded-full ${statusDot}"></span>
+                                </div>
+                                <p class="text-sm text-gray-600">${sys.vendor}</p>
+                                <div class="mt-2 flex items-center gap-2 text-xs">
+                                    <span class="px-2 py-1 bg-white rounded">${sys.location}</span>
+                                    ${sys.compliance ? sys.compliance.map(c => `<span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded">${c}</span>`).join('') : ''}
+                                </div>
+                                <p class="text-xs text-gray-400 mt-2">${sys.description || ''}</p>
+                            </div>
+                        `;
+                    }).join('');
+                }
+            } catch (error) {
+                console.error('Error loading admin panel:', error);
+            }
+        }
+
+        // Logout
+        function logout() {
+            token = null;
+            currentUser = null;
+            selectedTicketId = null;
+            document.getElementById('mainApp').classList.add('hidden');
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('adminTab').classList.add('hidden');
+            document.getElementById('supportTab').classList.add('hidden');
+            document.getElementById('profileTab').classList.remove('hidden');
+            document.getElementById('userBadge').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
