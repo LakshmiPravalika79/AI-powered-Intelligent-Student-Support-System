@@ -298,5 +298,3 @@ docker run -p 8000:8000 uniassist-pro
 ✅ **High Clarity** - Clear separation of concerns, documented flows
 
 ---
-
-*Built for DBIM Hackathon - December 2024*
