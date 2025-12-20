@@ -229,7 +229,7 @@ curl "http://localhost:8000/api/analytics" \
 
 ---
 
-## 🎤 DBIM Presentation Talking Points
+## 🎤 DBIM Presentation Points
 
 ### 1. Business Problem
 > "Students spend 15+ minutes per query navigating multiple systems. This costs universities $25 per human-handled inquiry."
@@ -289,9 +289,9 @@ docker run -p 8000:8000 uniassist-pro
 
 ---
 
-## 🏆 Why This Architecture Wins
 
-✅ **Correct Thinking** - Hybrid cloud with ESB is industry standard  
+
+✅ Hybrid cloud with ESB is industry standard  
 ✅ **Feasibility** - Runs locally in 30 seconds, production-ready patterns  
 ✅ **Clean Explanation** - Every file has architecture comments  
 ✅ **Low Risk** - No external APIs, no secrets, no complex setup  
