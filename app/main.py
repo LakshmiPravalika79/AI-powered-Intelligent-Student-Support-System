@@ -534,6 +534,86 @@ async def get_all_users(
     }
 
 
+@app.post("/api/admin/users", tags=["Admin"])
+async def create_user(
+    user_data: Dict,
+    current_user: Dict = Depends(auth_service.get_current_user)
+):
+    """
+    Create a new user (Admin only).
+    
+    RBAC: Requires ADMIN role with MANAGE_USERS permission
+    
+    Creates a new user with the specified role.
+    """
+    # Check admin permission
+    if not rbac_service.has_permission(current_user["username"], Permission.MANAGE_USERS):
+        raise HTTPException(
+            status_code=403,
+            detail="Access denied: Admin role required"
+        )
+    
+    # Extract user data
+    email = user_data.get("email", "").lower().strip()
+    name = user_data.get("name", "").strip()
+    password = user_data.get("password", "")
+    role = user_data.get("role", "student")
+    student_id = user_data.get("student_id")
+    
+    # Validation
+    if not email or not name or not password:
+        raise HTTPException(status_code=400, detail="Name, email, and password are required")
+    
+    if role not in ["student", "staff", "admin"]:
+        raise HTTPException(status_code=400, detail="Invalid role specified")
+    
+    # Check if user already exists
+    if email in db.users:
+        raise HTTPException(status_code=400, detail="A user with this email already exists")
+    
+    # Create user
+    from datetime import datetime
+    new_user = {
+        "password": password,  # In production, this should be hashed
+        "name": name,
+        "role": role,
+        "is_active": True,
+        "created_at": datetime.now().isoformat(),
+        "created_by": current_user["username"]
+    }
+    
+    if role == "student" and student_id:
+        new_user["student_id"] = student_id
+    elif role == "staff":
+        new_user["department"] = "Support"
+    
+    # Add to database
+    db.users[email] = new_user
+    
+    # If student, create student record
+    if role == "student" and student_id:
+        db.student_records[student_id] = {
+            "name": name,
+            "email": email,
+            "major": "Undeclared",
+            "year": 1,
+            "gpa": 0.0,
+            "enrollment_status": "Active",
+            "advisor": "TBD"
+        }
+    
+    return {
+        "success": True,
+        "message": f"User {name} created successfully",
+        "user": {
+            "email": email,
+            "name": name,
+            "role": role,
+            "student_id": student_id if role == "student" else None
+        }
+    }
+
+
 @app.get("/api/admin/legacy-systems", tags=["Admin"])
 async def get_legacy_systems_status(
     current_user: Dict = Depends(auth_service.get_current_user)
