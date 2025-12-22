@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechEDU - AI Student Support</title>
+    <title>CampusHub - Smart Student Support</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<<<<<<< HEAD
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -27,6 +28,53 @@
             --shadow-soft: 0 30px 60px rgba(4, 6, 12, 0.45);
             --shadow-hover: 0 40px 70px rgba(8, 12, 22, 0.55);
             --transition-base: cubic-bezier(0.18, 0.89, 0.32, 1.28);
+=======
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        accent: {
+                            50: '#fdf4ff',
+                            100: '#fae8ff',
+                            200: '#f5d0fe',
+                            300: '#f0abfc',
+                            400: '#e879f9',
+                            500: '#d946ef',
+                            600: '#c026d3',
+                            700: '#a21caf',
+                            800: '#86198f',
+                            900: '#701a75',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .chat-container { height: calc(100vh - 220px); }
+        .message-enter { animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+>>>>>>> 5cd32c16083a1667e7eb32593cdbfd7ab4874b45
         }
 
         *, *::before, *::after {
@@ -661,8 +709,72 @@
                 padding: 0.55rem 1rem;
             }
         }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        }
+        .gradient-primary {
+            background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 50%, #8b5cf6 100%);
+        }
+        .gradient-accent {
+            background: linear-gradient(135deg, #f97316 0%, #ec4899 50%, #8b5cf6 100%);
+        }
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .btn-glow {
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 30px rgba(14, 165, 233, 0.6);
+        }
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .scroll-smooth::-webkit-scrollbar {
+            width: 6px;
+        }
+        .scroll-smooth::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+        .scroll-smooth::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .scroll-smooth::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .stat-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+        }
     </style>
 </head>
+<<<<<<< HEAD
 <body class="min-h-screen text-primary">
     <!-- Login Screen -->
     <div id="loginScreen" class="min-h-screen login-backdrop flex items-center justify-center px-4 py-12">
@@ -703,6 +815,140 @@
             <div id="loginError" class="error-banner">
                 <i class="fas fa-exclamation-triangle mt-0.5"></i>
                 <span></span>
+=======
+<body class="bg-slate-50 min-h-screen">
+    <!-- Login Screen -->
+    <div id="loginScreen" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <!-- Campus Background Image -->
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" 
+                 alt="Campus" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/80 via-purple-900/70 to-slate-900/80"></div>
+        </div>
+        
+        <!-- Floating Elements -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-10 left-10 w-20 h-20 border border-white/20 rounded-2xl rotate-12 animate-pulse"></div>
+            <div class="absolute top-1/4 right-20 w-16 h-16 border border-white/10 rounded-full animate-bounce" style="animation-duration: 3s;"></div>
+            <div class="absolute bottom-20 left-1/4 w-12 h-12 bg-white/5 rounded-lg rotate-45"></div>
+            <div class="absolute top-1/3 left-1/4 text-white/10 text-6xl"><i class="fas fa-graduation-cap"></i></div>
+            <div class="absolute bottom-1/4 right-1/4 text-white/10 text-5xl"><i class="fas fa-book-open"></i></div>
+        </div>
+
+        <!-- Left Side - Branding -->
+        <div class="hidden lg:flex flex-col justify-center items-start w-1/2 h-full p-16 relative z-10">
+            <div class="max-w-lg">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-2xl text-white"></i>
+                    </div>
+                    <span class="text-3xl font-extrabold text-white">CampusHub</span>
+                </div>
+                <h1 class="text-4xl font-bold text-white leading-tight mb-4">
+                    Your Smart<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">Student Support</span><br>
+                    Platform
+                </h1>
+                <p class="text-lg text-white/70 mb-8">Get instant answers to your questions about financial aid, courses, housing, and more. Available 24/7.</p>
+                <div class="flex gap-6">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-white">24/7</div>
+                        <div class="text-sm text-white/60">Support</div>
+                    </div>
+                    <div class="w-px bg-white/20"></div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-white">AI</div>
+                        <div class="text-sm text-white/60">Powered</div>
+                    </div>
+                    <div class="w-px bg-white/20"></div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-white">73%</div>
+                        <div class="text-sm text-white/60">Auto-resolved</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Login Form -->
+        <div class="w-full lg:w-1/2 flex items-center justify-center p-4 relative z-10">
+            <div class="bg-white/95 backdrop-blur-xl p-6 rounded-2xl shadow-2xl w-full max-w-sm">
+                <!-- Mobile Logo -->
+                <div class="lg:hidden text-center mb-5">
+                    <div class="w-12 h-12 gradient-primary rounded-xl flex items-center justify-center mx-auto mb-2 shadow-lg">
+                        <i class="fas fa-graduation-cap text-xl text-white"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold text-slate-800">CampusHub</h1>
+                </div>
+
+                <div class="hidden lg:block mb-5">
+                    <h2 class="text-xl font-bold text-slate-800">Welcome back!</h2>
+                    <p class="text-slate-500 text-sm">Sign in to access your student portal</p>
+                </div>
+                
+                <form id="loginForm" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1.5">Email Address</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"><i class="fas fa-envelope"></i></span>
+                            <input type="email" id="email" value="sarah.johnson@techedu.edu"
+                                class="w-full pl-10 pr-4 py-2.5 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-slate-50/50">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1.5">Password</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"><i class="fas fa-lock"></i></span>
+                            <input type="password" id="password" value="demo123"
+                                class="w-full pl-10 pr-4 py-2.5 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-slate-50/50">
+                        </div>
+                    </div>
+                    <button type="submit" 
+                        class="w-full gradient-primary text-white py-2.5 rounded-lg font-semibold text-sm hover:opacity-90 transition-all shadow-lg hover:shadow-indigo-500/25">
+                        Sign In <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </form>
+                
+                <div class="mt-4 p-3 bg-slate-50 rounded-lg border border-slate-100">
+                    <p class="text-xs text-slate-500 font-medium mb-2"><i class="fas fa-info-circle mr-1"></i>Demo Accounts</p>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex items-center justify-between p-2 bg-blue-50 rounded-lg border border-blue-100">
+                            <div class="flex items-center">
+                                <span class="w-6 h-6 bg-blue-200 rounded-full flex items-center justify-center mr-2 text-xs">👨‍🎓</span>
+                                <div>
+                                    <p class="font-semibold text-blue-800">Student</p>
+                                    <p class="text-blue-600">sarah.johnson@techedu.edu</p>
+                                </div>
+                            </div>
+                            <code class="bg-blue-100 px-2 py-0.5 rounded text-blue-700">demo123</code>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-green-50 rounded-lg border border-green-100">
+                            <div class="flex items-center">
+                                <span class="w-6 h-6 bg-green-200 rounded-full flex items-center justify-center mr-2 text-xs">👔</span>
+                                <div>
+                                    <p class="font-semibold text-green-800">Staff</p>
+                                    <p class="text-green-600">advisor.smith@techedu.edu</p>
+                                </div>
+                            </div>
+                            <code class="bg-green-100 px-2 py-0.5 rounded text-green-700">staff123</code>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-amber-50 rounded-lg border border-amber-100">
+                            <div class="flex items-center">
+                                <span class="w-6 h-6 bg-amber-200 rounded-full flex items-center justify-center mr-2 text-xs">👑</span>
+                                <div>
+                                    <p class="font-semibold text-amber-800">Admin</p>
+                                    <p class="text-amber-600">admin@techedu.edu</p>
+                                </div>
+                            </div>
+                            <code class="bg-amber-100 px-2 py-0.5 rounded text-amber-700">admin123</code>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="loginError" class="hidden mt-3 p-3 bg-red-50 text-red-700 rounded-lg text-xs border border-red-200 flex items-center">
+                    <i class="fas fa-exclamation-circle mr-2"></i>
+                    <span></span>
+                </div>
+>>>>>>> 5cd32c16083a1667e7eb32593cdbfd7ab4874b45
             </div>
         </div>
     </div>
@@ -710,6 +956,7 @@
     <!-- Main App -->
     <div id="mainApp" class="hidden">
         <!-- Header -->
+<<<<<<< HEAD
         <header class="app-header layout-container soft-enter">
             <div class="flex flex-wrap items-center justify-between gap-5">
                 <div class="flex items-center gap-4">
@@ -719,6 +966,48 @@
                     <div>
                         <h2 class="text-xl font-semibold">TechEDU Student Support</h2>
                         <p class="text-tertiary text-sm mt-1">Always-on assistance for students, advisors, and admins.</p>
+=======
+        <header class="gradient-primary text-white shadow-xl sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 py-3">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="w-11 h-11 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm shadow-inner">
+                            <i class="fas fa-graduation-cap text-xl"></i>
+                        </div>
+                        <div>
+                            <h1 class="font-extrabold text-xl tracking-tight">CampusHub</h1>
+                            <p class="text-xs text-white/70 flex items-center gap-1">
+                                <span class="w-2 h-2 bg-green-400 rounded-full pulse-dot"></span>
+                                AI-Powered • Always Online
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="showTab('chat')" id="chatTab" class="tab-btn px-4 py-2.5 rounded-xl bg-white/20 backdrop-blur-sm font-medium transition-all hover:bg-white/30">
+                            <i class="fas fa-comments mr-2"></i>Chat
+                        </button>
+                        <button onclick="showTab('myTickets')" id="myTicketsTab" class="tab-btn px-4 py-2.5 rounded-xl hover:bg-white/20 backdrop-blur-sm font-medium transition-all">
+                            <i class="fas fa-ticket-alt mr-2"></i>My Tickets
+                        </button>
+                        <button onclick="showTab('support')" id="supportTab" class="tab-btn px-4 py-2.5 rounded-xl hover:bg-white/20 backdrop-blur-sm font-medium transition-all hidden">
+                            <i class="fas fa-headset mr-2"></i>Support
+                        </button>
+                        <button onclick="showTab('analytics')" id="analyticsTab" class="tab-btn px-4 py-2.5 rounded-xl hover:bg-white/20 backdrop-blur-sm font-medium transition-all hidden">
+                            <i class="fas fa-chart-line mr-2"></i>Analytics
+                        </button>
+                        <button onclick="showTab('admin')" id="adminTab" class="tab-btn px-4 py-2.5 rounded-xl hover:bg-white/20 backdrop-blur-sm font-medium transition-all hidden">
+                            <i class="fas fa-shield-alt mr-2"></i>Admin
+                        </button>
+                        <button onclick="showTab('profile')" id="profileTab" class="tab-btn px-4 py-2.5 rounded-xl hover:bg-white/20 backdrop-blur-sm font-medium transition-all">
+                            <i class="fas fa-user-circle mr-2"></i>Profile
+                        </button>
+                        <div id="userBadge" class="px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-sm text-sm font-semibold hidden border border-white/20">
+                            <span id="userRole">Student</span>
+                        </div>
+                        <button onclick="logout()" class="p-2.5 rounded-xl hover:bg-red-500/30 transition-all ml-2" title="Sign Out">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+>>>>>>> 5cd32c16083a1667e7eb32593cdbfd7ab4874b45
                     </div>
                 </div>
 
@@ -753,14 +1042,22 @@
         </header>
 
         <!-- Chat View -->
+<<<<<<< HEAD
         <div id="chatView" class="layout-container max-w-5xl mx-auto px-4 pb-8">
             <div class="card overflow-hidden soft-enter">
                 <!-- Chat Messages -->
                 <div id="chatMessages" class="chat-container scroll-area space-y-4">
+=======
+        <div id="chatView" class="max-w-4xl mx-auto p-4 pt-6">
+            <div class="glass-card rounded-3xl shadow-xl overflow-hidden border border-slate-200/50">
+                <!-- Chat Messages -->
+                <div id="chatMessages" class="chat-container overflow-y-auto p-6 space-y-4 scroll-smooth bg-gradient-to-b from-slate-50 to-white">
+>>>>>>> 5cd32c16083a1667e7eb32593cdbfd7ab4874b45
                     <!-- Welcome message will be added by JS -->
                 </div>
                 
                 <!-- Quick Actions -->
+<<<<<<< HEAD
                 <div class="quick-actions">
                     <div class="flex flex-wrap gap-3 items-center justify-between">
                         <p class="label">Quick questions</p>
@@ -782,12 +1079,41 @@
                             📚 Registration
                         </button>
                         <button onclick="askQuestion('I have a complaint or issue')" class="chip chip-danger">
+=======
+                <div class="px-6 py-4 border-t border-slate-100 bg-gradient-to-r from-slate-50 to-indigo-50/30">
+                    <div class="flex justify-between items-center mb-3">
+                        <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Quick Actions</p>
+                        <button id="myTicketsBtn" onclick="showMyTickets()" class="text-xs bg-indigo-100 text-indigo-700 hover:bg-indigo-200 font-semibold px-3 py-1.5 rounded-full transition-all hover-lift">
+                            <i class="fas fa-ticket-alt mr-1"></i><span id="ticketsBtnText">My Tickets</span>
+                        </button>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="askQuestion('When is my next financial aid disbursement?')" 
+                            class="px-4 py-2 text-sm bg-gradient-to-r from-emerald-50 to-teal-50 text-emerald-700 rounded-full hover:from-emerald-100 hover:to-teal-100 font-medium transition-all hover-lift border border-emerald-200/50">
+                            💰 Financial Aid
+                        </button>
+                        <button onclick="askQuestion('What is my current GPA?')" 
+                            class="px-4 py-2 text-sm bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 rounded-full hover:from-blue-100 hover:to-cyan-100 font-medium transition-all hover-lift border border-blue-200/50">
+                            📊 My GPA
+                        </button>
+                        <button onclick="askQuestion('Where is my dorm room located?')" 
+                            class="px-4 py-2 text-sm bg-gradient-to-r from-violet-50 to-purple-50 text-violet-700 rounded-full hover:from-violet-100 hover:to-purple-100 font-medium transition-all hover-lift border border-violet-200/50">
+                            🏠 Housing
+                        </button>
+                        <button onclick="askQuestion('How do I register for next semester?')" 
+                            class="px-4 py-2 text-sm bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 rounded-full hover:from-amber-100 hover:to-orange-100 font-medium transition-all hover-lift border border-amber-200/50">
+                            📚 Registration
+                        </button>
+                        <button onclick="askQuestion('I have a complaint or issue')" 
+                            class="px-4 py-2 text-sm bg-gradient-to-r from-rose-50 to-pink-50 text-rose-700 rounded-full hover:from-rose-100 hover:to-pink-100 font-medium transition-all hover-lift border border-rose-200/50">
+>>>>>>> 5cd32c16083a1667e7eb32593cdbfd7ab4874b45
                             ⚠️ Report Issue
                         </button>
                     </div>
                 </div>
                 
                 <!-- Input -->
+<<<<<<< HEAD
                 <div class="input-shell">
                     <form id="chatForm" class="flex flex-col md:flex-row gap-3">
                         <input type="text" id="messageInput" placeholder="Ask me anything about your student services..."
@@ -795,13 +1121,129 @@
                         <button type="submit" class="btn btn-primary md:w-auto w-full justify-center">
                             <i class="fas fa-paper-plane"></i>
                             <span>Send</span>
+=======
+                <div class="p-4 border-t border-slate-100 bg-white">
+                    <form id="chatForm" class="flex gap-3">
+                        <div class="flex-1 relative">
+                            <input type="text" id="messageInput" placeholder="Ask me anything about your student services..."
+                                class="w-full px-5 py-4 border-2 border-slate-200 rounded-2xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-slate-700 placeholder-slate-400">
+                        </div>
+                        <button type="submit" 
+                            class="px-6 py-4 gradient-primary text-white rounded-2xl hover:opacity-90 transition-all btn-glow shadow-lg font-semibold">
+                            <i class="fas fa-paper-plane mr-2"></i>Send
+>>>>>>> 5cd32c16083a1667e7eb32593cdbfd7ab4874b45
                         </button>
                     </form>
                 </div>
             </div>
         </div>
 
+        <!-- My Tickets View (Students) -->
+        <div id="myTicketsView" class="hidden max-w-5xl mx-auto p-4 pt-6">
+            <!-- Header -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-800">My Support Tickets</h2>
+                <p class="text-slate-500">Track your support requests and conversations</p>
+            </div>
+            
+            <!-- Ticket Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div class="glass-card p-4 rounded-xl border-l-4 border-amber-500 hover-lift">
+                    <p class="text-slate-500 text-xs font-medium">Open</p>
+                    <p id="myTicketsOpen" class="text-2xl font-bold text-amber-600">0</p>
+                </div>
+                <div class="glass-card p-4 rounded-xl border-l-4 border-blue-500 hover-lift">
+                    <p class="text-slate-500 text-xs font-medium">In Progress</p>
+                    <p id="myTicketsProgress" class="text-2xl font-bold text-blue-600">0</p>
+                </div>
+                <div class="glass-card p-4 rounded-xl border-l-4 border-purple-500 hover-lift">
+                    <p class="text-slate-500 text-xs font-medium">Awaiting Reply</p>
+                    <p id="myTicketsPending" class="text-2xl font-bold text-purple-600">0</p>
+                </div>
+                <div class="glass-card p-4 rounded-xl border-l-4 border-emerald-500 hover-lift">
+                    <p class="text-slate-500 text-xs font-medium">Resolved</p>
+                    <p id="myTicketsResolved" class="text-2xl font-bold text-emerald-600">0</p>
+                </div>
+            </div>
+            
+            <!-- Create New Ticket Button -->
+            <div class="mb-6">
+                <button onclick="showCreateTicketModal()" class="gradient-primary text-white px-5 py-2.5 rounded-xl font-medium hover:opacity-90 transition-all shadow-lg">
+                    <i class="fas fa-plus mr-2"></i>Create New Ticket
+                </button>
+            </div>
+            
+            <!-- Tickets List -->
+            <div class="glass-card rounded-2xl shadow-lg border border-slate-200/50 overflow-hidden">
+                <div class="p-4 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-indigo-50/30">
+                    <h3 class="font-bold text-lg flex items-center text-slate-800">
+                        <span class="w-9 h-9 bg-indigo-100 rounded-xl flex items-center justify-center mr-3">
+                            <i class="fas fa-inbox text-indigo-600"></i>
+                        </span>Your Tickets
+                    </h3>
+                </div>
+                <div id="myTicketsList" class="p-4 space-y-3 max-h-[500px] overflow-y-auto scroll-smooth">
+                    <!-- Tickets will be loaded here -->
+                    <div class="text-center py-12 text-slate-400">
+                        <i class="fas fa-ticket-alt text-4xl mb-3"></i>
+                        <p>Loading your tickets...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ticket Detail Modal -->
+            <div id="studentTicketModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[80vh] overflow-hidden">
+                    <div class="p-4 border-b border-slate-100 bg-gradient-to-r from-indigo-500 to-purple-600 text-white flex justify-between items-center">
+                        <h3 class="font-bold text-lg"><i class="fas fa-ticket-alt mr-2"></i>Ticket Details</h3>
+                        <button onclick="closeStudentTicketModal()" class="p-2 hover:bg-white/20 rounded-lg transition-all">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div id="studentTicketDetail" class="p-5 overflow-y-auto max-h-[60vh]">
+                        <!-- Ticket detail will be loaded here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Create Ticket Modal -->
+            <div id="createTicketModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg">
+                    <div class="p-4 border-b border-slate-100 bg-gradient-to-r from-indigo-500 to-purple-600 text-white flex justify-between items-center">
+                        <h3 class="font-bold text-lg"><i class="fas fa-plus-circle mr-2"></i>Create New Ticket</h3>
+                        <button onclick="closeCreateTicketModal()" class="p-2 hover:bg-white/20 rounded-lg transition-all">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="p-5">
+                        <form id="createTicketForm" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Category</label>
+                                <select id="newTicketCategory" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500">
+                                    <option value="general">General Inquiry</option>
+                                    <option value="financial_aid">Financial Aid</option>
+                                    <option value="registration">Registration</option>
+                                    <option value="housing">Housing</option>
+                                    <option value="grades">Grades & Academics</option>
+                                    <option value="technical">Technical Issue</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Describe your issue</label>
+                                <textarea id="newTicketQuery" rows="4" placeholder="Please describe your question or issue in detail..." 
+                                    class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 resize-none"></textarea>
+                            </div>
+                            <button type="submit" class="w-full gradient-primary text-white py-3 rounded-xl font-semibold hover:opacity-90 transition-all">
+                                <i class="fas fa-paper-plane mr-2"></i>Submit Ticket
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Analytics View -->
+<<<<<<< HEAD
         <div id="analyticsView" class="hidden layout-container max-w-6xl mx-auto px-4 pb-10">
             <div class="soft-enter mb-8">
                 <h2 class="text-xl font-semibold text-primary">Welcome back, <span id="analyticsStudentName">Student</span></h2>
@@ -852,18 +1294,87 @@
                     <div class="flex items-center justify-between">
                         <span class="metric-label">Course Progress</span>
                         <div class="chip chip-accent text-xs"><i class="fas fa-book-reader"></i> In progress</div>
+=======
+        <div id="analyticsView" class="hidden max-w-7xl mx-auto p-4 pt-6">
+            <!-- Header -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-800">Analytics Dashboard</h2>
+                <p class="text-slate-500">Real-time performance metrics and insights</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
+                <div class="stat-card bg-gradient-to-br from-blue-500 to-indigo-600 p-6 rounded-2xl shadow-lg hover-lift text-white">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-blue-100 text-sm font-medium">Total Queries</p>
+                            <p id="totalQueries" class="text-4xl font-extrabold mt-1">--</p>
+                        </div>
+                        <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+                            <i class="fas fa-comments text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card bg-gradient-to-br from-emerald-500 to-teal-600 p-6 rounded-2xl shadow-lg hover-lift text-white">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-emerald-100 text-sm font-medium">AI Resolution Rate</p>
+                            <p id="automatedRate" class="text-4xl font-extrabold mt-1">--</p>
+                        </div>
+                        <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+                            <i class="fas fa-robot text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card bg-gradient-to-br from-violet-500 to-purple-600 p-6 rounded-2xl shadow-lg hover-lift text-white">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-violet-100 text-sm font-medium">Avg Response</p>
+                            <p id="avgResponse" class="text-4xl font-extrabold mt-1">--</p>
+                        </div>
+                        <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+                            <i class="fas fa-bolt text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card bg-gradient-to-br from-amber-500 to-orange-600 p-6 rounded-2xl shadow-lg hover-lift text-white">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-amber-100 text-sm font-medium">Satisfaction</p>
+                            <p id="satisfaction" class="text-4xl font-extrabold mt-1">--</p>
+                        </div>
+                        <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+                            <i class="fas fa-heart text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                <div class="glass-card p-6 rounded-2xl shadow-lg border border-slate-200/50 hover-lift">
+                    <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-chart-pie text-indigo-600"></i></span>Query Categories</h3>
+                    <div id="categoriesChart" class="space-y-4">
+                        <!-- Will be populated by JS -->
+>>>>>>> 5cd32c16083a1667e7eb32593cdbfd7ab4874b45
                     </div>
                     <ul class="course-list" id="analyticsCourseList"></ul>
                 </div>
+<<<<<<< HEAD
 
                 <div class="card insight-card p-6">
                     <div class="flex items-center justify-between">
                         <span class="metric-label">Upcoming &amp; Reminders</span>
                         <div class="chip text-xs"><i class="fas fa-calendar"></i> Stay prepared</div>
+=======
+                <div class="glass-card p-6 rounded-2xl shadow-lg border border-slate-200/50 hover-lift">
+                    <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-dollar-sign text-emerald-600"></i></span>ROI Metrics</h3>
+                    <div id="roiMetrics" class="space-y-3">
+                        <!-- Will be populated by JS -->
+>>>>>>> 5cd32c16083a1667e7eb32593cdbfd7ab4874b45
                     </div>
                     <ul class="timeline" id="analyticsTimeline"></ul>
                 </div>
             </div>
+<<<<<<< HEAD
 
             <div class="insight-grid two soft-enter mt-8">
                 <div class="card insight-card p-6">
@@ -872,50 +1383,61 @@
                         <div class="chip chip-success text-xs"><i class="fas fa-leaf"></i> Balance</div>
                     </div>
                     <ul class="tip-list" id="analyticsTips"></ul>
+=======
+            
+            <!-- ESB Status -->
+            <div class="mt-5 glass-card p-6 rounded-2xl shadow-lg border border-slate-200/50">
+                <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-network-wired text-purple-600"></i></span>System Integration Status</h3>
+                <div id="esbStatus" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3">
+                    <!-- Will be populated by JS -->
+>>>>>>> 5cd32c16083a1667e7eb32593cdbfd7ab4874b45
                 </div>
             </div>
         </div>
 
         <!-- Profile View -->
-        <div id="profileView" class="hidden max-w-4xl mx-auto p-4">
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-                <div class="bg-gradient-to-r from-blue-600 to-blue-700 p-6 text-white">
-                    <div class="flex items-center gap-4">
-                        <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center">
-                            <i class="fas fa-user text-3xl"></i>
+        <div id="profileView" class="hidden max-w-4xl mx-auto p-4 pt-6">
+            <div class="glass-card rounded-3xl shadow-xl overflow-hidden border border-slate-200/50">
+                <div class="gradient-primary p-8 text-white relative overflow-hidden">
+                    <div class="absolute inset-0 opacity-20">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-3xl"></div>
+                    </div>
+                    <div class="flex items-center gap-5 relative z-10">
+                        <div class="w-24 h-24 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm shadow-xl">
+                            <i class="fas fa-user-graduate text-4xl"></i>
                         </div>
                         <div>
-                            <h2 id="profileName" class="text-2xl font-bold">Loading...</h2>
-                            <p id="profileProgram" class="text-blue-100">--</p>
+                            <h2 id="profileName" class="text-3xl font-extrabold">Loading...</h2>
+                            <p id="profileProgram" class="text-white/80 text-lg mt-1">--</p>
                         </div>
                     </div>
                 </div>
-                <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-graduation-cap mr-2 text-blue-600"></i>Academic Info</h3>
-                        <div class="space-y-2">
-                            <p><span class="text-gray-500">Student ID:</span> <span id="profileId" class="font-medium">--</span></p>
-                            <p><span class="text-gray-500">Year:</span> <span id="profileYear" class="font-medium">--</span></p>
-                            <p><span class="text-gray-500">GPA:</span> <span id="profileGpa" class="font-medium">--</span></p>
+                <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-2xl border border-blue-100">
+                        <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-9 h-9 bg-blue-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-graduation-cap text-blue-600"></i></span>Academic Info</h3>
+                        <div class="space-y-3">
+                            <p class="flex justify-between"><span class="text-slate-500">Student ID</span> <span id="profileId" class="font-semibold text-slate-800">--</span></p>
+                            <p class="flex justify-between"><span class="text-slate-500">Year</span> <span id="profileYear" class="font-semibold text-slate-800">--</span></p>
+                            <p class="flex justify-between"><span class="text-slate-500">GPA</span> <span id="profileGpa" class="font-semibold text-emerald-600 text-lg">--</span></p>
                         </div>
                     </div>
-                    <div>
-                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-home mr-2 text-green-600"></i>Housing</h3>
-                        <div class="space-y-2">
-                            <p><span class="text-gray-500">Building:</span> <span id="profileBuilding" class="font-medium">--</span></p>
-                            <p><span class="text-gray-500">Room:</span> <span id="profileRoom" class="font-medium">--</span></p>
+                    <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-5 rounded-2xl border border-green-100">
+                        <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-9 h-9 bg-green-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-home text-green-600"></i></span>Housing</h3>
+                        <div class="space-y-3">
+                            <p class="flex justify-between"><span class="text-slate-500">Building</span> <span id="profileBuilding" class="font-semibold text-slate-800">--</span></p>
+                            <p class="flex justify-between"><span class="text-slate-500">Room</span> <span id="profileRoom" class="font-semibold text-slate-800">--</span></p>
                         </div>
                     </div>
-                    <div>
-                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-dollar-sign mr-2 text-purple-600"></i>Financial Aid</h3>
-                        <div class="space-y-2">
-                            <p><span class="text-gray-500">Status:</span> <span id="profileAidStatus" class="font-medium">--</span></p>
-                            <p><span class="text-gray-500">Amount:</span> <span id="profileAidAmount" class="font-medium">--</span></p>
-                            <p><span class="text-gray-500">Next Disbursement:</span> <span id="profileAidDate" class="font-medium">--</span></p>
+                    <div class="bg-gradient-to-br from-purple-50 to-violet-50 p-5 rounded-2xl border border-purple-100">
+                        <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-9 h-9 bg-purple-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-dollar-sign text-purple-600"></i></span>Financial Aid</h3>
+                        <div class="space-y-3">
+                            <p class="flex justify-between"><span class="text-slate-500">Status</span> <span id="profileAidStatus" class="font-semibold text-emerald-600">--</span></p>
+                            <p class="flex justify-between"><span class="text-slate-500">Amount</span> <span id="profileAidAmount" class="font-semibold text-slate-800 text-lg">--</span></p>
+                            <p class="flex justify-between"><span class="text-slate-500">Next Disbursement</span> <span id="profileAidDate" class="font-semibold text-slate-800">--</span></p>
                         </div>
                     </div>
-                    <div>
-                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-book mr-2 text-orange-600"></i>Current Courses</h3>
+                    <div class="bg-gradient-to-br from-orange-50 to-amber-50 p-5 rounded-2xl border border-orange-100">
+                        <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-9 h-9 bg-orange-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-book text-orange-600"></i></span>Current Courses</h3>
                         <div id="profileCourses" class="space-y-2">
                             <!-- Will be populated by JS -->
                         </div>
@@ -925,21 +1447,24 @@
         </div>
 
         <!-- Support Staff Portal (Staff/Admin Only) -->
-        <div id="supportView" class="hidden max-w-6xl mx-auto p-4">
+        <div id="supportView" class="hidden max-w-7xl mx-auto p-4 pt-6">
             <!-- Support Header -->
-            <div class="bg-gradient-to-r from-green-600 to-teal-600 rounded-2xl p-6 text-white mb-6 shadow-lg">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-4">
-                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                            <i class="fas fa-headset text-3xl"></i>
+            <div class="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 rounded-3xl p-8 text-white mb-6 shadow-xl relative overflow-hidden">
+                <div class="absolute inset-0 opacity-20">
+                    <div class="absolute top-0 right-0 w-96 h-96 bg-white/20 rounded-full blur-3xl"></div>
+                </div>
+                <div class="flex items-center justify-between relative z-10">
+                    <div class="flex items-center gap-5">
+                        <div class="w-18 h-18 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm p-4">
+                            <i class="fas fa-headset text-4xl"></i>
                         </div>
                         <div>
-                            <h2 class="text-2xl font-bold">Support Staff Portal</h2>
-                            <p class="text-green-100">Manage escalated student queries</p>
+                            <h2 class="text-3xl font-extrabold">Support Portal</h2>
+                            <p class="text-white/80 mt-1">Manage escalated student queries efficiently</p>
                         </div>
                     </div>
-                    <div class="text-right">
-                        <p class="text-sm text-green-100">Escalation Threshold</p>
+                    <div class="text-right bg-white/10 backdrop-blur-sm rounded-2xl px-6 py-4">
+                        <p class="text-sm text-white/80">Escalation Threshold</p>
                         <p class="text-2xl font-bold">&lt; 70% Confidence</p>
                     </div>
                 </div>
@@ -947,60 +1472,60 @@
 
             <!-- Escalation Stats -->
             <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
-                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-red-500">
-                    <p class="text-gray-500 text-sm">Open Tickets</p>
-                    <p id="supportOpenCount" class="text-2xl font-bold text-red-600">--</p>
+                <div class="glass-card p-5 rounded-2xl shadow-lg border-l-4 border-red-500 hover-lift">
+                    <p class="text-slate-500 text-sm font-medium">Open Tickets</p>
+                    <p id="supportOpenCount" class="text-3xl font-extrabold text-red-600 mt-1">--</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-yellow-500">
-                    <p class="text-gray-500 text-sm">In Progress</p>
-                    <p id="supportProgressCount" class="text-2xl font-bold text-yellow-600">--</p>
+                <div class="glass-card p-5 rounded-2xl shadow-lg border-l-4 border-amber-500 hover-lift">
+                    <p class="text-slate-500 text-sm font-medium">In Progress</p>
+                    <p id="supportProgressCount" class="text-3xl font-extrabold text-amber-600 mt-1">--</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-blue-500">
-                    <p class="text-gray-500 text-sm">Pending Student</p>
-                    <p id="supportPendingCount" class="text-2xl font-bold text-blue-600">--</p>
+                <div class="glass-card p-5 rounded-2xl shadow-lg border-l-4 border-blue-500 hover-lift">
+                    <p class="text-slate-500 text-sm font-medium">Pending Student</p>
+                    <p id="supportPendingCount" class="text-3xl font-extrabold text-blue-600 mt-1">--</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-green-500">
-                    <p class="text-gray-500 text-sm">Resolved</p>
-                    <p id="supportResolvedCount" class="text-2xl font-bold text-green-600">--</p>
+                <div class="glass-card p-5 rounded-2xl shadow-lg border-l-4 border-emerald-500 hover-lift">
+                    <p class="text-slate-500 text-sm font-medium">Resolved</p>
+                    <p id="supportResolvedCount" class="text-3xl font-extrabold text-emerald-600 mt-1">--</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-purple-500">
-                    <p class="text-gray-500 text-sm">Avg Resolution</p>
-                    <p id="supportAvgTime" class="text-2xl font-bold text-purple-600">--</p>
+                <div class="glass-card p-5 rounded-2xl shadow-lg border-l-4 border-purple-500 hover-lift">
+                    <p class="text-slate-500 text-sm font-medium">Avg Resolution</p>
+                    <p id="supportAvgTime" class="text-3xl font-extrabold text-purple-600 mt-1">--</p>
                 </div>
             </div>
 
             <!-- Escalation Flow Diagram -->
-            <div class="bg-white rounded-xl shadow-lg p-4 mb-6">
-                <h3 class="font-bold text-lg mb-3"><i class="fas fa-project-diagram mr-2 text-blue-600"></i>Escalation Flow</h3>
-                <div class="flex items-center justify-center gap-2 text-sm overflow-x-auto py-2">
-                    <div class="bg-blue-100 text-blue-700 px-4 py-2 rounded-lg whitespace-nowrap">
-                        <i class="fas fa-user mr-1"></i>Student Query
+            <div class="glass-card rounded-2xl shadow-lg p-5 mb-6 border border-slate-200/50">
+                <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-9 h-9 bg-indigo-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-project-diagram text-indigo-600"></i></span>Escalation Flow</h3>
+                <div class="flex items-center justify-center gap-3 text-sm overflow-x-auto py-3">
+                    <div class="bg-gradient-to-r from-blue-100 to-blue-50 text-blue-700 px-5 py-3 rounded-xl whitespace-nowrap font-medium shadow-sm border border-blue-200">
+                        <i class="fas fa-user mr-2"></i>Student Query
                     </div>
-                    <i class="fas fa-arrow-right text-gray-400"></i>
-                    <div class="bg-purple-100 text-purple-700 px-4 py-2 rounded-lg whitespace-nowrap">
-                        <i class="fas fa-robot mr-1"></i>AI Processing
+                    <i class="fas fa-arrow-right text-slate-300 text-lg"></i>
+                    <div class="bg-gradient-to-r from-purple-100 to-purple-50 text-purple-700 px-5 py-3 rounded-xl whitespace-nowrap font-medium shadow-sm border border-purple-200">
+                        <i class="fas fa-robot mr-2"></i>AI Processing
                     </div>
-                    <i class="fas fa-arrow-right text-gray-400"></i>
-                    <div class="bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg whitespace-nowrap">
-                        <i class="fas fa-question mr-1"></i>Confidence &lt; 70%?
+                    <i class="fas fa-arrow-right text-slate-300 text-lg"></i>
+                    <div class="bg-gradient-to-r from-amber-100 to-amber-50 text-amber-700 px-5 py-3 rounded-xl whitespace-nowrap font-medium shadow-sm border border-amber-200">
+                        <i class="fas fa-question mr-2"></i>Confidence &lt; 70%?
                     </div>
-                    <i class="fas fa-arrow-right text-gray-400"></i>
-                    <div class="bg-red-100 text-red-700 px-4 py-2 rounded-lg whitespace-nowrap">
-                        <i class="fas fa-ticket-alt mr-1"></i>Create Ticket
+                    <i class="fas fa-arrow-right text-slate-300 text-lg"></i>
+                    <div class="bg-gradient-to-r from-red-100 to-red-50 text-red-700 px-5 py-3 rounded-xl whitespace-nowrap font-medium shadow-sm border border-red-200">
+                        <i class="fas fa-ticket-alt mr-2"></i>Create Ticket
                     </div>
-                    <i class="fas fa-arrow-right text-gray-400"></i>
-                    <div class="bg-green-100 text-green-700 px-4 py-2 rounded-lg whitespace-nowrap">
-                        <i class="fas fa-headset mr-1"></i>Staff Support
+                    <i class="fas fa-arrow-right text-slate-300 text-lg"></i>
+                    <div class="bg-gradient-to-r from-emerald-100 to-emerald-50 text-emerald-700 px-5 py-3 rounded-xl whitespace-nowrap font-medium shadow-sm border border-emerald-200">
+                        <i class="fas fa-headset mr-2"></i>Staff Support
                     </div>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <!-- Tickets List -->
-                <div class="lg:col-span-2 bg-white rounded-xl shadow-lg overflow-hidden">
-                    <div class="p-4 border-b bg-gray-50 flex justify-between items-center">
-                        <h3 class="font-bold text-lg"><i class="fas fa-ticket-alt mr-2 text-green-600"></i>Support Tickets</h3>
-                        <select id="ticketStatusFilter" onchange="loadTickets()" class="text-sm border rounded-lg px-3 py-1">
+                <div class="lg:col-span-2 glass-card rounded-2xl shadow-lg overflow-hidden border border-slate-200/50">
+                    <div class="p-5 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-indigo-50/30 flex justify-between items-center">
+                        <h3 class="font-bold text-lg flex items-center text-slate-800"><span class="w-9 h-9 bg-emerald-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-ticket-alt text-emerald-600"></i></span>Support Tickets</h3>
+                        <select id="ticketStatusFilter" onchange="loadTickets()" class="text-sm border-2 border-slate-200 rounded-xl px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white">
                             <option value="">All Tickets</option>
                             <option value="open">Open</option>
                             <option value="in_progress">In Progress</option>
@@ -1008,7 +1533,7 @@
                             <option value="resolved">Resolved</option>
                         </select>
                     </div>
-                    <div class="p-4 max-h-[500px] overflow-y-auto">
+                    <div class="p-5 max-h-[500px] overflow-y-auto scroll-smooth">
                         <div id="ticketsList" class="space-y-3">
                             <!-- Will be populated by JS -->
                         </div>
@@ -1016,45 +1541,47 @@
                 </div>
 
                 <!-- Ticket Detail -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                    <div class="p-4 border-b bg-gray-50">
-                        <h3 class="font-bold text-lg"><i class="fas fa-comments mr-2 text-blue-600"></i>Ticket Detail</h3>
+                <div class="glass-card rounded-2xl shadow-lg overflow-hidden border border-slate-200/50">
+                    <div class="p-5 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-blue-50/30">
+                        <h3 class="font-bold text-lg flex items-center text-slate-800"><span class="w-9 h-9 bg-blue-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-comments text-blue-600"></i></span>Ticket Detail</h3>
                     </div>
-                    <div id="ticketDetail" class="p-4">
-                        <div class="text-center text-gray-400 py-8">
-                            <i class="fas fa-ticket-alt text-4xl mb-2"></i>
-                            <p>Select a ticket to view details</p>
+                    <div id="ticketDetail" class="p-5">
+                        <div class="text-center text-slate-400 py-12">
+                            <div class="w-20 h-20 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-ticket-alt text-4xl text-slate-300"></i>
+                            </div>
+                            <p class="font-medium">Select a ticket to view details</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Why Escalation Matters -->
-            <div class="mt-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 border border-blue-100">
-                <h3 class="font-bold text-lg mb-3"><i class="fas fa-info-circle mr-2 text-blue-600"></i>Why AI + Human Support?</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                    <div>
-                        <p class="font-medium text-blue-700">🤖 AI Handles (70%+ Confidence)</p>
-                        <ul class="mt-1 text-gray-600 space-y-1">
-                            <li>• FAQ questions</li>
-                            <li>• Status inquiries</li>
-                            <li>• Simple information lookup</li>
+            <div class="mt-6 bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 rounded-2xl p-6 border border-indigo-100">
+                <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-9 h-9 bg-indigo-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-lightbulb text-indigo-600"></i></span>Why AI + Human Support?</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-sm">
+                    <div class="bg-white/70 backdrop-blur-sm rounded-xl p-4 border border-blue-100">
+                        <p class="font-semibold text-blue-700 flex items-center mb-2"><span class="text-lg mr-2">🤖</span>AI Handles (70%+ Confidence)</p>
+                        <ul class="text-slate-600 space-y-1">
+                            <li class="flex items-center"><i class="fas fa-check text-emerald-500 mr-2 text-xs"></i>FAQ questions</li>
+                            <li class="flex items-center"><i class="fas fa-check text-emerald-500 mr-2 text-xs"></i>Status inquiries</li>
+                            <li class="flex items-center"><i class="fas fa-check text-emerald-500 mr-2 text-xs"></i>Simple information lookup</li>
                         </ul>
                     </div>
-                    <div>
-                        <p class="font-medium text-orange-700">⚠️ Escalated (&lt;70% Confidence)</p>
-                        <ul class="mt-1 text-gray-600 space-y-1">
-                            <li>• Complex appeals</li>
-                            <li>• Special circumstances</li>
-                            <li>• Policy exceptions</li>
+                    <div class="bg-white/70 backdrop-blur-sm rounded-xl p-4 border border-amber-100">
+                        <p class="font-semibold text-amber-700 flex items-center mb-2"><span class="text-lg mr-2">⚠️</span>Escalated (&lt;70% Confidence)</p>
+                        <ul class="text-slate-600 space-y-1">
+                            <li class="flex items-center"><i class="fas fa-arrow-right text-amber-500 mr-2 text-xs"></i>Complex appeals</li>
+                            <li class="flex items-center"><i class="fas fa-arrow-right text-amber-500 mr-2 text-xs"></i>Special circumstances</li>
+                            <li class="flex items-center"><i class="fas fa-arrow-right text-amber-500 mr-2 text-xs"></i>Policy exceptions</li>
                         </ul>
                     </div>
-                    <div>
-                        <p class="font-medium text-green-700">✅ Benefits</p>
-                        <ul class="mt-1 text-gray-600 space-y-1">
-                            <li>• 73% queries auto-resolved</li>
-                            <li>• Staff focus on complex issues</li>
-                            <li>• Better student experience</li>
+                    <div class="bg-white/70 backdrop-blur-sm rounded-xl p-4 border border-emerald-100">
+                        <p class="font-semibold text-emerald-700 flex items-center mb-2"><span class="text-lg mr-2">✅</span>Benefits</p>
+                        <ul class="text-slate-600 space-y-1">
+                            <li class="flex items-center"><i class="fas fa-star text-emerald-500 mr-2 text-xs"></i>73% queries auto-resolved</li>
+                            <li class="flex items-center"><i class="fas fa-star text-emerald-500 mr-2 text-xs"></i>Staff focus on complex issues</li>
+                            <li class="flex items-center"><i class="fas fa-star text-emerald-500 mr-2 text-xs"></i>Better student experience</li>
                         </ul>
                     </div>
                 </div>
@@ -1062,53 +1589,64 @@
         </div>
 
         <!-- Admin View (Staff/Admin Only) -->
-        <div id="adminView" class="hidden max-w-6xl mx-auto p-4">
+        <div id="adminView" class="hidden max-w-7xl mx-auto p-4 pt-6">
             <!-- Admin Header -->
-            <div class="bg-gradient-to-r from-purple-600 to-purple-700 rounded-2xl p-6 text-white mb-6 shadow-lg">
-                <div class="flex items-center gap-4">
-                    <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                        <i class="fas fa-shield-alt text-3xl"></i>
+            <div class="bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 rounded-3xl p-8 text-white mb-6 shadow-xl relative overflow-hidden">
+                <div class="absolute inset-0 opacity-20">
+                    <div class="absolute top-0 right-0 w-96 h-96 bg-white/20 rounded-full blur-3xl"></div>
+                    <div class="absolute bottom-0 left-0 w-64 h-64 bg-pink-300/20 rounded-full blur-3xl"></div>
+                </div>
+                <div class="flex items-center gap-5 relative z-10">
+                    <div class="w-18 h-18 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm p-4">
+                        <i class="fas fa-shield-alt text-4xl"></i>
                     </div>
                     <div>
-                        <h2 class="text-2xl font-bold">Administration Panel</h2>
-                        <p class="text-purple-100">System Management & Legacy Integration</p>
+                        <h2 class="text-3xl font-extrabold">Administration Panel</h2>
+                        <p class="text-white/80 mt-1">System Management & Legacy Integration</p>
                     </div>
                 </div>
             </div>
 
+            <!-- Create User Button -->
+            <div class="mb-6">
+                <button onclick="showCreateUserModal()" class="gradient-primary text-white px-5 py-2.5 rounded-xl font-medium hover:opacity-90 transition-all shadow-lg">
+                    <i class="fas fa-user-plus mr-2"></i>Create New User
+                </button>
+            </div>
+
             <!-- Admin Stats -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-purple-500">
-                    <p class="text-gray-500 text-sm">Total Users</p>
-                    <p id="adminTotalUsers" class="text-2xl font-bold text-gray-800">--</p>
+                <div class="glass-card p-5 rounded-2xl shadow-lg border-l-4 border-violet-500 hover-lift">
+                    <p class="text-slate-500 text-sm font-medium">Total Users</p>
+                    <p id="adminTotalUsers" class="text-3xl font-extrabold text-slate-800 mt-1">--</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-blue-500">
-                    <p class="text-gray-500 text-sm">Students</p>
-                    <p id="adminStudentCount" class="text-2xl font-bold text-blue-600">--</p>
+                <div class="glass-card p-5 rounded-2xl shadow-lg border-l-4 border-blue-500 hover-lift">
+                    <p class="text-slate-500 text-sm font-medium">Students</p>
+                    <p id="adminStudentCount" class="text-3xl font-extrabold text-blue-600 mt-1">--</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-green-500">
-                    <p class="text-gray-500 text-sm">Staff</p>
-                    <p id="adminStaffCount" class="text-2xl font-bold text-green-600">--</p>
+                <div class="glass-card p-5 rounded-2xl shadow-lg border-l-4 border-emerald-500 hover-lift">
+                    <p class="text-slate-500 text-sm font-medium">Staff</p>
+                    <p id="adminStaffCount" class="text-3xl font-extrabold text-emerald-600 mt-1">--</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-red-500">
-                    <p class="text-gray-500 text-sm">Admins</p>
-                    <p id="adminAdminCount" class="text-2xl font-bold text-red-600">--</p>
+                <div class="glass-card p-5 rounded-2xl shadow-lg border-l-4 border-rose-500 hover-lift">
+                    <p class="text-slate-500 text-sm font-medium">Admins</p>
+                    <p id="adminAdminCount" class="text-3xl font-extrabold text-rose-600 mt-1">--</p>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <!-- Users Table -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                    <div class="p-4 border-b bg-gray-50">
-                        <h3 class="font-bold text-lg"><i class="fas fa-users mr-2 text-purple-600"></i>User Management</h3>
+                <div class="glass-card rounded-2xl shadow-lg overflow-hidden border border-slate-200/50">
+                    <div class="p-5 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-purple-50/30">
+                        <h3 class="font-bold text-lg flex items-center text-slate-800"><span class="w-9 h-9 bg-violet-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-users text-violet-600"></i></span>User Management</h3>
                     </div>
-                    <div class="p-4 max-h-96 overflow-y-auto">
+                    <div class="p-5 max-h-96 overflow-y-auto scroll-smooth">
                         <table class="w-full">
-                            <thead class="text-left text-sm text-gray-500">
+                            <thead class="text-left text-sm text-slate-500 border-b border-slate-100">
                                 <tr>
-                                    <th class="pb-2">User</th>
-                                    <th class="pb-2">Role</th>
-                                    <th class="pb-2">Status</th>
+                                    <th class="pb-3 font-semibold">User</th>
+                                    <th class="pb-3 font-semibold">Role</th>
+                                    <th class="pb-3 font-semibold">Status</th>
                                 </tr>
                             </thead>
                             <tbody id="adminUsersTable" class="text-sm">
@@ -1119,11 +1657,11 @@
                 </div>
 
                 <!-- RBAC Matrix -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                    <div class="p-4 border-b bg-gray-50">
-                        <h3 class="font-bold text-lg"><i class="fas fa-key mr-2 text-orange-600"></i>Role Permissions Matrix</h3>
+                <div class="glass-card rounded-2xl shadow-lg overflow-hidden border border-slate-200/50">
+                    <div class="p-5 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-orange-50/30">
+                        <h3 class="font-bold text-lg flex items-center text-slate-800"><span class="w-9 h-9 bg-amber-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-key text-amber-600"></i></span>Role Permissions</h3>
                     </div>
-                    <div class="p-4 max-h-96 overflow-y-auto">
+                    <div class="p-5 max-h-96 overflow-y-auto scroll-smooth">
                         <div id="rbacMatrix" class="space-y-4">
                             <!-- Will be populated by JS -->
                         </div>
@@ -1132,14 +1670,63 @@
             </div>
 
             <!-- Legacy Systems Status -->
-            <div class="mt-6 bg-white rounded-xl shadow-lg overflow-hidden">
-                <div class="p-4 border-b bg-gray-50">
-                    <h3 class="font-bold text-lg"><i class="fas fa-server mr-2 text-blue-600"></i>Legacy Systems Integration (On-Premise)</h3>
-                    <p class="text-sm text-gray-500 mt-1">Real-time status of enterprise systems connected via ESB</p>
+            <div class="mt-6 glass-card rounded-2xl shadow-lg overflow-hidden border border-slate-200/50">
+                <div class="p-5 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-blue-50/30">
+                    <h3 class="font-bold text-lg flex items-center text-slate-800"><span class="w-9 h-9 bg-blue-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-server text-blue-600"></i></span>Legacy Systems Integration</h3>
+                    <p class="text-sm text-slate-500 mt-1 ml-12">Real-time status of enterprise systems connected via ESB</p>
                 </div>
-                <div class="p-4">
+                <div class="p-5">
                     <div id="legacySystemsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <!-- Will be populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Create User Modal -->
+            <div id="createUserModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg">
+                    <div class="p-4 border-b border-slate-100 bg-gradient-to-r from-violet-500 to-purple-600 text-white flex justify-between items-center rounded-t-2xl">
+                        <h3 class="font-bold text-lg"><i class="fas fa-user-plus mr-2"></i>Create New User</h3>
+                        <button onclick="closeCreateUserModal()" class="p-2 hover:bg-white/20 rounded-lg transition-all">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="p-5">
+                        <form id="createUserForm" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Full Name</label>
+                                <input type="text" id="newUserName" placeholder="John Doe" required
+                                    class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-violet-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Email Address</label>
+                                <input type="email" id="newUserEmail" placeholder="john.doe@techedu.edu" required
+                                    class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-violet-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Password</label>
+                                <input type="password" id="newUserPassword" placeholder="Enter password" required
+                                    class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-violet-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Role</label>
+                                <select id="newUserRole" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-violet-500">
+                                    <option value="student">Student</option>
+                                    <option value="staff">Staff</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+                            <div id="studentFields">
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Student ID</label>
+                                <input type="text" id="newStudentId" placeholder="STU2024XXX"
+                                    class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-violet-500">
+                            </div>
+                            <div id="createUserError" class="hidden p-3 bg-red-50 text-red-700 rounded-xl text-sm border border-red-200"></div>
+                            <div id="createUserSuccess" class="hidden p-3 bg-emerald-50 text-emerald-700 rounded-xl text-sm border border-emerald-200"></div>
+                            <button type="submit" class="w-full gradient-primary text-white py-3 rounded-xl font-semibold hover:opacity-90 transition-all">
+                                <i class="fas fa-user-plus mr-2"></i>Create User
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -1251,14 +1838,39 @@
                     document.getElementById('userRole').textContent = roleText;
                     
                     // Show/hide tabs based on role
-                    if (currentUser.ui_capabilities.can_view_admin_panel) {
+                    if (currentUser.role === 'admin') {
+                        // Admin sees Admin and Analytics only
                         document.getElementById('adminTab').classList.remove('hidden');
+                        document.getElementById('analyticsTab').classList.remove('hidden');
+                        document.getElementById('supportTab').classList.add('hidden');
+                        document.getElementById('chatTab').classList.add('hidden');
+                        document.getElementById('myTicketsTab').classList.add('hidden');
+                        // Default to admin view
+                        showTab('admin');
+                    } else if (currentUser.role === 'staff') {
+                        // Staff only sees Support and Analytics (no Chat, Admin)
                         document.getElementById('supportTab').classList.remove('hidden');
+                        document.getElementById('analyticsTab').classList.remove('hidden');
+                        document.getElementById('chatTab').classList.add('hidden');
+                        document.getElementById('adminTab').classList.add('hidden');
+                        document.getElementById('myTicketsTab').classList.add('hidden');
+                        // Default to support view for staff
+                        showTab('support');
+                    } else {
+                        // Students see Chat, My Tickets, Profile
+                        document.getElementById('myTicketsTab').classList.remove('hidden');
+                        document.getElementById('chatTab').classList.remove('hidden');
+                        document.getElementById('analyticsTab').classList.add('hidden');
+                        document.getElementById('adminTab').classList.add('hidden');
+                        document.getElementById('supportTab').classList.add('hidden');
+                        // Default to profile view for students
+                        showTab('profile');
                     }
                     
                     // Hide profile tab for non-students
                     if (!currentUser.student_id) {
                         document.getElementById('profileTab').classList.add('hidden');
+                        document.getElementById('myTicketsTab').classList.add('hidden');
                     }
                 }
             } catch (error) {
@@ -1266,11 +1878,331 @@
             }
         }
 
+        // Load My Tickets View for Students
+        async function loadMyTicketsView() {
+            try {
+                const response = await fetch(`${API_URL}/api/tickets/my`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const tickets = data.tickets || [];
+                    
+                    // Update stats
+                    const stats = { open: 0, in_progress: 0, pending_student: 0, resolved: 0 };
+                    tickets.forEach(t => {
+                        if (stats[t.status] !== undefined) stats[t.status]++;
+                    });
+                    
+                    document.getElementById('myTicketsOpen').textContent = stats.open;
+                    document.getElementById('myTicketsProgress').textContent = stats.in_progress;
+                    document.getElementById('myTicketsPending').textContent = stats.pending_student;
+                    document.getElementById('myTicketsResolved').textContent = stats.resolved;
+                    
+                    // Render tickets list
+                    const listDiv = document.getElementById('myTicketsList');
+                    if (tickets.length === 0) {
+                        listDiv.innerHTML = `
+                            <div class="text-center py-12">
+                                <div class="w-20 h-20 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-inbox text-4xl text-slate-300"></i>
+                                </div>
+                                <p class="text-slate-500 font-medium">No tickets yet</p>
+                                <p class="text-slate-400 text-sm mt-1">Create a ticket when you need help from our support team</p>
+                            </div>
+                        `;
+                    } else {
+                        listDiv.innerHTML = tickets.map(ticket => {
+                            const statusConfig = {
+                                'open': { bg: 'bg-amber-100', text: 'text-amber-700', label: 'Open', icon: 'fa-clock' },
+                                'in_progress': { bg: 'bg-blue-100', text: 'text-blue-700', label: 'In Progress', icon: 'fa-spinner' },
+                                'pending_student': { bg: 'bg-purple-100', text: 'text-purple-700', label: 'Awaiting Your Reply', icon: 'fa-reply' },
+                                'resolved': { bg: 'bg-emerald-100', text: 'text-emerald-700', label: 'Resolved', icon: 'fa-check' },
+                                'closed': { bg: 'bg-slate-100', text: 'text-slate-700', label: 'Closed', icon: 'fa-times' }
+                            };
+                            const status = statusConfig[ticket.status] || statusConfig['open'];
+                            const createdDate = new Date(ticket.created_at).toLocaleDateString();
+                            const hasUnread = ticket.status === 'pending_student';
+                            
+                            return `
+                                <div onclick="openStudentTicketModal('${ticket.id}')" 
+                                     class="p-4 border rounded-xl cursor-pointer hover:bg-slate-50 transition-all hover:shadow-md ${hasUnread ? 'border-purple-300 bg-purple-50/30' : 'border-slate-200'}">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <div class="flex items-center gap-2">
+                                            <span class="font-semibold text-slate-800">${ticket.id}</span>
+                                            ${hasUnread ? '<span class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></span>' : ''}
+                                        </div>
+                                        <span class="px-2.5 py-1 rounded-full text-xs font-medium ${status.bg} ${status.text}">
+                                            <i class="fas ${status.icon} mr-1"></i>${status.label}
+                                        </span>
+                                    </div>
+                                    <p class="text-slate-700 text-sm line-clamp-2">${ticket.original_query}</p>
+                                    <div class="flex justify-between items-center mt-3 text-xs text-slate-400">
+                                        <span><i class="fas fa-tag mr-1"></i>${ticket.category}</span>
+                                        <span><i class="fas fa-calendar mr-1"></i>${createdDate}</span>
+                                    </div>
+                                    ${ticket.messages?.length > 0 ? `<div class="mt-2 text-xs text-slate-500"><i class="fas fa-comments mr-1"></i>${ticket.messages.length} message${ticket.messages.length > 1 ? 's' : ''}</div>` : ''}
+                                </div>
+                            `;
+                        }).join('');
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading tickets:', error);
+                document.getElementById('myTicketsList').innerHTML = `
+                    <div class="text-center py-8 text-red-500">
+                        <i class="fas fa-exclamation-circle text-2xl mb-2"></i>
+                        <p>Failed to load tickets</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Open ticket detail modal for students
+        async function openStudentTicketModal(ticketId) {
+            document.getElementById('studentTicketModal').classList.remove('hidden');
+            const detailDiv = document.getElementById('studentTicketDetail');
+            detailDiv.innerHTML = '<div class="text-center py-8"><i class="fas fa-spinner fa-spin text-2xl text-indigo-500"></i></div>';
+            
+            try {
+                const response = await fetch(`${API_URL}/api/tickets/${ticketId}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (response.ok) {
+                    const ticket = await response.json();
+                    const statusConfig = {
+                        'open': { bg: 'bg-amber-100', text: 'text-amber-700', label: 'Open' },
+                        'in_progress': { bg: 'bg-blue-100', text: 'text-blue-700', label: 'In Progress' },
+                        'pending_student': { bg: 'bg-purple-100', text: 'text-purple-700', label: 'Awaiting Your Reply' },
+                        'resolved': { bg: 'bg-emerald-100', text: 'text-emerald-700', label: 'Resolved' }
+                    };
+                    const status = statusConfig[ticket.status] || statusConfig['open'];
+                    
+                    detailDiv.innerHTML = `
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="text-xs text-slate-400">Ticket ID</span>
+                                    <p class="font-bold text-lg text-slate-800">${ticket.id}</p>
+                                </div>
+                                <span class="px-3 py-1.5 rounded-full text-sm font-medium ${status.bg} ${status.text}">${status.label}</span>
+                            </div>
+                            
+                            <div class="bg-slate-50 rounded-xl p-4">
+                                <span class="text-xs text-slate-400">Your Original Question</span>
+                                <p class="text-slate-700 mt-1">${ticket.original_query}</p>
+                                <div class="flex gap-4 mt-2 text-xs text-slate-400">
+                                    <span><i class="fas fa-tag mr-1"></i>${ticket.category}</span>
+                                    <span><i class="fas fa-calendar mr-1"></i>${new Date(ticket.created_at).toLocaleString()}</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <span class="text-sm font-semibold text-slate-700">Conversation</span>
+                                <div class="mt-2 space-y-3 max-h-60 overflow-y-auto">
+                                    ${ticket.messages.length === 0 ? 
+                                        '<p class="text-slate-400 text-sm text-center py-4">No messages yet. A support staff member will respond soon.</p>' :
+                                        ticket.messages.map(msg => `
+                                            <div class="${msg.sender === 'student' ? 'ml-8 bg-indigo-50' : msg.sender === 'staff' ? 'mr-8 bg-emerald-50' : 'bg-slate-50'} rounded-xl p-3">
+                                                <div class="flex items-center gap-2 mb-1">
+                                                    <span class="text-xs font-medium ${msg.sender === 'student' ? 'text-indigo-600' : msg.sender === 'staff' ? 'text-emerald-600' : 'text-slate-600'}">
+                                                        ${msg.sender === 'student' ? '<i class="fas fa-user"></i> You' : msg.sender === 'staff' ? '<i class="fas fa-headset"></i> ' + (msg.sender_name || 'Support') : '<i class="fas fa-robot"></i> System'}
+                                                    </span>
+                                                    <span class="text-xs text-slate-400">${new Date(msg.timestamp).toLocaleString()}</span>
+                                                </div>
+                                                <p class="text-sm text-slate-700">${msg.message}</p>
+                                            </div>
+                                        `).join('')
+                                    }
+                                </div>
+                            </div>
+                            
+                            ${ticket.status !== 'resolved' && ticket.status !== 'closed' ? `
+                                <div class="border-t pt-4">
+                                    <div class="flex gap-2">
+                                        <input type="text" id="studentReplyInput" placeholder="Type your reply..." 
+                                            class="flex-1 px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 text-sm">
+                                        <button onclick="sendStudentReply('${ticket.id}')" class="px-4 py-2.5 gradient-primary text-white rounded-xl font-medium hover:opacity-90">
+                                            <i class="fas fa-paper-plane"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            ` : `
+                                <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-center">
+                                    <i class="fas fa-check-circle text-emerald-500 text-2xl mb-2"></i>
+                                    <p class="text-emerald-700 font-medium">This ticket has been resolved</p>
+                                    ${ticket.resolution_notes ? `<p class="text-sm text-slate-600 mt-1">${ticket.resolution_notes}</p>` : ''}
+                                </div>
+                            `}
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                detailDiv.innerHTML = '<div class="text-center py-8 text-red-500"><i class="fas fa-exclamation-circle"></i> Failed to load ticket</div>';
+            }
+        }
+        
+        function closeStudentTicketModal() {
+            document.getElementById('studentTicketModal').classList.add('hidden');
+        }
+        
+        // Send reply from student
+        async function sendStudentReply(ticketId) {
+            const input = document.getElementById('studentReplyInput');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            try {
+                const response = await fetch(`${API_URL}/api/tickets/${ticketId}/message`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ text: message })
+                });
+                
+                if (response.ok) {
+                    input.value = '';
+                    openStudentTicketModal(ticketId); // Refresh
+                    loadMyTicketsView(); // Refresh list
+                }
+            } catch (error) {
+                console.error('Error sending reply:', error);
+            }
+        }
+        
+        // Show create ticket modal
+        function showCreateTicketModal() {
+            document.getElementById('createTicketModal').classList.remove('hidden');
+        }
+        
+        function closeCreateTicketModal() {
+            document.getElementById('createTicketModal').classList.add('hidden');
+        }
+        
+        // Show create user modal (Admin)
+        function showCreateUserModal() {
+            document.getElementById('createUserModal').classList.remove('hidden');
+            document.getElementById('createUserError').classList.add('hidden');
+            document.getElementById('createUserSuccess').classList.add('hidden');
+            document.getElementById('createUserForm').reset();
+            updateStudentFieldsVisibility();
+        }
+        
+        function closeCreateUserModal() {
+            document.getElementById('createUserModal').classList.add('hidden');
+        }
+        
+        // Toggle student ID field based on role selection
+        function updateStudentFieldsVisibility() {
+            const role = document.getElementById('newUserRole').value;
+            const studentFields = document.getElementById('studentFields');
+            if (role === 'student') {
+                studentFields.classList.remove('hidden');
+            } else {
+                studentFields.classList.add('hidden');
+            }
+        }
+        
+        // Listen to role change
+        document.getElementById('newUserRole')?.addEventListener('change', updateStudentFieldsVisibility);
+        
+        // Handle create user form
+        document.getElementById('createUserForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const errorDiv = document.getElementById('createUserError');
+            const successDiv = document.getElementById('createUserSuccess');
+            errorDiv.classList.add('hidden');
+            successDiv.classList.add('hidden');
+            
+            const name = document.getElementById('newUserName').value.trim();
+            const email = document.getElementById('newUserEmail').value.trim();
+            const password = document.getElementById('newUserPassword').value;
+            const role = document.getElementById('newUserRole').value;
+            const studentId = document.getElementById('newStudentId').value.trim();
+            
+            if (!name || !email || !password) {
+                errorDiv.textContent = 'Please fill in all required fields.';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}/api/admin/users`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        password: password,
+                        role: role,
+                        student_id: role === 'student' ? (studentId || `STU${Date.now().toString().slice(-6)}`) : null
+                    })
+                });
+                
+                if (response.ok) {
+                    successDiv.innerHTML = `<i class="fas fa-check-circle mr-2"></i>User <strong>${name}</strong> created successfully!`;
+                    successDiv.classList.remove('hidden');
+                    document.getElementById('createUserForm').reset();
+                    loadAdminData(); // Refresh admin panel
+                    setTimeout(() => {
+                        closeCreateUserModal();
+                    }, 2000);
+                } else {
+                    const data = await response.json();
+                    errorDiv.textContent = data.detail || 'Failed to create user. Please try again.';
+                    errorDiv.classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('Error creating user:', error);
+                errorDiv.textContent = 'Network error. Please try again.';
+                errorDiv.classList.remove('hidden');
+            }
+        });
+        
+        // Handle create ticket form
+        document.getElementById('createTicketForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const category = document.getElementById('newTicketCategory').value;
+            const query = document.getElementById('newTicketQuery').value.trim();
+            
+            if (!query) return;
+            
+            try {
+                const response = await fetch(`${API_URL}/api/tickets/create`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        query: query,
+                        category: category,
+                        ai_confidence: 0.5
+                    })
+                });
+                
+                if (response.ok) {
+                    closeCreateTicketModal();
+                    document.getElementById('newTicketQuery').value = '';
+                    loadMyTicketsView();
+                }
+            } catch (error) {
+                console.error('Error creating ticket:', error);
+            }
+        });
+
         // Initialize chat with welcome message
         async function initChat() {
             const chatMessages = document.getElementById('chatMessages');
             chatMessages.innerHTML = '';
-            addMessage('bot', `Hi! 👋 I'm UniAssist, your AI-powered student support assistant.\n\nI have access to your student profile and can help you with:\n\n• 💰 Financial Aid & Tuition\n• 📚 Course Registration\n• 📊 Academic Records & Grades\n• 🏠 Housing Information\n• 🎓 Admissions Questions\n\nI'll do my best to resolve your queries instantly. If I'm unable to help, I'll connect you with our support staff.\n\nHow can I help you today?`);
+            addMessage('bot', `Hi! 👋 Welcome to CampusHub, your smart student support assistant.\n\nI have access to your student profile and can help you with:\n\n• 💰 Financial Aid & Tuition\n• 📚 Course Registration\n• 📊 Academic Records & Grades\n• 🏠 Housing Information\n• 🎓 Admissions Questions\n\nI'll do my best to resolve your queries instantly. If I'm unable to help, I'll connect you with our support staff.\n\nHow can I help you today?`);
             
             // Check if student has existing tickets and update button
             if (currentUser?.student_id) {
@@ -1796,12 +2728,14 @@
             document.getElementById(`${tab}Tab`).classList.add('bg-white/20');
             
             document.getElementById('chatView').classList.add('hidden');
+            document.getElementById('myTicketsView').classList.add('hidden');
             document.getElementById('analyticsView').classList.add('hidden');
             document.getElementById('profileView').classList.add('hidden');
             document.getElementById('adminView').classList.add('hidden');
             document.getElementById('supportView').classList.add('hidden');
             document.getElementById(`${tab}View`).classList.remove('hidden');
             
+            if (tab === 'myTickets') loadMyTicketsView();
             if (tab === 'analytics') loadAnalytics();
             if (tab === 'admin') loadAdminPanel();
             if (tab === 'support') loadSupportPortal();
