@@ -112,13 +112,13 @@ const generateAIResponse = (message, studentData) => {
 };
 
 // Main App Component
-const UniAssistPro = () => {
+const CampusHub = () => {
   const [currentView, setCurrentView] = useState('chat');
   const [messages, setMessages] = useState([
     {
       id: 1,
       type: 'bot',
-      text: `Hi ${mockStudentData.name}! 👋 I'm UniAssist, your AI-powered student support assistant. I have access to your student profile and can help you with:
+      text: `Hi ${mockStudentData.name}! 👋 Welcome to CampusHub, your smart student support assistant. I have access to your student profile and can help you with:
 
 • Financial Aid & Tuition
 • Course Registration
@@ -219,8 +219,8 @@ How can I help you today?`,
               <Bot size={24} />
             </div>
             <div>
-              <h1 className="font-bold text-lg">UniAssist Pro</h1>
-              <p className="text-xs text-blue-100">AI Student Support • Online 24/7</p>
+              <h1 className="font-bold text-lg">CampusHub</h1>
+              <p className="text-xs text-blue-100">Smart Student Support • Online 24/7</p>
             </div>
           </div>
           <button
@@ -640,4 +640,4 @@ How can I help you today?`,
   );
 };
 
-export default UniAssistPro;
+export default CampusHub;

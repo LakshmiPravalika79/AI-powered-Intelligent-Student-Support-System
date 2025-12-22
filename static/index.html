@@ -3,15 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniAssist Pro - AI Student Support</title>
+    <title>CampusHub - Smart Student Support</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        accent: {
+                            50: '#fdf4ff',
+                            100: '#fae8ff',
+                            200: '#f5d0fe',
+                            300: '#f0abfc',
+                            400: '#e879f9',
+                            500: '#d946ef',
+                            600: '#c026d3',
+                            700: '#a21caf',
+                            800: '#86198f',
+                            900: '#701a75',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        .chat-container { height: calc(100vh - 200px); }
-        .message-enter { animation: slideIn 0.3s ease-out; }
+        * { font-family: 'Inter', sans-serif; }
+        .chat-container { height: calc(100vh - 220px); }
+        .message-enter { animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         @keyframes slideIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
         .typing-indicator span {
             animation: typing 1.4s infinite;
@@ -23,85 +62,168 @@
             0%, 60%, 100% { transform: translateY(0); }
             30% { transform: translateY(-5px); }
         }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        }
+        .gradient-primary {
+            background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 50%, #8b5cf6 100%);
+        }
+        .gradient-accent {
+            background: linear-gradient(135deg, #f97316 0%, #ec4899 50%, #8b5cf6 100%);
+        }
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .btn-glow {
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 30px rgba(14, 165, 233, 0.6);
+        }
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .scroll-smooth::-webkit-scrollbar {
+            width: 6px;
+        }
+        .scroll-smooth::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+        .scroll-smooth::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .scroll-smooth::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .stat-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+        }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen">
+<body class="bg-slate-50 min-h-screen">
     <!-- Login Screen -->
-    <div id="loginScreen" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-600 to-blue-800">
-        <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
+    <div id="loginScreen" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <!-- Animated Background -->
+        <div class="absolute inset-0 gradient-bg"></div>
+        <div class="absolute inset-0 opacity-30">
+            <div class="absolute top-20 left-20 w-72 h-72 bg-white/20 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute bottom-20 right-20 w-96 h-96 bg-pink-300/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+            <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-blue-300/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 0.5s;"></div>
+        </div>
+        
+        <div class="glass-card p-8 rounded-3xl shadow-2xl w-full max-w-md relative z-10 mx-4">
             <div class="text-center mb-8">
-                <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg rotate-3 hover:rotate-0 transition-transform duration-300">
                     <i class="fas fa-graduation-cap text-3xl text-white"></i>
                 </div>
-                <h1 class="text-2xl font-bold text-gray-800">UniAssist Pro</h1>
-                <p class="text-gray-500">AI-Powered Student Support</p>
+                <h1 class="text-3xl font-extrabold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">CampusHub</h1>
+                <p class="text-slate-500 mt-1 font-medium">Smart Student Support Platform</p>
             </div>
             
-            <form id="loginForm" class="space-y-4">
+            <form id="loginForm" class="space-y-5">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <input type="email" id="email" value="sarah.johnson@techedu.edu"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Email</label>
+                    <div class="relative">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"><i class="fas fa-envelope"></i></span>
+                        <input type="email" id="email" value="sarah.johnson@techedu.edu"
+                            class="w-full pl-12 pr-4 py-3.5 border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white/80">
+                    </div>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                    <input type="password" id="password" value="demo123"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Password</label>
+                    <div class="relative">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"><i class="fas fa-lock"></i></span>
+                        <input type="password" id="password" value="demo123"
+                            class="w-full pl-12 pr-4 py-3.5 border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white/80">
+                    </div>
                 </div>
                 <button type="submit" 
-                    class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                    <i class="fas fa-sign-in-alt mr-2"></i>Sign In
+                    class="w-full gradient-primary text-white py-4 rounded-xl font-bold text-lg hover:opacity-90 transition-all btn-glow shadow-lg">
+                    <i class="fas fa-arrow-right mr-2"></i>Sign In
                 </button>
             </form>
             
-            <div class="mt-6 p-4 bg-blue-50 rounded-lg">
-                <p class="text-sm text-blue-800 font-medium">Demo Credentials:</p>
-                <div class="mt-2 space-y-1">
-                    <p class="text-sm text-blue-600">👨‍🎓 Student: sarah.johnson@techedu.edu / demo123</p>
-                    <p class="text-sm text-blue-600">👔 Staff: advisor.smith@techedu.edu / staff123</p>
-                    <p class="text-sm text-blue-600">👑 Admin: admin@techedu.edu / admin123</p>
+            <div class="mt-6 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl border border-indigo-100">
+                <p class="text-sm text-indigo-800 font-semibold flex items-center"><i class="fas fa-info-circle mr-2"></i>Demo Credentials</p>
+                <div class="mt-3 space-y-2">
+                    <p class="text-sm text-slate-600 flex items-center"><span class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-2 text-xs">👨‍🎓</span> sarah.johnson@techedu.edu</p>
+                    <p class="text-sm text-slate-600 flex items-center"><span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-2 text-xs">👔</span> advisor.smith@techedu.edu</p>
+                    <p class="text-sm text-slate-600 flex items-center"><span class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center mr-2 text-xs">👑</span> admin@techedu.edu</p>
                 </div>
             </div>
             
-            <div id="loginError" class="hidden mt-4 p-3 bg-red-100 text-red-700 rounded-lg text-sm"></div>
+            <div id="loginError" class="hidden mt-4 p-4 bg-red-50 text-red-700 rounded-xl text-sm border border-red-200 flex items-center">
+                <i class="fas fa-exclamation-circle mr-2"></i>
+                <span></span>
+            </div>
         </div>
     </div>
 
     <!-- Main App -->
     <div id="mainApp" class="hidden">
         <!-- Header -->
-        <header class="bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg">
-            <div class="max-w-6xl mx-auto px-4 py-4">
+        <header class="gradient-primary text-white shadow-xl sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 py-3">
                 <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                            <i class="fas fa-robot text-xl"></i>
+                    <div class="flex items-center gap-4">
+                        <div class="w-11 h-11 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm shadow-inner">
+                            <i class="fas fa-graduation-cap text-xl"></i>
                         </div>
                         <div>
-                            <h1 class="font-bold text-lg">UniAssist Pro</h1>
-                            <p class="text-xs text-blue-100">AI Student Support • Online 24/7</p>
+                            <h1 class="font-extrabold text-xl tracking-tight">CampusHub</h1>
+                            <p class="text-xs text-white/70 flex items-center gap-1">
+                                <span class="w-2 h-2 bg-green-400 rounded-full pulse-dot"></span>
+                                AI-Powered • Always Online
+                            </p>
                         </div>
                     </div>
-                    <div class="flex items-center gap-4">
-                        <button onclick="showTab('chat')" id="chatTab" class="tab-btn px-4 py-2 rounded-lg bg-white/20">
+                    <div class="flex items-center gap-2">
+                        <button onclick="showTab('chat')" id="chatTab" class="tab-btn px-4 py-2.5 rounded-xl bg-white/20 backdrop-blur-sm font-medium transition-all hover:bg-white/30">
                             <i class="fas fa-comments mr-2"></i>Chat
                         </button>
-                        <button onclick="showTab('support')" id="supportTab" class="tab-btn px-4 py-2 rounded-lg hover:bg-white/10 hidden">
+                        <button onclick="showTab('support')" id="supportTab" class="tab-btn px-4 py-2.5 rounded-xl hover:bg-white/20 backdrop-blur-sm font-medium transition-all hidden">
                             <i class="fas fa-headset mr-2"></i>Support
                         </button>
-                        <button onclick="showTab('analytics')" id="analyticsTab" class="tab-btn px-4 py-2 rounded-lg hover:bg-white/10">
-                            <i class="fas fa-chart-bar mr-2"></i>Analytics
+                        <button onclick="showTab('analytics')" id="analyticsTab" class="tab-btn px-4 py-2.5 rounded-xl hover:bg-white/20 backdrop-blur-sm font-medium transition-all">
+                            <i class="fas fa-chart-line mr-2"></i>Analytics
                         </button>
-                        <button onclick="showTab('admin')" id="adminTab" class="tab-btn px-4 py-2 rounded-lg hover:bg-white/10 hidden">
-                            <i class="fas fa-cog mr-2"></i>Admin
+                        <button onclick="showTab('admin')" id="adminTab" class="tab-btn px-4 py-2.5 rounded-xl hover:bg-white/20 backdrop-blur-sm font-medium transition-all hidden">
+                            <i class="fas fa-shield-alt mr-2"></i>Admin
                         </button>
-                        <button onclick="showTab('profile')" id="profileTab" class="tab-btn px-4 py-2 rounded-lg hover:bg-white/10">
-                            <i class="fas fa-user mr-2"></i>Profile
+                        <button onclick="showTab('profile')" id="profileTab" class="tab-btn px-4 py-2.5 rounded-xl hover:bg-white/20 backdrop-blur-sm font-medium transition-all">
+                            <i class="fas fa-user-circle mr-2"></i>Profile
                         </button>
-                        <div id="userBadge" class="px-3 py-1 rounded-full bg-white/20 text-sm hidden">
+                        <div id="userBadge" class="px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-sm text-sm font-semibold hidden border border-white/20">
                             <span id="userRole">Student</span>
                         </div>
-                        <button onclick="logout()" class="px-4 py-2 rounded-lg hover:bg-white/10">
+                        <button onclick="logout()" class="p-2.5 rounded-xl hover:bg-red-500/30 transition-all ml-2" title="Sign Out">
                             <i class="fas fa-sign-out-alt"></i>
                         </button>
                     </div>
@@ -110,53 +232,55 @@
         </header>
 
         <!-- Chat View -->
-        <div id="chatView" class="max-w-4xl mx-auto p-4">
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div id="chatView" class="max-w-4xl mx-auto p-4 pt-6">
+            <div class="glass-card rounded-3xl shadow-xl overflow-hidden border border-slate-200/50">
                 <!-- Chat Messages -->
-                <div id="chatMessages" class="chat-container overflow-y-auto p-4 space-y-4">
+                <div id="chatMessages" class="chat-container overflow-y-auto p-6 space-y-4 scroll-smooth bg-gradient-to-b from-slate-50 to-white">
                     <!-- Welcome message will be added by JS -->
                 </div>
                 
                 <!-- Quick Actions -->
-                <div class="px-4 py-2 border-t bg-gray-50">
-                    <div class="flex justify-between items-center mb-2">
-                        <p class="text-xs text-gray-500">Quick questions:</p>
-                        <button id="myTicketsBtn" onclick="showMyTickets()" class="text-xs text-blue-600 hover:text-blue-800 font-medium">
-                            <i class="fas fa-ticket-alt mr-1"></i><span id="ticketsBtnText">📋 My Tickets</span>
+                <div class="px-6 py-4 border-t border-slate-100 bg-gradient-to-r from-slate-50 to-indigo-50/30">
+                    <div class="flex justify-between items-center mb-3">
+                        <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Quick Actions</p>
+                        <button id="myTicketsBtn" onclick="showMyTickets()" class="text-xs bg-indigo-100 text-indigo-700 hover:bg-indigo-200 font-semibold px-3 py-1.5 rounded-full transition-all hover-lift">
+                            <i class="fas fa-ticket-alt mr-1"></i><span id="ticketsBtnText">My Tickets</span>
                         </button>
                     </div>
                     <div class="flex flex-wrap gap-2">
                         <button onclick="askQuestion('When is my next financial aid disbursement?')" 
-                            class="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded-full hover:bg-blue-200">
+                            class="px-4 py-2 text-sm bg-gradient-to-r from-emerald-50 to-teal-50 text-emerald-700 rounded-full hover:from-emerald-100 hover:to-teal-100 font-medium transition-all hover-lift border border-emerald-200/50">
                             💰 Financial Aid
                         </button>
                         <button onclick="askQuestion('What is my current GPA?')" 
-                            class="px-3 py-1 text-sm bg-green-100 text-green-700 rounded-full hover:bg-green-200">
+                            class="px-4 py-2 text-sm bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 rounded-full hover:from-blue-100 hover:to-cyan-100 font-medium transition-all hover-lift border border-blue-200/50">
                             📊 My GPA
                         </button>
                         <button onclick="askQuestion('Where is my dorm room located?')" 
-                            class="px-3 py-1 text-sm bg-purple-100 text-purple-700 rounded-full hover:bg-purple-200">
+                            class="px-4 py-2 text-sm bg-gradient-to-r from-violet-50 to-purple-50 text-violet-700 rounded-full hover:from-violet-100 hover:to-purple-100 font-medium transition-all hover-lift border border-violet-200/50">
                             🏠 Housing
                         </button>
                         <button onclick="askQuestion('How do I register for next semester?')" 
-                            class="px-3 py-1 text-sm bg-orange-100 text-orange-700 rounded-full hover:bg-orange-200">
+                            class="px-4 py-2 text-sm bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 rounded-full hover:from-amber-100 hover:to-orange-100 font-medium transition-all hover-lift border border-amber-200/50">
                             📚 Registration
                         </button>
                         <button onclick="askQuestion('I have a complaint or issue')" 
-                            class="px-3 py-1 text-sm bg-red-100 text-red-700 rounded-full hover:bg-red-200">
+                            class="px-4 py-2 text-sm bg-gradient-to-r from-rose-50 to-pink-50 text-rose-700 rounded-full hover:from-rose-100 hover:to-pink-100 font-medium transition-all hover-lift border border-rose-200/50">
                             ⚠️ Report Issue
                         </button>
                     </div>
                 </div>
                 
                 <!-- Input -->
-                <div class="p-4 border-t">
-                    <form id="chatForm" class="flex gap-2">
-                        <input type="text" id="messageInput" placeholder="Ask me anything about your student services..."
-                            class="flex-1 px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <div class="p-4 border-t border-slate-100 bg-white">
+                    <form id="chatForm" class="flex gap-3">
+                        <div class="flex-1 relative">
+                            <input type="text" id="messageInput" placeholder="Ask me anything about your student services..."
+                                class="w-full px-5 py-4 border-2 border-slate-200 rounded-2xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-slate-700 placeholder-slate-400">
+                        </div>
                         <button type="submit" 
-                            class="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors">
-                            <i class="fas fa-paper-plane"></i>
+                            class="px-6 py-4 gradient-primary text-white rounded-2xl hover:opacity-90 transition-all btn-glow shadow-lg font-semibold">
+                            <i class="fas fa-paper-plane mr-2"></i>Send
                         </button>
                     </form>
                 </div>
@@ -164,63 +288,69 @@
         </div>
 
         <!-- Analytics View -->
-        <div id="analyticsView" class="hidden max-w-6xl mx-auto p-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                <div class="bg-white p-6 rounded-xl shadow-lg">
+        <div id="analyticsView" class="hidden max-w-7xl mx-auto p-4 pt-6">
+            <!-- Header -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-800">Analytics Dashboard</h2>
+                <p class="text-slate-500">Real-time performance metrics and insights</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
+                <div class="stat-card bg-gradient-to-br from-blue-500 to-indigo-600 p-6 rounded-2xl shadow-lg hover-lift text-white">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-gray-500 text-sm">Total Queries</p>
-                            <p id="totalQueries" class="text-3xl font-bold text-gray-800">--</p>
+                            <p class="text-blue-100 text-sm font-medium">Total Queries</p>
+                            <p id="totalQueries" class="text-4xl font-extrabold mt-1">--</p>
                         </div>
-                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                            <i class="fas fa-comments text-blue-600"></i>
+                        <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+                            <i class="fas fa-comments text-2xl"></i>
                         </div>
                     </div>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-lg">
+                <div class="stat-card bg-gradient-to-br from-emerald-500 to-teal-600 p-6 rounded-2xl shadow-lg hover-lift text-white">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-gray-500 text-sm">Automated Resolution</p>
-                            <p id="automatedRate" class="text-3xl font-bold text-green-600">--</p>
+                            <p class="text-emerald-100 text-sm font-medium">AI Resolution Rate</p>
+                            <p id="automatedRate" class="text-4xl font-extrabold mt-1">--</p>
                         </div>
-                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                            <i class="fas fa-robot text-green-600"></i>
+                        <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+                            <i class="fas fa-robot text-2xl"></i>
                         </div>
                     </div>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-lg">
+                <div class="stat-card bg-gradient-to-br from-violet-500 to-purple-600 p-6 rounded-2xl shadow-lg hover-lift text-white">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-gray-500 text-sm">Avg Response Time</p>
-                            <p id="avgResponse" class="text-3xl font-bold text-purple-600">--</p>
+                            <p class="text-violet-100 text-sm font-medium">Avg Response</p>
+                            <p id="avgResponse" class="text-4xl font-extrabold mt-1">--</p>
                         </div>
-                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                            <i class="fas fa-clock text-purple-600"></i>
+                        <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+                            <i class="fas fa-bolt text-2xl"></i>
                         </div>
                     </div>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-lg">
+                <div class="stat-card bg-gradient-to-br from-amber-500 to-orange-600 p-6 rounded-2xl shadow-lg hover-lift text-white">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-gray-500 text-sm">Satisfaction Score</p>
-                            <p id="satisfaction" class="text-3xl font-bold text-orange-600">--</p>
+                            <p class="text-amber-100 text-sm font-medium">Satisfaction</p>
+                            <p id="satisfaction" class="text-4xl font-extrabold mt-1">--</p>
                         </div>
-                        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
-                            <i class="fas fa-smile text-orange-600"></i>
+                        <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+                            <i class="fas fa-heart text-2xl"></i>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <div class="bg-white p-6 rounded-xl shadow-lg">
-                    <h3 class="font-bold text-lg mb-4"><i class="fas fa-chart-pie mr-2 text-blue-600"></i>Top Query Categories</h3>
-                    <div id="categoriesChart" class="space-y-3">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                <div class="glass-card p-6 rounded-2xl shadow-lg border border-slate-200/50 hover-lift">
+                    <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-chart-pie text-indigo-600"></i></span>Query Categories</h3>
+                    <div id="categoriesChart" class="space-y-4">
                         <!-- Will be populated by JS -->
                     </div>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-lg">
-                    <h3 class="font-bold text-lg mb-4"><i class="fas fa-dollar-sign mr-2 text-green-600"></i>ROI Metrics</h3>
+                <div class="glass-card p-6 rounded-2xl shadow-lg border border-slate-200/50 hover-lift">
+                    <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-dollar-sign text-emerald-600"></i></span>ROI Metrics</h3>
                     <div id="roiMetrics" class="space-y-3">
                         <!-- Will be populated by JS -->
                     </div>
@@ -228,8 +358,8 @@
             </div>
             
             <!-- ESB Status -->
-            <div class="mt-4 bg-white p-6 rounded-xl shadow-lg">
-                <h3 class="font-bold text-lg mb-4"><i class="fas fa-network-wired mr-2 text-purple-600"></i>ESB Integration Status</h3>
+            <div class="mt-5 glass-card p-6 rounded-2xl shadow-lg border border-slate-200/50">
+                <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-network-wired text-purple-600"></i></span>System Integration Status</h3>
                 <div id="esbStatus" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3">
                     <!-- Will be populated by JS -->
                 </div>
@@ -237,45 +367,48 @@
         </div>
 
         <!-- Profile View -->
-        <div id="profileView" class="hidden max-w-4xl mx-auto p-4">
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-                <div class="bg-gradient-to-r from-blue-600 to-blue-700 p-6 text-white">
-                    <div class="flex items-center gap-4">
-                        <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center">
-                            <i class="fas fa-user text-3xl"></i>
+        <div id="profileView" class="hidden max-w-4xl mx-auto p-4 pt-6">
+            <div class="glass-card rounded-3xl shadow-xl overflow-hidden border border-slate-200/50">
+                <div class="gradient-primary p-8 text-white relative overflow-hidden">
+                    <div class="absolute inset-0 opacity-20">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-3xl"></div>
+                    </div>
+                    <div class="flex items-center gap-5 relative z-10">
+                        <div class="w-24 h-24 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm shadow-xl">
+                            <i class="fas fa-user-graduate text-4xl"></i>
                         </div>
                         <div>
-                            <h2 id="profileName" class="text-2xl font-bold">Loading...</h2>
-                            <p id="profileProgram" class="text-blue-100">--</p>
+                            <h2 id="profileName" class="text-3xl font-extrabold">Loading...</h2>
+                            <p id="profileProgram" class="text-white/80 text-lg mt-1">--</p>
                         </div>
                     </div>
                 </div>
-                <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-graduation-cap mr-2 text-blue-600"></i>Academic Info</h3>
-                        <div class="space-y-2">
-                            <p><span class="text-gray-500">Student ID:</span> <span id="profileId" class="font-medium">--</span></p>
-                            <p><span class="text-gray-500">Year:</span> <span id="profileYear" class="font-medium">--</span></p>
-                            <p><span class="text-gray-500">GPA:</span> <span id="profileGpa" class="font-medium">--</span></p>
+                <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-2xl border border-blue-100">
+                        <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-9 h-9 bg-blue-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-graduation-cap text-blue-600"></i></span>Academic Info</h3>
+                        <div class="space-y-3">
+                            <p class="flex justify-between"><span class="text-slate-500">Student ID</span> <span id="profileId" class="font-semibold text-slate-800">--</span></p>
+                            <p class="flex justify-between"><span class="text-slate-500">Year</span> <span id="profileYear" class="font-semibold text-slate-800">--</span></p>
+                            <p class="flex justify-between"><span class="text-slate-500">GPA</span> <span id="profileGpa" class="font-semibold text-emerald-600 text-lg">--</span></p>
                         </div>
                     </div>
-                    <div>
-                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-home mr-2 text-green-600"></i>Housing</h3>
-                        <div class="space-y-2">
-                            <p><span class="text-gray-500">Building:</span> <span id="profileBuilding" class="font-medium">--</span></p>
-                            <p><span class="text-gray-500">Room:</span> <span id="profileRoom" class="font-medium">--</span></p>
+                    <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-5 rounded-2xl border border-green-100">
+                        <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-9 h-9 bg-green-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-home text-green-600"></i></span>Housing</h3>
+                        <div class="space-y-3">
+                            <p class="flex justify-between"><span class="text-slate-500">Building</span> <span id="profileBuilding" class="font-semibold text-slate-800">--</span></p>
+                            <p class="flex justify-between"><span class="text-slate-500">Room</span> <span id="profileRoom" class="font-semibold text-slate-800">--</span></p>
                         </div>
                     </div>
-                    <div>
-                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-dollar-sign mr-2 text-purple-600"></i>Financial Aid</h3>
-                        <div class="space-y-2">
-                            <p><span class="text-gray-500">Status:</span> <span id="profileAidStatus" class="font-medium">--</span></p>
-                            <p><span class="text-gray-500">Amount:</span> <span id="profileAidAmount" class="font-medium">--</span></p>
-                            <p><span class="text-gray-500">Next Disbursement:</span> <span id="profileAidDate" class="font-medium">--</span></p>
+                    <div class="bg-gradient-to-br from-purple-50 to-violet-50 p-5 rounded-2xl border border-purple-100">
+                        <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-9 h-9 bg-purple-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-dollar-sign text-purple-600"></i></span>Financial Aid</h3>
+                        <div class="space-y-3">
+                            <p class="flex justify-between"><span class="text-slate-500">Status</span> <span id="profileAidStatus" class="font-semibold text-emerald-600">--</span></p>
+                            <p class="flex justify-between"><span class="text-slate-500">Amount</span> <span id="profileAidAmount" class="font-semibold text-slate-800 text-lg">--</span></p>
+                            <p class="flex justify-between"><span class="text-slate-500">Next Disbursement</span> <span id="profileAidDate" class="font-semibold text-slate-800">--</span></p>
                         </div>
                     </div>
-                    <div>
-                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-book mr-2 text-orange-600"></i>Current Courses</h3>
+                    <div class="bg-gradient-to-br from-orange-50 to-amber-50 p-5 rounded-2xl border border-orange-100">
+                        <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-9 h-9 bg-orange-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-book text-orange-600"></i></span>Current Courses</h3>
                         <div id="profileCourses" class="space-y-2">
                             <!-- Will be populated by JS -->
                         </div>
@@ -285,21 +418,24 @@
         </div>
 
         <!-- Support Staff Portal (Staff/Admin Only) -->
-        <div id="supportView" class="hidden max-w-6xl mx-auto p-4">
+        <div id="supportView" class="hidden max-w-7xl mx-auto p-4 pt-6">
             <!-- Support Header -->
-            <div class="bg-gradient-to-r from-green-600 to-teal-600 rounded-2xl p-6 text-white mb-6 shadow-lg">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-4">
-                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                            <i class="fas fa-headset text-3xl"></i>
+            <div class="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 rounded-3xl p-8 text-white mb-6 shadow-xl relative overflow-hidden">
+                <div class="absolute inset-0 opacity-20">
+                    <div class="absolute top-0 right-0 w-96 h-96 bg-white/20 rounded-full blur-3xl"></div>
+                </div>
+                <div class="flex items-center justify-between relative z-10">
+                    <div class="flex items-center gap-5">
+                        <div class="w-18 h-18 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm p-4">
+                            <i class="fas fa-headset text-4xl"></i>
                         </div>
                         <div>
-                            <h2 class="text-2xl font-bold">Support Staff Portal</h2>
-                            <p class="text-green-100">Manage escalated student queries</p>
+                            <h2 class="text-3xl font-extrabold">Support Portal</h2>
+                            <p class="text-white/80 mt-1">Manage escalated student queries efficiently</p>
                         </div>
                     </div>
-                    <div class="text-right">
-                        <p class="text-sm text-green-100">Escalation Threshold</p>
+                    <div class="text-right bg-white/10 backdrop-blur-sm rounded-2xl px-6 py-4">
+                        <p class="text-sm text-white/80">Escalation Threshold</p>
                         <p class="text-2xl font-bold">&lt; 70% Confidence</p>
                     </div>
                 </div>
@@ -307,60 +443,60 @@
 
             <!-- Escalation Stats -->
             <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
-                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-red-500">
-                    <p class="text-gray-500 text-sm">Open Tickets</p>
-                    <p id="supportOpenCount" class="text-2xl font-bold text-red-600">--</p>
+                <div class="glass-card p-5 rounded-2xl shadow-lg border-l-4 border-red-500 hover-lift">
+                    <p class="text-slate-500 text-sm font-medium">Open Tickets</p>
+                    <p id="supportOpenCount" class="text-3xl font-extrabold text-red-600 mt-1">--</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-yellow-500">
-                    <p class="text-gray-500 text-sm">In Progress</p>
-                    <p id="supportProgressCount" class="text-2xl font-bold text-yellow-600">--</p>
+                <div class="glass-card p-5 rounded-2xl shadow-lg border-l-4 border-amber-500 hover-lift">
+                    <p class="text-slate-500 text-sm font-medium">In Progress</p>
+                    <p id="supportProgressCount" class="text-3xl font-extrabold text-amber-600 mt-1">--</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-blue-500">
-                    <p class="text-gray-500 text-sm">Pending Student</p>
-                    <p id="supportPendingCount" class="text-2xl font-bold text-blue-600">--</p>
+                <div class="glass-card p-5 rounded-2xl shadow-lg border-l-4 border-blue-500 hover-lift">
+                    <p class="text-slate-500 text-sm font-medium">Pending Student</p>
+                    <p id="supportPendingCount" class="text-3xl font-extrabold text-blue-600 mt-1">--</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-green-500">
-                    <p class="text-gray-500 text-sm">Resolved</p>
-                    <p id="supportResolvedCount" class="text-2xl font-bold text-green-600">--</p>
+                <div class="glass-card p-5 rounded-2xl shadow-lg border-l-4 border-emerald-500 hover-lift">
+                    <p class="text-slate-500 text-sm font-medium">Resolved</p>
+                    <p id="supportResolvedCount" class="text-3xl font-extrabold text-emerald-600 mt-1">--</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-purple-500">
-                    <p class="text-gray-500 text-sm">Avg Resolution</p>
-                    <p id="supportAvgTime" class="text-2xl font-bold text-purple-600">--</p>
+                <div class="glass-card p-5 rounded-2xl shadow-lg border-l-4 border-purple-500 hover-lift">
+                    <p class="text-slate-500 text-sm font-medium">Avg Resolution</p>
+                    <p id="supportAvgTime" class="text-3xl font-extrabold text-purple-600 mt-1">--</p>
                 </div>
             </div>
 
             <!-- Escalation Flow Diagram -->
-            <div class="bg-white rounded-xl shadow-lg p-4 mb-6">
-                <h3 class="font-bold text-lg mb-3"><i class="fas fa-project-diagram mr-2 text-blue-600"></i>Escalation Flow</h3>
-                <div class="flex items-center justify-center gap-2 text-sm overflow-x-auto py-2">
-                    <div class="bg-blue-100 text-blue-700 px-4 py-2 rounded-lg whitespace-nowrap">
-                        <i class="fas fa-user mr-1"></i>Student Query
+            <div class="glass-card rounded-2xl shadow-lg p-5 mb-6 border border-slate-200/50">
+                <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-9 h-9 bg-indigo-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-project-diagram text-indigo-600"></i></span>Escalation Flow</h3>
+                <div class="flex items-center justify-center gap-3 text-sm overflow-x-auto py-3">
+                    <div class="bg-gradient-to-r from-blue-100 to-blue-50 text-blue-700 px-5 py-3 rounded-xl whitespace-nowrap font-medium shadow-sm border border-blue-200">
+                        <i class="fas fa-user mr-2"></i>Student Query
                     </div>
-                    <i class="fas fa-arrow-right text-gray-400"></i>
-                    <div class="bg-purple-100 text-purple-700 px-4 py-2 rounded-lg whitespace-nowrap">
-                        <i class="fas fa-robot mr-1"></i>AI Processing
+                    <i class="fas fa-arrow-right text-slate-300 text-lg"></i>
+                    <div class="bg-gradient-to-r from-purple-100 to-purple-50 text-purple-700 px-5 py-3 rounded-xl whitespace-nowrap font-medium shadow-sm border border-purple-200">
+                        <i class="fas fa-robot mr-2"></i>AI Processing
                     </div>
-                    <i class="fas fa-arrow-right text-gray-400"></i>
-                    <div class="bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg whitespace-nowrap">
-                        <i class="fas fa-question mr-1"></i>Confidence &lt; 70%?
+                    <i class="fas fa-arrow-right text-slate-300 text-lg"></i>
+                    <div class="bg-gradient-to-r from-amber-100 to-amber-50 text-amber-700 px-5 py-3 rounded-xl whitespace-nowrap font-medium shadow-sm border border-amber-200">
+                        <i class="fas fa-question mr-2"></i>Confidence &lt; 70%?
                     </div>
-                    <i class="fas fa-arrow-right text-gray-400"></i>
-                    <div class="bg-red-100 text-red-700 px-4 py-2 rounded-lg whitespace-nowrap">
-                        <i class="fas fa-ticket-alt mr-1"></i>Create Ticket
+                    <i class="fas fa-arrow-right text-slate-300 text-lg"></i>
+                    <div class="bg-gradient-to-r from-red-100 to-red-50 text-red-700 px-5 py-3 rounded-xl whitespace-nowrap font-medium shadow-sm border border-red-200">
+                        <i class="fas fa-ticket-alt mr-2"></i>Create Ticket
                     </div>
-                    <i class="fas fa-arrow-right text-gray-400"></i>
-                    <div class="bg-green-100 text-green-700 px-4 py-2 rounded-lg whitespace-nowrap">
-                        <i class="fas fa-headset mr-1"></i>Staff Support
+                    <i class="fas fa-arrow-right text-slate-300 text-lg"></i>
+                    <div class="bg-gradient-to-r from-emerald-100 to-emerald-50 text-emerald-700 px-5 py-3 rounded-xl whitespace-nowrap font-medium shadow-sm border border-emerald-200">
+                        <i class="fas fa-headset mr-2"></i>Staff Support
                     </div>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <!-- Tickets List -->
-                <div class="lg:col-span-2 bg-white rounded-xl shadow-lg overflow-hidden">
-                    <div class="p-4 border-b bg-gray-50 flex justify-between items-center">
-                        <h3 class="font-bold text-lg"><i class="fas fa-ticket-alt mr-2 text-green-600"></i>Support Tickets</h3>
-                        <select id="ticketStatusFilter" onchange="loadTickets()" class="text-sm border rounded-lg px-3 py-1">
+                <div class="lg:col-span-2 glass-card rounded-2xl shadow-lg overflow-hidden border border-slate-200/50">
+                    <div class="p-5 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-indigo-50/30 flex justify-between items-center">
+                        <h3 class="font-bold text-lg flex items-center text-slate-800"><span class="w-9 h-9 bg-emerald-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-ticket-alt text-emerald-600"></i></span>Support Tickets</h3>
+                        <select id="ticketStatusFilter" onchange="loadTickets()" class="text-sm border-2 border-slate-200 rounded-xl px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white">
                             <option value="">All Tickets</option>
                             <option value="open">Open</option>
                             <option value="in_progress">In Progress</option>
@@ -368,7 +504,7 @@
                             <option value="resolved">Resolved</option>
                         </select>
                     </div>
-                    <div class="p-4 max-h-[500px] overflow-y-auto">
+                    <div class="p-5 max-h-[500px] overflow-y-auto scroll-smooth">
                         <div id="ticketsList" class="space-y-3">
                             <!-- Will be populated by JS -->
                         </div>
@@ -376,45 +512,47 @@
                 </div>
 
                 <!-- Ticket Detail -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                    <div class="p-4 border-b bg-gray-50">
-                        <h3 class="font-bold text-lg"><i class="fas fa-comments mr-2 text-blue-600"></i>Ticket Detail</h3>
+                <div class="glass-card rounded-2xl shadow-lg overflow-hidden border border-slate-200/50">
+                    <div class="p-5 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-blue-50/30">
+                        <h3 class="font-bold text-lg flex items-center text-slate-800"><span class="w-9 h-9 bg-blue-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-comments text-blue-600"></i></span>Ticket Detail</h3>
                     </div>
-                    <div id="ticketDetail" class="p-4">
-                        <div class="text-center text-gray-400 py-8">
-                            <i class="fas fa-ticket-alt text-4xl mb-2"></i>
-                            <p>Select a ticket to view details</p>
+                    <div id="ticketDetail" class="p-5">
+                        <div class="text-center text-slate-400 py-12">
+                            <div class="w-20 h-20 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-ticket-alt text-4xl text-slate-300"></i>
+                            </div>
+                            <p class="font-medium">Select a ticket to view details</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Why Escalation Matters -->
-            <div class="mt-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 border border-blue-100">
-                <h3 class="font-bold text-lg mb-3"><i class="fas fa-info-circle mr-2 text-blue-600"></i>Why AI + Human Support?</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                    <div>
-                        <p class="font-medium text-blue-700">🤖 AI Handles (70%+ Confidence)</p>
-                        <ul class="mt-1 text-gray-600 space-y-1">
-                            <li>• FAQ questions</li>
-                            <li>• Status inquiries</li>
-                            <li>• Simple information lookup</li>
+            <div class="mt-6 bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 rounded-2xl p-6 border border-indigo-100">
+                <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-9 h-9 bg-indigo-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-lightbulb text-indigo-600"></i></span>Why AI + Human Support?</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-sm">
+                    <div class="bg-white/70 backdrop-blur-sm rounded-xl p-4 border border-blue-100">
+                        <p class="font-semibold text-blue-700 flex items-center mb-2"><span class="text-lg mr-2">🤖</span>AI Handles (70%+ Confidence)</p>
+                        <ul class="text-slate-600 space-y-1">
+                            <li class="flex items-center"><i class="fas fa-check text-emerald-500 mr-2 text-xs"></i>FAQ questions</li>
+                            <li class="flex items-center"><i class="fas fa-check text-emerald-500 mr-2 text-xs"></i>Status inquiries</li>
+                            <li class="flex items-center"><i class="fas fa-check text-emerald-500 mr-2 text-xs"></i>Simple information lookup</li>
                         </ul>
                     </div>
-                    <div>
-                        <p class="font-medium text-orange-700">⚠️ Escalated (&lt;70% Confidence)</p>
-                        <ul class="mt-1 text-gray-600 space-y-1">
-                            <li>• Complex appeals</li>
-                            <li>• Special circumstances</li>
-                            <li>• Policy exceptions</li>
+                    <div class="bg-white/70 backdrop-blur-sm rounded-xl p-4 border border-amber-100">
+                        <p class="font-semibold text-amber-700 flex items-center mb-2"><span class="text-lg mr-2">⚠️</span>Escalated (&lt;70% Confidence)</p>
+                        <ul class="text-slate-600 space-y-1">
+                            <li class="flex items-center"><i class="fas fa-arrow-right text-amber-500 mr-2 text-xs"></i>Complex appeals</li>
+                            <li class="flex items-center"><i class="fas fa-arrow-right text-amber-500 mr-2 text-xs"></i>Special circumstances</li>
+                            <li class="flex items-center"><i class="fas fa-arrow-right text-amber-500 mr-2 text-xs"></i>Policy exceptions</li>
                         </ul>
                     </div>
-                    <div>
-                        <p class="font-medium text-green-700">✅ Benefits</p>
-                        <ul class="mt-1 text-gray-600 space-y-1">
-                            <li>• 73% queries auto-resolved</li>
-                            <li>• Staff focus on complex issues</li>
-                            <li>• Better student experience</li>
+                    <div class="bg-white/70 backdrop-blur-sm rounded-xl p-4 border border-emerald-100">
+                        <p class="font-semibold text-emerald-700 flex items-center mb-2"><span class="text-lg mr-2">✅</span>Benefits</p>
+                        <ul class="text-slate-600 space-y-1">
+                            <li class="flex items-center"><i class="fas fa-star text-emerald-500 mr-2 text-xs"></i>73% queries auto-resolved</li>
+                            <li class="flex items-center"><i class="fas fa-star text-emerald-500 mr-2 text-xs"></i>Staff focus on complex issues</li>
+                            <li class="flex items-center"><i class="fas fa-star text-emerald-500 mr-2 text-xs"></i>Better student experience</li>
                         </ul>
                     </div>
                 </div>
@@ -422,53 +560,57 @@
         </div>
 
         <!-- Admin View (Staff/Admin Only) -->
-        <div id="adminView" class="hidden max-w-6xl mx-auto p-4">
+        <div id="adminView" class="hidden max-w-7xl mx-auto p-4 pt-6">
             <!-- Admin Header -->
-            <div class="bg-gradient-to-r from-purple-600 to-purple-700 rounded-2xl p-6 text-white mb-6 shadow-lg">
-                <div class="flex items-center gap-4">
-                    <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                        <i class="fas fa-shield-alt text-3xl"></i>
+            <div class="bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 rounded-3xl p-8 text-white mb-6 shadow-xl relative overflow-hidden">
+                <div class="absolute inset-0 opacity-20">
+                    <div class="absolute top-0 right-0 w-96 h-96 bg-white/20 rounded-full blur-3xl"></div>
+                    <div class="absolute bottom-0 left-0 w-64 h-64 bg-pink-300/20 rounded-full blur-3xl"></div>
+                </div>
+                <div class="flex items-center gap-5 relative z-10">
+                    <div class="w-18 h-18 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm p-4">
+                        <i class="fas fa-shield-alt text-4xl"></i>
                     </div>
                     <div>
-                        <h2 class="text-2xl font-bold">Administration Panel</h2>
-                        <p class="text-purple-100">System Management & Legacy Integration</p>
+                        <h2 class="text-3xl font-extrabold">Administration Panel</h2>
+                        <p class="text-white/80 mt-1">System Management & Legacy Integration</p>
                     </div>
                 </div>
             </div>
 
             <!-- Admin Stats -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-purple-500">
-                    <p class="text-gray-500 text-sm">Total Users</p>
-                    <p id="adminTotalUsers" class="text-2xl font-bold text-gray-800">--</p>
+                <div class="glass-card p-5 rounded-2xl shadow-lg border-l-4 border-violet-500 hover-lift">
+                    <p class="text-slate-500 text-sm font-medium">Total Users</p>
+                    <p id="adminTotalUsers" class="text-3xl font-extrabold text-slate-800 mt-1">--</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-blue-500">
-                    <p class="text-gray-500 text-sm">Students</p>
-                    <p id="adminStudentCount" class="text-2xl font-bold text-blue-600">--</p>
+                <div class="glass-card p-5 rounded-2xl shadow-lg border-l-4 border-blue-500 hover-lift">
+                    <p class="text-slate-500 text-sm font-medium">Students</p>
+                    <p id="adminStudentCount" class="text-3xl font-extrabold text-blue-600 mt-1">--</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-green-500">
-                    <p class="text-gray-500 text-sm">Staff</p>
-                    <p id="adminStaffCount" class="text-2xl font-bold text-green-600">--</p>
+                <div class="glass-card p-5 rounded-2xl shadow-lg border-l-4 border-emerald-500 hover-lift">
+                    <p class="text-slate-500 text-sm font-medium">Staff</p>
+                    <p id="adminStaffCount" class="text-3xl font-extrabold text-emerald-600 mt-1">--</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-red-500">
-                    <p class="text-gray-500 text-sm">Admins</p>
-                    <p id="adminAdminCount" class="text-2xl font-bold text-red-600">--</p>
+                <div class="glass-card p-5 rounded-2xl shadow-lg border-l-4 border-rose-500 hover-lift">
+                    <p class="text-slate-500 text-sm font-medium">Admins</p>
+                    <p id="adminAdminCount" class="text-3xl font-extrabold text-rose-600 mt-1">--</p>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <!-- Users Table -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                    <div class="p-4 border-b bg-gray-50">
-                        <h3 class="font-bold text-lg"><i class="fas fa-users mr-2 text-purple-600"></i>User Management</h3>
+                <div class="glass-card rounded-2xl shadow-lg overflow-hidden border border-slate-200/50">
+                    <div class="p-5 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-purple-50/30">
+                        <h3 class="font-bold text-lg flex items-center text-slate-800"><span class="w-9 h-9 bg-violet-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-users text-violet-600"></i></span>User Management</h3>
                     </div>
-                    <div class="p-4 max-h-96 overflow-y-auto">
+                    <div class="p-5 max-h-96 overflow-y-auto scroll-smooth">
                         <table class="w-full">
-                            <thead class="text-left text-sm text-gray-500">
+                            <thead class="text-left text-sm text-slate-500 border-b border-slate-100">
                                 <tr>
-                                    <th class="pb-2">User</th>
-                                    <th class="pb-2">Role</th>
-                                    <th class="pb-2">Status</th>
+                                    <th class="pb-3 font-semibold">User</th>
+                                    <th class="pb-3 font-semibold">Role</th>
+                                    <th class="pb-3 font-semibold">Status</th>
                                 </tr>
                             </thead>
                             <tbody id="adminUsersTable" class="text-sm">
@@ -479,11 +621,11 @@
                 </div>
 
                 <!-- RBAC Matrix -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                    <div class="p-4 border-b bg-gray-50">
-                        <h3 class="font-bold text-lg"><i class="fas fa-key mr-2 text-orange-600"></i>Role Permissions Matrix</h3>
+                <div class="glass-card rounded-2xl shadow-lg overflow-hidden border border-slate-200/50">
+                    <div class="p-5 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-orange-50/30">
+                        <h3 class="font-bold text-lg flex items-center text-slate-800"><span class="w-9 h-9 bg-amber-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-key text-amber-600"></i></span>Role Permissions</h3>
                     </div>
-                    <div class="p-4 max-h-96 overflow-y-auto">
+                    <div class="p-5 max-h-96 overflow-y-auto scroll-smooth">
                         <div id="rbacMatrix" class="space-y-4">
                             <!-- Will be populated by JS -->
                         </div>
@@ -492,12 +634,12 @@
             </div>
 
             <!-- Legacy Systems Status -->
-            <div class="mt-6 bg-white rounded-xl shadow-lg overflow-hidden">
-                <div class="p-4 border-b bg-gray-50">
-                    <h3 class="font-bold text-lg"><i class="fas fa-server mr-2 text-blue-600"></i>Legacy Systems Integration (On-Premise)</h3>
-                    <p class="text-sm text-gray-500 mt-1">Real-time status of enterprise systems connected via ESB</p>
+            <div class="mt-6 glass-card rounded-2xl shadow-lg overflow-hidden border border-slate-200/50">
+                <div class="p-5 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-blue-50/30">
+                    <h3 class="font-bold text-lg flex items-center text-slate-800"><span class="w-9 h-9 bg-blue-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-server text-blue-600"></i></span>Legacy Systems Integration</h3>
+                    <p class="text-sm text-slate-500 mt-1 ml-12">Real-time status of enterprise systems connected via ESB</p>
                 </div>
-                <div class="p-4">
+                <div class="p-5">
                     <div id="legacySystemsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <!-- Will be populated by JS -->
                     </div>
@@ -629,7 +771,7 @@
         async function initChat() {
             const chatMessages = document.getElementById('chatMessages');
             chatMessages.innerHTML = '';
-            addMessage('bot', `Hi! 👋 I'm UniAssist, your AI-powered student support assistant.\n\nI have access to your student profile and can help you with:\n\n• 💰 Financial Aid & Tuition\n• 📚 Course Registration\n• 📊 Academic Records & Grades\n• 🏠 Housing Information\n• 🎓 Admissions Questions\n\nI'll do my best to resolve your queries instantly. If I'm unable to help, I'll connect you with our support staff.\n\nHow can I help you today?`);
+            addMessage('bot', `Hi! 👋 Welcome to CampusHub, your smart student support assistant.\n\nI have access to your student profile and can help you with:\n\n• 💰 Financial Aid & Tuition\n• 📚 Course Registration\n• 📊 Academic Records & Grades\n• 🏠 Housing Information\n• 🎓 Admissions Questions\n\nI'll do my best to resolve your queries instantly. If I'm unable to help, I'll connect you with our support staff.\n\nHow can I help you today?`);
             
             // Check if student has existing tickets and update button
             if (currentUser?.student_id) {
