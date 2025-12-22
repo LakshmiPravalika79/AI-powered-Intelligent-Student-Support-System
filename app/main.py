@@ -134,33 +134,14 @@ if os.path.exists(static_dir):
 # HEALTH & STATUS ENDPOINTS
 # ================================================================================
 
-@app.get("/", tags=["System"])
-async def root():
+@app.get("/", include_in_schema=False)
+def serve_frontend():
     """
-    Root endpoint - Serves the frontend or API info.
+    Always serve the frontend UI at root.
     """
-    # Serve the frontend HTML if it exists
     static_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "static")
     index_path = os.path.join(static_dir, "index.html")
-    if os.path.exists(index_path):
-        return FileResponse(index_path)
-    
-    # Otherwise return API info
-    return {
-        "name": "UniAssist Pro API",
-        "version": "1.0.0-MVP",
-        "description": "AI-Powered Intelligent Student Support System",
-        "architecture": "DBIM Hybrid Cloud + On-Premise",
-        "status": "operational",
-        "documentation": {
-            "swagger": "/docs",
-            "redoc": "/redoc"
-        },
-        "demo_credentials": {
-            "username": "sarah.johnson@techedu.edu",
-            "password": "demo123"
-        }
-    }
+    return FileResponse(index_path)
 
 
 @app.get("/health", tags=["System"])
