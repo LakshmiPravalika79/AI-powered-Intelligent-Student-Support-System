@@ -6,6 +6,29 @@
     <title>CampusHub - Smart Student Support</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<<<<<<< HEAD
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #0D1018;
+            --bg-muted: #131722;
+            --bg-elevated: #191F2C;
+            --bg-highlight: #20283A;
+            --bg-soft: #262F45;
+            --text-primary: #F2F4FF;
+            --text-secondary: #A3ADC9;
+            --text-tertiary: #7E88A6;
+            --accent-primary: #8D9CFF;
+            --accent-primary-strong: #6E7AFD;
+            --accent-soft: rgba(141, 156, 255, 0.18);
+            --border-soft: rgba(255, 255, 255, 0.06);
+            --border-strong: rgba(141, 156, 255, 0.4);
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --shadow-soft: 0 30px 60px rgba(4, 6, 12, 0.45);
+            --shadow-hover: 0 40px 70px rgba(8, 12, 22, 0.55);
+            --transition-base: cubic-bezier(0.18, 0.89, 0.32, 1.28);
+=======
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
@@ -51,16 +74,640 @@
         @keyframes slideIn {
             from { opacity: 0; transform: translateY(20px) scale(0.95); }
             to { opacity: 1; transform: translateY(0) scale(1); }
+>>>>>>> 5cd32c16083a1667e7eb32593cdbfd7ab4874b45
         }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background:
+                radial-gradient(120% 120% at 10% -20%, rgba(110, 122, 253, 0.32), transparent 55%),
+                radial-gradient(120% 140% at 90% 0%, rgba(20, 26, 45, 0.65), transparent 60%),
+                var(--bg-base);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.7;
+            letter-spacing: 0.01em;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-primary-strong);
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            margin: 0;
+            color: var(--text-primary);
+        }
+
+        h1 { font-size: clamp(1.8rem, 2vw + 1rem, 2.4rem); }
+        h2 { font-size: clamp(1.6rem, 1.4vw + 1rem, 2rem); }
+        h3 { font-size: clamp(1.3rem, 1vw + 0.9rem, 1.6rem); }
+
+        p, span, label, input, select {
+            color: var(--text-secondary);
+        }
+
+        .card {
+            background: linear-gradient(160deg, rgba(33, 40, 58, 0.92), rgba(18, 23, 35, 0.92));
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.45s var(--transition-base), box-shadow 0.45s var(--transition-base), border 0.45s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: var(--border-strong);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .surface-muted {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: var(--radius-md);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 0.75rem 1.6rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border-radius: var(--radius-md);
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s var(--transition-base);
+            position: relative;
+            overflow: hidden;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(255, 255, 255, 0.18), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+
+        .btn:hover::after {
+            opacity: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary-strong), var(--accent-primary));
+            box-shadow: 0 18px 35px rgba(110, 122, 253, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 25px 45px rgba(110, 122, 253, 0.35);
+        }
+
+        .btn-ghost {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-secondary);
+        }
+
+        .btn-ghost:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .btn-icon {
+            width: 2.75rem;
+            height: 2.75rem;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 999px;
+            color: var(--text-secondary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-icon:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+        }
+
+        .input-field {
+            width: 100%;
+            background: rgba(22, 28, 43, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-md);
+            padding: 0.85rem 1.2rem;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            transition: all 0.35s var(--transition-base);
+        }
+
+        .input-field:focus {
+            border-color: var(--border-strong);
+            box-shadow: 0 0 0 3px rgba(141, 156, 255, 0.12);
+            background: rgba(29, 34, 51, 0.9);
+            outline: none;
+        }
+
+        .input-field::placeholder {
+            color: rgba(163, 173, 201, 0.5);
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.55rem 0.95rem;
+            font-size: 0.88rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.35s var(--transition-base);
+        }
+
+        .chip:hover {
+            transform: translateY(-2px);
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+            background: rgba(141, 156, 255, 0.12);
+        }
+
+        .chip-accent {
+            color: rgba(215, 224, 255, 0.85);
+            background: rgba(141, 156, 255, 0.16);
+            border-color: rgba(141, 156, 255, 0.22);
+        }
+
+        .chip-success {
+            color: #AEE8C9;
+            background: rgba(118, 217, 166, 0.16);
+            border-color: rgba(118, 217, 166, 0.25);
+        }
+
+        .chip-purple {
+            color: #D2B8FF;
+            background: rgba(176, 118, 235, 0.18);
+            border-color: rgba(176, 118, 235, 0.22);
+        }
+
+        .chip-warning {
+            color: #FFDCA6;
+            background: rgba(246, 199, 125, 0.16);
+            border-color: rgba(246, 199, 125, 0.22);
+        }
+
+        .chip-danger {
+            color: #FFB5B0;
+            background: rgba(242, 141, 133, 0.18);
+            border-color: rgba(242, 141, 133, 0.24);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.35rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            background: rgba(141, 156, 255, 0.18);
+            color: var(--accent-primary);
+            border: 1px solid rgba(141, 156, 255, 0.25);
+        }
+
+        .layout-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .app-header {
+            background: linear-gradient(135deg, rgba(28, 34, 52, 0.95), rgba(16, 20, 33, 0.88));
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(26px);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem 1.75rem;
+            margin: 1.5rem auto 1rem;
+            box-shadow: 0 30px 60px rgba(4, 6, 12, 0.45);
+        }
+
+        .tab-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.65rem 1.2rem;
+            border-radius: 999px;
+            color: var(--text-secondary);
+            transition: all 0.35s var(--transition-base);
+            background: transparent;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .tab-btn.tab-active {
+            background: rgba(141, 156, 255, 0.16);
+            color: var(--accent-primary);
+            box-shadow: 0 12px 20px rgba(141, 156, 255, 0.18);
+        }
+
+        .logout-label {
+            display: none;
+        }
+
+        .message-bubble {
+            max-width: 80%;
+            padding: 1rem 1.25rem;
+            border-radius: 18px;
+            font-size: 0.95rem;
+            line-height: 1.55;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            box-shadow: 0 14px 24px rgba(5, 7, 14, 0.35);
+        }
+
+        .message-bubble.user {
+            margin-left: auto;
+            background: linear-gradient(135deg, var(--accent-primary-strong), var(--accent-primary));
+            color: #fff;
+            border-bottom-right-radius: 6px;
+        }
+
+        .message-bubble.bot {
+            margin-right: auto;
+            background: rgba(30, 37, 53, 0.95);
+            border-bottom-left-radius: 6px;
+        }
+
+        .message-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 12px 20px rgba(5, 8, 16, 0.35);
+        }
+
+        .message-avatar.user {
+            background: linear-gradient(135deg, rgba(142, 157, 255, 0.38), rgba(71, 87, 214, 0.85));
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .message-avatar.bot {
+            background: rgba(36, 43, 63, 0.85);
+            color: var(--accent-primary);
+        }
+
+        .chat-container {
+            height: calc(100vh - 280px);
+            padding: 1.5rem;
+            background: rgba(12, 16, 26, 0.55);
+        }
+
+        .quick-actions {
+            background: rgba(16, 21, 34, 0.72);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 1.1rem 1.5rem;
+        }
+
+        .quick-actions .label {
+            font-size: 0.85rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(163, 173, 201, 0.6);
+        }
+
+        .input-shell {
+            padding: 1.25rem 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(12, 16, 26, 0.55);
+        }
+
         .typing-indicator span {
-            animation: typing 1.4s infinite;
+            opacity: 0.4;
+            animation: typing 1.4s infinite ease-in-out;
             display: inline-block;
         }
-        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+        .stats-grid {
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        .stat-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            inset: -20%;
+            background: radial-gradient(circle at top right, rgba(141, 156, 255, 0.22), transparent 55%);
+            opacity: 0.8;
+        }
+
+        .stat-card > * {
+            position: relative;
+        }
+
+        .stat-icon {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(141, 156, 255, 0.16);
+            color: var(--accent-primary);
+        }
+
+        .section-subtle {
+            background: rgba(14, 17, 27, 0.72);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .login-backdrop {
+            background:
+                radial-gradient(90% 120% at 15% -20%, rgba(110, 122, 253, 0.45), transparent 55%),
+                radial-gradient(80% 120% at 85% -20%, rgba(43, 50, 85, 0.6), transparent 65%),
+                var(--bg-base);
+        }
+
+        .login-card {
+            padding: 3rem 3.25rem;
+        }
+
+        .login-badge {
+            margin-top: 0.75rem;
+        }
+
+        .login-icon {
+            width: 5rem;
+            height: 5rem;
+            border-radius: 20px;
+            margin: 0 auto 1.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(141, 156, 255, 0.35), rgba(141, 156, 255, 0.05));
+            border: 1px solid rgba(141, 156, 255, 0.25);
+            box-shadow: 0 18px 35px rgba(16, 20, 35, 0.4);
+        }
+
+        .login-meta {
+            margin-top: 2rem;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: var(--radius-md);
+            padding: 1.4rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .login-meta p {
+            margin: 0.35rem 0;
+            color: rgba(215, 224, 255, 0.82);
+            font-size: 0.9rem;
+        }
+
+        .login-meta strong {
+            color: var(--text-primary);
+        }
+
+        .error-banner {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 0.95rem 1.1rem;
+            border-radius: var(--radius-md);
+            background: rgba(242, 141, 133, 0.08);
+            border: 1px solid rgba(242, 141, 133, 0.22);
+            color: #F2B7B2;
+            font-size: 0.9rem;
+        }
+
+        .error-banner.active {
+            display: flex;
+            gap: 0.6rem;
+            align-items: flex-start;
+        }
+
+        .scroll-area {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+        }
+
+        .scroll-area::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .scroll-area::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .scroll-area::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 999px;
+        }
+
+        .scroll-area::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         @keyframes typing {
-            0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-5px); }
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+            30% { transform: translateY(-4px); opacity: 1; }
+        }
+
+        .shadow-lg,
+        .shadow-2xl {
+            box-shadow: var(--shadow-soft) !important;
+        }
+
+        #mainApp .bg-white,
+        #mainApp .bg-gray-50,
+        #mainApp .bg-gray-100 {
+            background: linear-gradient(160deg, rgba(33, 40, 58, 0.92), rgba(18, 23, 35, 0.92)) !important;
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+        }
+
+        #mainApp .border {
+            border-color: rgba(255, 255, 255, 0.06) !important;
+        }
+
+        #mainApp .border-t {
+            border-color: rgba(255, 255, 255, 0.04) !important;
+        }
+
+        #mainApp .text-gray-800,
+        #mainApp .text-gray-700 {
+            color: var(--text-primary) !important;
+        }
+
+        #mainApp .text-gray-600,
+        #mainApp .text-gray-500 {
+            color: var(--text-secondary) !important;
+        }
+
+        #mainApp .text-gray-400 {
+            color: var(--text-tertiary) !important;
+        }
+
+        #mainApp .text-blue-600,
+        #mainApp .text-blue-700,
+        #mainApp .text-blue-800 {
+            color: var(--accent-primary) !important;
+        }
+
+        .bg-blue-600 {
+            background: linear-gradient(135deg, var(--accent-primary-strong), var(--accent-primary)) !important;
+        }
+
+        [class~="hover:bg-blue-700"]:hover {
+            background: linear-gradient(135deg, var(--accent-primary-strong), var(--accent-primary)) !important;
+            box-shadow: 0 18px 35px rgba(110, 122, 253, 0.3);
+        }
+
+        .bg-blue-100 {
+            background: rgba(141, 156, 255, 0.16) !important;
+            color: var(--accent-primary) !important;
+        }
+
+        .bg-green-100 {
+            background: rgba(118, 217, 166, 0.16) !important;
+            color: #AEE8C9 !important;
+        }
+
+        .bg-purple-100 {
+            background: rgba(176, 118, 235, 0.18) !important;
+            color: #D2B8FF !important;
+        }
+
+        .bg-orange-100 {
+            background: rgba(246, 199, 125, 0.18) !important;
+            color: #FFDCAA !important;
+        }
+
+        .bg-red-100 {
+            background: rgba(242, 141, 133, 0.18) !important;
+            color: #F7B7B0 !important;
+        }
+
+        .text-green-600 {
+            color: #9CE6C0 !important;
+        }
+
+        .text-purple-600 {
+            color: #C8B6FF !important;
+        }
+
+        .text-orange-600 {
+            color: #FFC893 !important;
+        }
+
+        .text-red-600 {
+            color: #F6A6A0 !important;
+        }
+
+        .border-gray-300,
+        .border-gray-200 {
+            border-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .bg-blue-50,
+        .from-blue-50 {
+            background: rgba(141, 156, 255, 0.08) !important;
+        }
+
+        .bg-purple-50,
+        .from-purple-600 {
+            background: linear-gradient(135deg, rgba(123, 90, 255, 0.45), rgba(35, 30, 65, 0.9)) !important;
+        }
+
+        .from-blue-600,
+        .to-blue-700 {
+            background: linear-gradient(135deg, rgba(110, 122, 253, 0.4), rgba(38, 45, 84, 0.85)) !important;
+        }
+
+        .from-green-600,
+        .to-teal-600 {
+            background: linear-gradient(135deg, rgba(79, 196, 190, 0.25), rgba(32, 74, 86, 0.65)) !important;
+        }
+
+        .to-purple-700 {
+            background: linear-gradient(135deg, rgba(111, 76, 255, 0.35), rgba(45, 32, 85, 0.75)) !important;
+        }
+
+        .text-primary {
+            color: var(--text-primary) !important;
+        }
+
+        .text-secondary {
+            color: var(--text-secondary) !important;
+        }
+
+        .text-tertiary {
+            color: var(--text-tertiary) !important;
+        }
+
+        .soft-enter {
+            opacity: 0;
+            animation: slideIn 0.6s var(--transition-base) forwards;
+        }
+
+        @media (max-width: 768px) {
+            .app-header {
+                padding: 1rem;
+                margin-top: 1rem;
+            }
+
+            .card {
+                border-radius: 16px;
+            }
+
+            .login-card {
+                padding: 2.5rem 2rem;
+            }
+
+            .tab-btn {
+                padding: 0.55rem 1rem;
+            }
         }
         .glass-card {
             background: rgba(255, 255, 255, 0.95);
@@ -127,6 +774,48 @@
         }
     </style>
 </head>
+<<<<<<< HEAD
+<body class="min-h-screen text-primary">
+    <!-- Login Screen -->
+    <div id="loginScreen" class="min-h-screen login-backdrop flex items-center justify-center px-4 py-12">
+        <div class="card login-card w-full max-w-lg soft-enter">
+            <div class="text-center">
+                <div class="login-icon">
+                    <i class="fas fa-graduation-cap text-2xl text-primary"></i>
+                </div>
+                <div class="badge text-xs tracking-widest uppercase">AI-Powered Access</div>
+                <h1 class="mt-4">TechEDU Student Support</h1>
+                <p class="mt-2 text-secondary">A quietly confident companion for every learning journey.</p>
+            </div>
+
+            <form id="loginForm" class="mt-10 space-y-5">
+                <div>
+                    <label class="block text-sm text-secondary font-medium mb-2">Email</label>
+                    <input type="email" id="email" value="sarah.johnson@techedu.edu" autocomplete="email"
+                        class="input-field" placeholder="name@techedu.edu">
+                </div>
+                <div>
+                    <label class="block text-sm text-secondary font-medium mb-2">Password</label>
+                    <input type="password" id="password" value="demo123" autocomplete="current-password"
+                        class="input-field" placeholder="Enter your password">
+                </div>
+                <button type="submit" class="btn btn-primary w-full justify-center">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Sign In</span>
+                </button>
+            </form>
+
+            <div class="login-meta">
+                <p class="text-tertiary text-xs uppercase tracking-[0.2em]">Demo Credentials</p>
+                <p>👨‍🎓 <strong>Student:</strong> sarah.johnson@techedu.edu / demo123</p>
+                <p>👔 <strong>Staff:</strong> advisor.smith@techedu.edu / staff123</p>
+                <p>👑 <strong>Admin:</strong> admin@techedu.edu / admin123</p>
+            </div>
+
+            <div id="loginError" class="error-banner">
+                <i class="fas fa-exclamation-triangle mt-0.5"></i>
+                <span></span>
+=======
 <body class="bg-slate-50 min-h-screen">
     <!-- Login Screen -->
     <div id="loginScreen" class="min-h-screen flex items-center justify-center relative overflow-hidden">
@@ -259,6 +948,7 @@
                     <i class="fas fa-exclamation-circle mr-2"></i>
                     <span></span>
                 </div>
+>>>>>>> 5cd32c16083a1667e7eb32593cdbfd7ab4874b45
             </div>
         </div>
     </div>
@@ -266,6 +956,17 @@
     <!-- Main App -->
     <div id="mainApp" class="hidden">
         <!-- Header -->
+<<<<<<< HEAD
+        <header class="app-header layout-container soft-enter">
+            <div class="flex flex-wrap items-center justify-between gap-5">
+                <div class="flex items-center gap-4">
+                    <div class="btn-icon text-primary bg-accent-soft">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-semibold">TechEDU Student Support</h2>
+                        <p class="text-tertiary text-sm mt-1">Always-on assistance for students, advisors, and admins.</p>
+=======
         <header class="gradient-primary text-white shadow-xl sticky top-0 z-50">
             <div class="max-w-7xl mx-auto px-4 py-3">
                 <div class="flex items-center justify-between">
@@ -306,20 +1007,79 @@
                         <button onclick="logout()" class="p-2.5 rounded-xl hover:bg-red-500/30 transition-all ml-2" title="Sign Out">
                             <i class="fas fa-sign-out-alt"></i>
                         </button>
+>>>>>>> 5cd32c16083a1667e7eb32593cdbfd7ab4874b45
                     </div>
+                </div>
+
+                <nav class="flex items-center gap-2 flex-wrap">
+                    <button onclick="showTab('chat')" id="chatTab" class="tab-btn tab-active">
+                        <i class="fas fa-comments"></i><span>Chat</span>
+                    </button>
+                    <button onclick="showTab('analytics')" id="analyticsTab" class="tab-btn">
+                        <i class="fas fa-chart-line"></i><span>Analytics</span>
+                    </button>
+                    <button onclick="showTab('support')" id="supportTab" class="tab-btn hidden">
+                        <i class="fas fa-headset"></i><span>Support</span>
+                    </button>
+                    <button onclick="showTab('admin')" id="adminTab" class="tab-btn hidden">
+                        <i class="fas fa-shield-alt"></i><span>Admin</span>
+                    </button>
+                    <button onclick="showTab('profile')" id="profileTab" class="tab-btn">
+                        <i class="fas fa-user"></i><span>Profile</span>
+                    </button>
+                </nav>
+
+                <div class="flex items-center gap-3">
+                    <div id="userBadge" class="chip chip-accent hidden">
+                        <i class="fas fa-id-badge"></i>
+                        <span id="userRole">Student</span>
+                    </div>
+                    <button onclick="logout()" class="btn-icon" title="Sign out">
+                        <i class="fas fa-power-off"></i>
+                    </button>
                 </div>
             </div>
         </header>
 
         <!-- Chat View -->
+<<<<<<< HEAD
+        <div id="chatView" class="layout-container max-w-5xl mx-auto px-4 pb-8">
+            <div class="card overflow-hidden soft-enter">
+                <!-- Chat Messages -->
+                <div id="chatMessages" class="chat-container scroll-area space-y-4">
+=======
         <div id="chatView" class="max-w-4xl mx-auto p-4 pt-6">
             <div class="glass-card rounded-3xl shadow-xl overflow-hidden border border-slate-200/50">
                 <!-- Chat Messages -->
                 <div id="chatMessages" class="chat-container overflow-y-auto p-6 space-y-4 scroll-smooth bg-gradient-to-b from-slate-50 to-white">
+>>>>>>> 5cd32c16083a1667e7eb32593cdbfd7ab4874b45
                     <!-- Welcome message will be added by JS -->
                 </div>
                 
                 <!-- Quick Actions -->
+<<<<<<< HEAD
+                <div class="quick-actions">
+                    <div class="flex flex-wrap gap-3 items-center justify-between">
+                        <p class="label">Quick questions</p>
+                        <button id="myTicketsBtn" onclick="showMyTickets()" class="chip chip-accent text-xs">
+                            <i class="fas fa-ticket-alt"></i><span id="ticketsBtnText">📋 My Tickets</span>
+                        </button>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mt-3">
+                        <button onclick="askQuestion('When is my next financial aid disbursement?')" class="chip">
+                            💰 Financial Aid
+                        </button>
+                        <button onclick="askQuestion('What is my current GPA?')" class="chip chip-success">
+                            📊 My GPA
+                        </button>
+                        <button onclick="askQuestion('Where is my dorm room located?')" class="chip chip-purple">
+                            🏠 Housing
+                        </button>
+                        <button onclick="askQuestion('How do I register for next semester?')" class="chip chip-warning">
+                            📚 Registration
+                        </button>
+                        <button onclick="askQuestion('I have a complaint or issue')" class="chip chip-danger">
+=======
                 <div class="px-6 py-4 border-t border-slate-100 bg-gradient-to-r from-slate-50 to-indigo-50/30">
                     <div class="flex justify-between items-center mb-3">
                         <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Quick Actions</p>
@@ -346,12 +1106,22 @@
                         </button>
                         <button onclick="askQuestion('I have a complaint or issue')" 
                             class="px-4 py-2 text-sm bg-gradient-to-r from-rose-50 to-pink-50 text-rose-700 rounded-full hover:from-rose-100 hover:to-pink-100 font-medium transition-all hover-lift border border-rose-200/50">
+>>>>>>> 5cd32c16083a1667e7eb32593cdbfd7ab4874b45
                             ⚠️ Report Issue
                         </button>
                     </div>
                 </div>
                 
                 <!-- Input -->
+<<<<<<< HEAD
+                <div class="input-shell">
+                    <form id="chatForm" class="flex flex-col md:flex-row gap-3">
+                        <input type="text" id="messageInput" placeholder="Ask me anything about your student services..."
+                            class="flex-1 input-field" autocomplete="off">
+                        <button type="submit" class="btn btn-primary md:w-auto w-full justify-center">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Send</span>
+=======
                 <div class="p-4 border-t border-slate-100 bg-white">
                     <form id="chatForm" class="flex gap-3">
                         <div class="flex-1 relative">
@@ -361,6 +1131,7 @@
                         <button type="submit" 
                             class="px-6 py-4 gradient-primary text-white rounded-2xl hover:opacity-90 transition-all btn-glow shadow-lg font-semibold">
                             <i class="fas fa-paper-plane mr-2"></i>Send
+>>>>>>> 5cd32c16083a1667e7eb32593cdbfd7ab4874b45
                         </button>
                     </form>
                 </div>
@@ -472,6 +1243,58 @@
         </div>
 
         <!-- Analytics View -->
+<<<<<<< HEAD
+        <div id="analyticsView" class="hidden layout-container max-w-6xl mx-auto px-4 pb-10">
+            <div class="soft-enter mb-8">
+                <h2 class="text-xl font-semibold text-primary">Welcome back, <span id="analyticsStudentName">Student</span></h2>
+                <p class="text-secondary mt-2">Here’s your current status and a few hand-picked suggestions for staying ahead.</p>
+            </div>
+
+            <div class="insight-grid two soft-enter">
+                <div class="card insight-card p-6">
+                    <span class="metric-label">Academic Snapshot</span>
+                    <div class="metric-value" id="analyticsGpa">--</div>
+                    <p class="metric-subtext" id="analyticsProgram">Program —</p>
+                    <div class="progress-pill" id="analyticsYear">Year --</div>
+                    <div class="insight-grid two mt-6">
+                        <div>
+                            <p class="metric-label">Active Courses</p>
+                            <p class="metric-subtext" id="analyticsCourseCount">--</p>
+                        </div>
+                        <div>
+                            <p class="metric-label">Financial Aid</p>
+                            <p class="metric-subtext" id="analyticsAidStatus">--</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card insight-card p-6">
+                    <span class="metric-label">Support Activity</span>
+                    <div class="metric-value" id="analyticsQuestions">--</div>
+                    <p class="metric-subtext">Questions you've asked this term</p>
+                    <div class="insight-grid two mt-6">
+                        <div>
+                            <p class="metric-label">Instant Answers</p>
+                            <p class="metric-subtext" id="analyticsInstantRate">--</p>
+                        </div>
+                        <div>
+                            <p class="metric-label">Avg Response Time</p>
+                            <p class="metric-subtext" id="analyticsResponse">--</p>
+                        </div>
+                    </div>
+                    <div class="progress-pill mt-6">
+                        <i class="fas fa-smile"></i>
+                        <span id="analyticsSatisfaction">Satisfaction --</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="insight-grid two soft-enter mt-8">
+                <div class="card insight-card p-6">
+                    <div class="flex items-center justify-between">
+                        <span class="metric-label">Course Progress</span>
+                        <div class="chip chip-accent text-xs"><i class="fas fa-book-reader"></i> In progress</div>
+=======
         <div id="analyticsView" class="hidden max-w-7xl mx-auto p-4 pt-6">
             <!-- Header -->
             <div class="mb-6">
@@ -531,21 +1354,43 @@
                     <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-chart-pie text-indigo-600"></i></span>Query Categories</h3>
                     <div id="categoriesChart" class="space-y-4">
                         <!-- Will be populated by JS -->
+>>>>>>> 5cd32c16083a1667e7eb32593cdbfd7ab4874b45
                     </div>
+                    <ul class="course-list" id="analyticsCourseList"></ul>
                 </div>
+<<<<<<< HEAD
+
+                <div class="card insight-card p-6">
+                    <div class="flex items-center justify-between">
+                        <span class="metric-label">Upcoming &amp; Reminders</span>
+                        <div class="chip text-xs"><i class="fas fa-calendar"></i> Stay prepared</div>
+=======
                 <div class="glass-card p-6 rounded-2xl shadow-lg border border-slate-200/50 hover-lift">
                     <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-dollar-sign text-emerald-600"></i></span>ROI Metrics</h3>
                     <div id="roiMetrics" class="space-y-3">
                         <!-- Will be populated by JS -->
+>>>>>>> 5cd32c16083a1667e7eb32593cdbfd7ab4874b45
                     </div>
+                    <ul class="timeline" id="analyticsTimeline"></ul>
                 </div>
             </div>
+<<<<<<< HEAD
+
+            <div class="insight-grid two soft-enter mt-8">
+                <div class="card insight-card p-6">
+                    <div class="flex items-center justify-between">
+                        <span class="metric-label">Personalized Suggestions</span>
+                        <div class="chip chip-success text-xs"><i class="fas fa-leaf"></i> Balance</div>
+                    </div>
+                    <ul class="tip-list" id="analyticsTips"></ul>
+=======
             
             <!-- ESB Status -->
             <div class="mt-5 glass-card p-6 rounded-2xl shadow-lg border border-slate-200/50">
                 <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-network-wired text-purple-600"></i></span>System Integration Status</h3>
                 <div id="esbStatus" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3">
                     <!-- Will be populated by JS -->
+>>>>>>> 5cd32c16083a1667e7eb32593cdbfd7ab4874b45
                 </div>
             </div>
         </div>
@@ -928,6 +1773,7 @@
         let token = null;
         let studentId = 'STU2024001';
         let currentUser = null;
+        let studentProfileData = null;
 
         // Login
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
@@ -1658,9 +2504,142 @@
                     coursesDiv.innerHTML = data.courses.map(c => 
                         `<p><span class="font-medium">${c.code}</span> - ${c.name} <span class="text-green-600">(${c.grade})</span></p>`
                     ).join('');
+
+                    studentProfileData = data;
+                    populateStudentAnalytics();
                 }
             } catch (error) {
                 console.error('Error loading profile:', error);
+            }
+        }
+
+        function populateStudentAnalytics() {
+            if (!studentProfileData) return;
+
+            const {
+                name = 'Student',
+                program = '--',
+                year = '--',
+                gpa = '--',
+                courses = [],
+                financial_aid: financialAid = {}
+            } = studentProfileData;
+
+            const formatDate = (value) => {
+                if (!value) return 'TBD';
+                const parsed = new Date(value);
+                return Number.isNaN(parsed.getTime())
+                    ? value
+                    : parsed.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            };
+
+            const firstName = (name && name.split(' ')[0]) || 'Student';
+            const courseCount = courses.length;
+            const activeCourses = courses.filter(course => (course.status || '').toLowerCase() !== 'completed');
+            const topCourse = activeCourses[0] || courses[0];
+            const secondCourse = activeCourses[1] || courses[1];
+            const disbursementRaw = financialAid?.disbursement_date;
+            const disbursementFormatted = formatDate(disbursementRaw);
+
+            const supportMetrics = {
+                questions: courseCount ? 6 + courseCount : 4,
+                instantRate: '82% instant answers',
+                response: '2m 18s average',
+                satisfaction: '4.7 / 5 confidence'
+            };
+
+            const timelineItems = [
+                disbursementRaw && {
+                    date: disbursementFormatted,
+                    title: 'Financial Aid Disbursement',
+                    description: `Funds release on ${financialAid.disbursement_date}. Confirm your banking details two days prior.`
+                },
+                topCourse && {
+                    date: 'Next Week',
+                    title: `${topCourse.code} — Project milestone`,
+                    description: 'Draft outline due. Block 45 minutes for focused research and upload to the course portal.'
+                },
+                {
+                    date: 'Month-End',
+                    title: 'Advisor Check-in',
+                    description: 'Schedule a 15-minute sync with your academic advisor to review progress and summer planning.'
+                }
+            ].filter(Boolean);
+
+            const tips = [
+                {
+                    label: 'Stay ahead',
+                    text: 'Set a 30-minute review block after each class. Short daily refresh keeps your cumulative GPA trending upward.'
+                },
+                financialAid?.status && {
+                    label: 'Financial aid',
+                    text: `Confirm your aid status (“${financialAid.status}”) and upload any pending documents before ${disbursementFormatted}.`
+                },
+                secondCourse && {
+                    label: secondCourse.code,
+                    text: `Pair up with a classmate for a weekly study sync. Collaborative prep boosts retention for ${secondCourse.name}.`
+                }
+            ].filter(Boolean);
+
+            const setText = (id, value) => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.textContent = value;
+                }
+            };
+
+            setText('analyticsStudentName', firstName);
+            setText('analyticsGpa', typeof gpa === 'number' ? gpa.toFixed(2) : gpa);
+            setText('analyticsProgram', `Program • ${program}`);
+            setText('analyticsYear', `Year ${year}`);
+            setText('analyticsCourseCount', `${courseCount} course${courseCount === 1 ? '' : 's'}`);
+            setText('analyticsAidStatus', financialAid?.status ? `${financialAid.status} • Next: ${disbursementFormatted}` : 'Aid status unavailable');
+            setText('analyticsQuestions', supportMetrics.questions);
+            setText('analyticsInstantRate', supportMetrics.instantRate);
+            setText('analyticsResponse', supportMetrics.response);
+            setText('analyticsSatisfaction', supportMetrics.satisfaction);
+
+            const courseList = document.getElementById('analyticsCourseList');
+            if (courseList) {
+                courseList.innerHTML = courses.length
+                    ? courses.map(course => `
+                        <li class="course-item">
+                            <div>
+                                <p class="title">${course.code}</p>
+                                <p class="subtitle">${course.name}</p>
+                            </div>
+                            <span class="badge text-xs">${course.grade || (course.status || 'In Progress')}</span>
+                        </li>
+                    `).join('')
+                    : '<li class="tip-card">No active courses are currently linked to your profile.</li>';
+            }
+
+            const timelineList = document.getElementById('analyticsTimeline');
+            if (timelineList) {
+                timelineList.innerHTML = timelineItems.length
+                    ? timelineItems.map(item => `
+                        <li class="timeline-item">
+                            <span class="timeline-marker"></span>
+                            <div class="timeline-content">
+                                <p class="date">${item.date}</p>
+                                <p class="title">${item.title}</p>
+                                <p class="description">${item.description}</p>
+                            </div>
+                        </li>
+                    `).join('')
+                    : '<li class="tip-card">No upcoming reminders at the moment.</li>';
+            }
+
+            const tipsList = document.getElementById('analyticsTips');
+            if (tipsList) {
+                tipsList.innerHTML = tips.length
+                    ? tips.map(tip => `
+                        <li class="tip-card">
+                            <strong>${tip.label}</strong>
+                            <p class="mt-1 text-secondary text-sm leading-relaxed">${tip.text}</p>
+                        </li>
+                    `).join('')
+                    : '<li class="tip-card">We’ll add new suggestions once more activity is available.</li>';
             }
         }
 

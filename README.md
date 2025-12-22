@@ -1,66 +1,8 @@
-# CampusHub - AI-Powered Student Support System
+# UniAssist Pro - AI-Powered Student Support System
 
 ## 🎓 DBIM MVP Implementation
 
 An intelligent student support chatbot demonstrating enterprise-grade architecture for a hackathon MVP.
-
----
-
-## 🔌 Enterprise-Ready Architecture (Plug & Play)
-
-> **This project uses mock data with a clean separation of concerns, designed for easy integration with real enterprise systems in future scope.**
-
-### Service Layer (`app/services/`) - Swap Implementations
-
-| Service | Current (Mock) | Production Replacement |
-|---------|----------------|------------------------|
-| `ai_service.py` | Rule-based keyword matching | OpenAI GPT-4 / Azure OpenAI / Google Gemini |
-| `esb_service.py` | Simulated ESB calls | MuleSoft Anypoint / Azure Service Bus / IBM App Connect |
-| `auth_service.py` | JWT with mock users | OAuth2 / SAML / Azure AD / Okta SSO |
-| `rbac_service.py` | In-memory role checks | Azure AD Groups / Ping Identity / enterprise IAM |
-| `analytics_service.py` | In-memory metrics | Power BI / Tableau / Looker / Azure Event Hubs |
-
-### Data Layer (`app/data/`) - Database Abstraction
-
-| Component | Current (Mock) | Production Replacement |
-|-----------|----------------|------------------------|
-| `mock_database.py` | In-memory Python dicts | PostgreSQL / MongoDB / Redis Cache Layer |
-| `legacy_systems.py` | Simulated connectors | Real connectors to enterprise systems |
-
-### Legacy System Connectors (Pre-Stubbed)
-
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                     LEGACY SYSTEMS (ON-PREMISE)                          │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│  Admissions System    →  SOAP/XML  →  Banner/Ellucian (Port 8443)       │
-│  Academic Records     →  JDBC      →  PeopleSoft (Port 1521)            │
-│  Financial Aid        →  REST      →  PowerFAIDS (Port 443)             │
-│  Housing System       →  REST      →  StarRez (Port 443)                │
-│  Directory Services   →  LDAP      →  Microsoft Active Directory (636)  │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
-
-### How to Swap Mock → Production
-
-```python
-# Current implementation (mock)
-class AIService:
-    def generate_response(self, query):
-        return self._mock_keyword_response(query)
-
-# Production implementation (just change the method body)
-class AIService:
-    def generate_response(self, query):
-        return openai.ChatCompletion.create(
-            model="gpt-4",
-            messages=[{"role": "user", "content": query}]
-        )
-```
-
-**The API layer (`main.py`) remains unchanged** - it only calls service methods, making this truly **plug-and-play** for enterprise deployment.
 
 ---
 
