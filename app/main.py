@@ -1,6 +1,6 @@
 """
 ================================================================================
-UniAssist Pro - AI-Powered Intelligent Student Support System
+TechEdu University - Student Support Portal 
 DBIM (Digital Business Innovation Methodology) MVP Implementation
 ================================================================================
 
@@ -64,7 +64,7 @@ from app.models.schemas import (
 # ================================================================================
 
 app = FastAPI(
-    title="UniAssist Pro API",
+    title="TechEdu University  API",
     description="""
     ## AI-Powered Intelligent Student Support System
     
@@ -147,7 +147,7 @@ async def root():
     
     # Otherwise return API info
     return {
-        "name": "UniAssist Pro API",
+        "name": "TechEdu University API",
         "version": "1.0.0-MVP",
         "description": "AI-Powered Intelligent Student Support System",
         "architecture": "DBIM Hybrid Cloud + On-Premise",
@@ -954,7 +954,7 @@ async def get_architecture_docs():
     NO AUTHENTICATION REQUIRED - This is public documentation.
     """
     return {
-        "title": "UniAssist Pro - System Architecture",
+        "title": "TechEdu University - System Architecture",
         "version": "1.0.0-MVP",
         "overview": {
             "description": "AI-Powered Intelligent Student Support System demonstrating enterprise integration patterns",
@@ -1133,7 +1133,7 @@ if __name__ == "__main__":
     
     print("""
     ╔════════════════════════════════════════════════════════════════════════╗
-    ║           UniAssist Pro - AI-Powered Student Support System            ║
+    ║           TechEdu University - Student Support Portal             ║
     ║                     DBIM MVP Implementation                            ║
     ╠════════════════════════════════════════════════════════════════════════╣
     ║                                                                        ║
