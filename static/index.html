@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CampusHub - Smart Student Support</title>
+    <title>TechEdu University Student Support Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
  
@@ -969,9 +969,18 @@
             border-radius: 50%;
             transform: translate(30%, -30%);
         }
+        /* ✅ NEW: Card hover effect */
+        .card-hover {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        }
     </style>
 </head>
-<body class="bg-slate-50 min-h-screen">
+<body class="bg-slate-100 min-h-screen">
     <!-- Login Screen -->
     <div id="loginScreen" class="min-h-screen flex items-center justify-center relative overflow-hidden">
         <!-- Campus Background Image -->
@@ -997,104 +1006,33 @@
                     </div>
                     <span class="text-3xl font-extrabold text-white">CampusHub</span>
                 </div>
-                <h1 class="text-4xl font-bold text-white leading-tight mb-4">
-                    Your Smart<br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">Student Support</span><br>
-                    Platform
-                </h1>
-                <p class="text-lg text-white/70 mb-8">Get instant answers to your questions about financial aid, courses, housing, and more. Available 24/7.</p>
-                <div class="flex gap-6">
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-white">24/7</div>
-                        <div class="text-sm text-white/60">Support</div>
-                    </div>
-                    <div class="w-px bg-white/20"></div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-white">AI</div>
-                        <div class="text-sm text-white/60">Powered</div>
-                    </div>
-                    <div class="w-px bg-white/20"></div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-white">73%</div>
-                        <div class="text-sm text-white/60">Auto-resolved</div>
-                    </div>
-                </div>
+                <h1 class="text-2xl font-bold text-gray-800">TechEdu University</h1>
+                <p class="text-gray-500">AI-Powered Student Support</p>
             </div>
-        </div>
-        <!-- Right Side - Login Form -->
-        <div class="w-full lg:w-1/2 flex items-center justify-center p-4 relative z-10">
-            <div class="bg-white/95 backdrop-blur-xl p-6 rounded-2xl shadow-2xl w-full max-w-sm">
-                <!-- Mobile Logo -->
-                <div class="lg:hidden text-center mb-5">
-                    <div class="w-12 h-12 gradient-primary rounded-xl flex items-center justify-center mx-auto mb-2 shadow-lg">
-                        <i class="fas fa-graduation-cap text-xl text-white"></i>
-                    </div>
-                    <h1 class="text-2xl font-bold text-slate-800">CampusHub</h1>
+            
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input type="email" id="email" value="sarah.johnson@techedu.edu"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                 </div>
-                <div class="hidden lg:block mb-5">
-                    <h2 class="text-xl font-bold text-slate-800">Welcome back!</h2>
-                    <p class="text-slate-500 text-sm">Sign in to access your student portal</p>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <input type="password" id="password" value="demo123"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                 </div>
-                <form id="loginForm" class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-600 mb-1.5">Email Address</label>
-                        <div class="relative">
-                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"><i class="fas fa-envelope"></i></span>
-                            <input type="email" id="email" value="sarah.johnson@techedu.edu"
-                                class="w-full pl-10 pr-4 py-2.5 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-slate-50/50">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-600 mb-1.5">Password</label>
-                        <div class="relative">
-                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"><i class="fas fa-lock"></i></span>
-                            <input type="password" id="password" value="demo123"
-                                class="w-full pl-10 pr-4 py-2.5 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-slate-50/50">
-                        </div>
-                    </div>
-                    <button type="submit" 
-                        class="w-full gradient-primary text-white py-2.5 rounded-lg font-semibold text-sm hover:opacity-90 transition-all shadow-lg hover:shadow-indigo-500/25">
-                        Sign In <i class="fas fa-arrow-right ml-2"></i>
-                    </button>
-                </form>
-                <div class="mt-4 p-3 bg-slate-50 rounded-lg border border-slate-100">
-                    <p class="text-xs text-slate-500 font-medium mb-2"><i class="fas fa-info-circle mr-1"></i>Demo Accounts</p>
-                    <div class="space-y-2 text-xs">
-                        <div class="flex items-center justify-between p-2 bg-blue-50 rounded-lg border border-blue-100">
-                            <div class="flex items-center">
-                                <span class="w-6 h-6 bg-blue-200 rounded-full flex items-center justify-center mr-2 text-xs">👨‍🎓</span>
-                                <div>
-                                    <p class="font-semibold text-blue-800">Student</p>
-                                    <p class="text-blue-600">sarah.johnson@techedu.edu</p>
-                                </div>
-                            </div>
-                            <code class="bg-blue-100 px-2 py-0.5 rounded text-blue-700">demo123</code>
-                        </div>
-                        <div class="flex items-center justify-between p-2 bg-green-50 rounded-lg border border-green-100">
-                            <div class="flex items-center">
-                                <span class="w-6 h-6 bg-green-200 rounded-full flex items-center justify-center mr-2 text-xs">👔</span>
-                                <div>
-                                    <p class="font-semibold text-green-800">Staff</p>
-                                    <p class="text-green-600">advisor.smith@techedu.edu</p>
-                                </div>
-                            </div>
-                            <code class="bg-green-100 px-2 py-0.5 rounded text-green-700">staff123</code>
-                        </div>
-                        <div class="flex items-center justify-between p-2 bg-amber-50 rounded-lg border border-amber-100">
-                            <div class="flex items-center">
-                                <span class="w-6 h-6 bg-amber-200 rounded-full flex items-center justify-center mr-2 text-xs">👑</span>
-                                <div>
-                                    <p class="font-semibold text-amber-800">Admin</p>
-                                    <p class="text-amber-600">admin@techedu.edu</p>
-                                </div>
-                            </div>
-                            <code class="bg-amber-100 px-2 py-0.5 rounded text-amber-700">admin123</code>
-                        </div>
-                    </div>
-                </div>
-                <div id="loginError" class="hidden mt-3 p-3 bg-red-50 text-red-700 rounded-lg text-xs border border-red-200 flex items-center">
-                    <i class="fas fa-exclamation-circle mr-2"></i>
-                    <span></span>
+                <button type="submit" 
+                    class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Sign In
+                </button>
+            </form>
+            
+            <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                <p class="text-sm text-blue-800 font-medium">Demo Credentials:</p>
+                <div class="mt-2 space-y-1">
+                    <p class="text-sm text-blue-600">👨‍🎓 Student: sarah.johnson@techedu.edu / demo123</p>
+                    <p class="text-sm text-blue-600">👔 Staff: advisor.smith@techedu.edu / staff123</p>
+                    <p class="text-sm text-blue-600">👑 Admin: admin@techedu.edu / admin123</p>
                 </div>
             </div>
         </div>
@@ -1103,19 +1041,16 @@
     <!-- Main App -->
     <div id="mainApp" class="hidden">
         <!-- Header -->
-        <header class="gradient-primary text-white shadow-xl sticky top-0 z-50">
-            <div class="max-w-7xl mx-auto px-4 py-3">
+        <header class="bg-gradient-to-r from-indigo-600 to-indigo-800 text-white shadow-lg">
+            <div class="max-w-6xl mx-auto px-4 py-4">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-4">
                         <div class="w-11 h-11 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                             <i class="fas fa-graduation-cap text-xl"></i>
                         </div>
                         <div>
-                            <h1 class="font-extrabold text-xl tracking-tight">CampusHub</h1>
-                            <p class="text-xs text-white/70 flex items-center gap-1">
-                                <span class="w-2 h-2 bg-green-400 rounded-full pulse-dot"></span>
-                                AI-Powered • Always Online
-                            </p>
+                            <h1 class="font-bold text-lg">TechEdu University </h1>
+                            <p class="text-xs text-blue-100">AI Student Support • Online 24/7</p>
                         </div>
                     </div>
                     <div class="flex items-center gap-2">
@@ -1149,8 +1084,8 @@
         </header>
 
         <!-- Chat View -->
-        <div id="chatView" class="max-w-4xl mx-auto p-4 pt-6">
-            <div class="glass-card rounded-3xl shadow-xl overflow-hidden border border-slate-200/50">
+        <div id="chatView" class="max-w-5xl mx-auto p-6">
+            <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-200">
                 <!-- Chat Messages -->
                 <div id="chatMessages" class="chat-container overflow-y-auto p-6 space-y-4 scroll-smooth bg-gradient-to-b from-slate-50 to-white">
                     <!-- Welcome message will be added by JS -->
@@ -1189,17 +1124,26 @@
                 </div>
                 
                 <!-- Input -->
-                <div class="p-4 border-t border-slate-100 bg-white">
-                    <form id="chatForm" class="flex gap-3">
-                        <div class="flex-1 relative">
-                            <input type="text" id="messageInput" placeholder="Ask me anything about your student services..."
-                                class="w-full px-5 py-4 border-2 border-slate-200 rounded-2xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-slate-700 placeholder-slate-400">
-                        </div>
-                        <button type="submit" 
-                            class="px-6 py-4 gradient-primary text-white rounded-2xl hover:opacity-90 transition-all btn-glow shadow-lg font-semibold">
-                            <i class="fas fa-paper-plane mr-2"></i>Send
+                <div class="p-4 border-t">
+                   <form id="chatForm" class="flex gap-3 items-center">
+                        <input
+                             type="text"
+                                id="messageInput"
+                                placeholder="Ask TechEdu anything about academics, finance, housing..."
+                                class="flex-1 px-5 py-4 border border-slate-300 rounded-full
+                                        focus:ring-2 focus:ring-indigo-500 focus:border-transparent
+                                        shadow-sm text-sm"
+                        >
+                        <button
+                            type="submit"
+                            class="px-6 py-4 bg-indigo-600 text-white rounded-full
+                                hover:bg-indigo-700 shadow-md transition-all
+                            flex items-center justify-center"
+    >
+                            <i class="fas fa-paper-plane"></i>
                         </button>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -1309,15 +1253,12 @@
         </div>
 
         <!-- Analytics View -->
-        <div id="analyticsView" class="hidden max-w-7xl mx-auto p-4 pt-6">
-            <!-- Header -->
-            <div class="mb-6">
-                <h2 class="text-2xl font-bold text-slate-800">Analytics Dashboard</h2>
-                <p class="text-slate-500">Real-time performance metrics and insights</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
-                <div class="stat-card bg-gradient-to-br from-blue-500 to-indigo-600 p-6 rounded-2xl shadow-lg hover-lift text-white">
+        <div id="analyticsView" class="hidden max-w-6xl mx-auto p-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+        <div id="analyticsView" class="hidden max-w-6xl mx-auto p-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-blue-100 text-sm font-medium">Total Queries</p>
@@ -1328,7 +1269,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="stat-card bg-gradient-to-br from-emerald-500 to-teal-600 p-6 rounded-2xl shadow-lg hover-lift text-white">
+//
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+//
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+//
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-emerald-100 text-sm font-medium">AI Resolution Rate</p>
@@ -1339,7 +1284,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="stat-card bg-gradient-to-br from-violet-500 to-purple-600 p-6 rounded-2xl shadow-lg hover-lift text-white">
+//
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+//
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+//
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-violet-100 text-sm font-medium">Avg Response</p>
@@ -1350,7 +1299,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="stat-card bg-gradient-to-br from-amber-500 to-orange-600 p-6 rounded-2xl shadow-lg hover-lift text-white">
+//
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+//
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+//
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-amber-100 text-sm font-medium">Satisfaction</p>
@@ -1363,16 +1316,25 @@
                 </div>
             </div>
             
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                <div class="glass-card p-6 rounded-2xl shadow-lg border border-slate-200/50 hover-lift">
-                    <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-9 h-9 bg-indigo-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-chart-pie text-indigo-600"></i></span>Query Categories</h3>
-                    <div id="categoriesChart" class="space-y-4">
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <h3 class="font-bold text-lg mb-4"><i class="fas fa-chart-pie mr-2 text-blue-600"></i>Top Query Categories</h3>
+                    <div id="categoriesChart" class="space-y-3">
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <h3 class="font-bold text-lg mb-4"><i class="fas fa-chart-pie mr-2 text-blue-600"></i>Top Query Categories</h3>
+                    <div id="categoriesChart" class="space-y-3">
+
                         <!-- Will be populated by JS -->
                     </div>
                     <ul class="course-list" id="analyticsCourseList"></ul>
                 </div>
-                <div class="glass-card p-6 rounded-2xl shadow-lg border border-slate-200/50 hover-lift">
-                    <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="w-9 h-9 bg-emerald-100 rounded-xl flex items-center justify-center mr-3"><i class="fas fa-dollar-sign text-emerald-600"></i></span>ROI Metrics</h3>
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <h3 class="font-bold text-lg mb-4"><i class="fas fa-dollar-sign mr-2 text-green-600"></i>ROI Metrics</h3>
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <h3 class="font-bold text-lg mb-4"><i class="fas fa-dollar-sign mr-2 text-green-600"></i>ROI Metrics</h3>
                     <div id="roiMetrics" class="space-y-3">
                         <!-- Will be populated by JS -->
                     </div>
@@ -1390,15 +1352,20 @@
         </div>
 
         <!-- Profile View -->
-        <div id="profileView" class="hidden max-w-4xl mx-auto p-4 pt-6">
-            <div class="glass-card rounded-3xl shadow-xl overflow-hidden border border-slate-200/50">
-                <div class="gradient-primary p-8 text-white relative overflow-hidden">
-                    <div class="absolute inset-0 opacity-20">
-                        <div class="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-3xl"></div>
-                    </div>
-                    <div class="flex items-center gap-5 relative z-10">
-                        <div class="w-24 h-24 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm shadow-xl">
-                            <i class="fas fa-user-graduate text-4xl"></i>
+        <div id="profileView" class="hidden max-w-4xl mx-auto p-4">
+            <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-200">
+                <div class="bg-gradient-to-r from-blue-600 to-blue-700 p-6 text-white">
+                    <div class="flex items-center gap-4">
+                        <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-3xl"></i>
+=======
+        <div id="profileView" class="hidden max-w-4xl mx-auto p-4">
+            <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-200">
+                <div class="bg-gradient-to-r from-blue-600 to-blue-700 p-6 text-white">
+                    <div class="flex items-center gap-4">
+                        <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-3xl"></i>
+>>>>>>> Chatbot
                         </div>
                         <div>
                             <h2 id="profileName" class="text-3xl font-extrabold">Loading...</h2>
@@ -1693,6 +1660,45 @@
                         document.getElementById('loginError').classList.remove('hidden');
                     }
                 });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    token = data.access_token;
+                    
+                    // Get user info to determine role
+                    await loadCurrentUser();
+                    
+                    document.getElementById('loginScreen').classList.add('hidden');
+                    document.getElementById('mainApp').classList.remove('hidden');
+                    
+
+                    if (currentUser.role === 'admin') {
+                        showTab('admin');
+                    } else if (currentUser.role === 'staff') {
+                        showTab('support');
+                    } else {
+                        showTab('chat'); // student
+                    }
+
+                    await initChat();
+
+                    
+                    // Load appropriate data based on role
+                    if (currentUser.student_id) {
+                        studentId = currentUser.student_id;
+                        loadProfile();
+                    }
+                    
+                    if (currentUser.is_staff || currentUser.is_admin) {
+                        loadAnalytics();
+                    }
+                } else {
+                    document.getElementById('loginError').textContent = 'Invalid credentials. Please try again.';
+                    document.getElementById('loginError').classList.remove('hidden');
+                }
+            } catch (error) {
+                document.getElementById('loginError').textContent = 'Connection error. Is the server running?';
+                document.getElementById('loginError').classList.remove('hidden');
             }
         });
         // Load profile (EXACT mock data as in first commit)
@@ -1748,6 +1754,41 @@
                         document.getElementById('supportTab').classList.add('hidden');
                         document.getElementById('chatTab').classList.add('hidden');
                         document.getElementById('myTicketsTab').classList.add('hidden');
+                    // 🔒 Hide all role-based tabs first
+                    document.getElementById('analyticsTab').classList.add('hidden');
+                    document.getElementById('adminTab').classList.add('hidden');
+                    document.getElementById('supportTab').classList.add('hidden');
+
+                    
+                    // Show role badge
+                    document.getElementById('userBadge').classList.remove('hidden');
+                    const roleText = currentUser.role.charAt(0).toUpperCase() + currentUser.role.slice(1);
+                    document.getElementById('userRole').textContent = roleText;
+                    
+                    // Show/hide tabs based on role
+                   // 👨‍🎓 STUDENT
+                    if (currentUser.role === 'student') {
+                    // Students see ONLY chat + profile
+                    // (analytics/admin/support stay hidden)
+                    }
+
+                    // 👔 STAFF
+                    if (currentUser.role === 'staff') {
+                        document.getElementById('analyticsTab').classList.remove('hidden');
+                        document.getElementById('supportTab').classList.remove('hidden');
+                    }
+
+                    // 👑 ADMIN
+                    if (currentUser.role === 'admin') {
+                        document.getElementById('analyticsTab').classList.remove('hidden');
+                        document.getElementById('adminTab').classList.remove('hidden');
+                        document.getElementById('supportTab').classList.remove('hidden');
+                    }
+
+
+                    
+                    // Hide profile tab for non-students
+                    if (!currentUser.student_id) {
                         document.getElementById('profileTab').classList.add('hidden');
                         showTab('admin');
                     } else if (currentUser.role === 'staff') {
@@ -1775,6 +1816,154 @@
 
         // Load My Tickets View for Students
         async function loadMyTicketsView() {
+        // Initialize chat with welcome message
+        async function initChat() {
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML = '';
+            addMessage('bot', `Hi! 👋 I'm UniAssist, your AI-powered student support assistant.\n\nI have access to your student profile and can help you with:\n\n• 💰 Financial Aid & Tuition\n• 📚 Course Registration\n• 📊 Academic Records & Grades\n• 🏠 Housing Information\n• 🎓 Admissions Questions\n\nI'll do my best to resolve your queries instantly. If I'm unable to help, I'll connect you with our support staff.\n\nHow can I help you today?`);
+            
+            // Check if student has existing tickets and update button
+            if (currentUser?.student_id) {
+                try {
+                    const response = await fetch(`${API_URL}/api/tickets/my`, {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    if (response.ok) {
+                        const data = await response.json();
+                        const ticketCount = data.tickets?.length || 0;
+                        const btnText = document.getElementById('ticketsBtnText');
+                        if (btnText) {
+                            if (ticketCount > 0) {
+                                btnText.textContent = `📋 My Tickets (${ticketCount})`;
+                                btnText.parentElement.classList.add('bg-blue-100', 'px-2', 'py-1', 'rounded');
+                            } else {
+                                btnText.textContent = '📋 My Tickets';
+                            }
+                        }
+                    }
+                } catch (e) { 
+                    console.error('Error checking tickets:', e);
+                }
+            }
+        }
+
+        // Simple markdown to HTML converter
+        function formatMessage(text) {
+            return text
+                .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')  // Bold
+                .replace(/\*(.+?)\*/g, '<em>$1</em>')              // Italic
+                .replace(/_(.+?)_/g, '<em>$1</em>')                // Italic with underscore
+                .replace(/---/g, '<hr class="my-2 border-gray-300">')  // Horizontal rule
+                .replace(/\n/g, '<br>');                          // Line breaks
+        }
+
+        // Add message to chat
+        function addMessage(type, text, metadata = {}) {
+            const chatMessages = document.getElementById('chatMessages');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `flex gap-3 message-enter ${type === 'user' ? 'flex-row-reverse' : ''}`;
+            
+            const icon = type === 'user' ? 'fa-user' : 'fa-robot';
+            const bgColor = type === 'user' ? 'bg-indigo-600' : 'bg-emerald-600';
+            const msgBg = type === 'user' ? 'bg-indigo-600 text-white rounded-br-none' : 'bg-slate-100 text-slate-800 rounded-bl-none';
+            
+            let metaHtml = '';
+            if (metadata.category) {
+                const confidencePercent = Math.round((metadata.confidence || 0) * 100);
+                const showEscalate = confidencePercent < 85; // Show escalate option for lower confidence
+                metaHtml = `<div class="text-xs text-gray-400 mt-1">
+                    <span class="bg-gray-200 px-2 py-0.5 rounded">${metadata.category}</span>
+                    ${metadata.confidence ? `<span class="ml-2">${confidencePercent}% confident</span>` : ''}
+                    ${showEscalate ? `<button onclick="raiseTicketFromChat()" class="ml-2 text-blue-600 hover:text-blue-800 underline">
+                        <i class="fas fa-headset"></i> Talk to Support
+                    </button>` : ''}
+                </div>`;
+                
+                // Store last query for potential escalation
+                window.lastQuery = { text: text, category: metadata.category, confidence: metadata.confidence };
+            }
+            
+            const formattedText = formatMessage(text);
+            
+            msgDiv.innerHTML = `
+                <div class="w-8 h-8 ${bgColor} rounded-full flex items-center justify-center flex-shrink-0">
+                    <i class="fas ${icon} text-white text-sm"></i>
+                </div>
+                <div class="max-w-[80%]">
+                    <div class="${msgBg} rounded-2xl px-4 py-3">
+                        <div class="text-sm">${formattedText}</div>
+                    </div>
+                    ${metaHtml}
+                </div>
+            `;
+            
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Raise ticket from chat
+        async function raiseTicketFromChat() {
+            const lastUserMsg = document.querySelectorAll('#chatMessages > div');
+            let userQuery = '';
+            
+            // Find the last user message
+            for (let i = lastUserMsg.length - 1; i >= 0; i--) {
+                if (lastUserMsg[i].classList.contains('flex-row-reverse')) {
+                    // Get text from the message div (handles both p and div.text-sm)
+                    userQuery = lastUserMsg[i].querySelector('.text-sm')?.textContent || 
+                                lastUserMsg[i].querySelector('p')?.textContent || '';
+                    break;
+                }
+            }
+            
+            // If no user message found, use stored lastUserMessage or lastQuery
+            if (!userQuery) {
+                userQuery = window.lastUserMessage || window.lastQuery?.text || '';
+            }
+            
+            if (!userQuery) {
+                addMessage('bot', 'Please ask a question first, then I can connect you with support.');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}/api/tickets/create`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        query: userQuery,
+                        category: window.lastQuery?.category || 'general',
+                        ai_confidence: window.lastQuery?.confidence || 0.5
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    addMessage('bot', `✅ I've created a support ticket for you!\n\n📋 Ticket ID: ${data.ticket.id}\n\nA support staff member will review your query and respond soon. You can view your tickets by clicking "My Tickets" above.\n\nTypical response time: 4-24 hours`, {});
+                    
+                    // Update ticket count in button
+                    const btnText = document.getElementById('ticketsBtnText');
+                    if (btnText) {
+                        const currentText = btnText.textContent;
+                        const match = currentText.match(/\((\d+)\)/);
+                        const count = match ? parseInt(match[1]) + 1 : 1;
+                        btnText.textContent = `📋 My Tickets (${count})`;
+                        btnText.parentElement.classList.add('bg-blue-100', 'px-2', 'py-1', 'rounded');
+                    }
+                } else {
+                    addMessage('bot', 'Sorry, I could not create a ticket. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error creating ticket:', error);
+                addMessage('bot', 'Connection error. Please try again.');
+            }
+        }
+
+        // Show my tickets modal for students
+        async function showMyTickets() {
             try {
                 const response = await fetch(`${API_URL}/api/tickets/my`, {
                     headers: { 'Authorization': `Bearer ${token}` }

@@ -112,13 +112,13 @@ const generateAIResponse = (message, studentData) => {
 };
 
 // Main App Component
-const UniAssistPro = () => {
-  const [currentView, setCurrentView] = useState('chat');
+const TechEduUniversity = () => {
+  const [currentView, setCurrentView] = useState('profile');
   const [messages, setMessages] = useState([
     {
       id: 1,
       type: 'bot',
-      text: `Hi ${mockStudentData.name}! 👋 I'm UniAssist, your AI-powered student support assistant. I have access to your student profile and can help you with:
+      text: `Hi ${mockStudentData.name}! 👋 I'm TechEdu University , your AI-powered student support assistant. I have access to your student profile and can help you with:
 
 • Financial Aid & Tuition
 • Course Registration
@@ -219,7 +219,7 @@ How can I help you today?`,
               <Bot size={24} />
             </div>
             <div>
-              <h1 className="font-bold text-lg">UniAssist Pro</h1>
+              <h1 className="font-bold text-lg">TechEdu University </h1>
               <p className="text-xs text-blue-100">AI Student Support • Online 24/7</p>
             </div>
           </div>
@@ -640,4 +640,4 @@ How can I help you today?`,
   );
 };
 
-export default UniAssistPro;
+export default TechEduUniversity;
